@@ -12,6 +12,26 @@ Entretanto, devemos levantar as limitações e as desvantagens dessa tecnologia.
 
 ## Sobre o Projeto.
 
+### Roadmap
+
+#### Entra Preliminar.
+
+- [ ] Criação de wireframes.
+
+- [ ] Documentação do Design escolhido e tomadas de decisão.
+
+- [ ] Definição da API.
+
+- [ ] Documentação dos critérios de escolha da api.
+
+- [ ] Apresentar um apk instalado em dispositivo móvel utilizando o Ionic.
+
+- [ ] Atualização da plataforma de projetos ( fase de iniciação e planjemento ).
+
+- [ ] Apresentação em slideshow do conteúdo desenvolvido e dos insights obtidos.
+
+#### Entrega Final.
+
 ## Integrantes
 
 # Wireframe
@@ -21,3 +41,11 @@ Entretanto, devemos levantar as limitações e as desvantagens dessa tecnologia.
 # API
 
 # Entrega pre-liminar
+
+## Escolha do Design ( Wireframe ).
+
+## Escolha da API.
+
+## APK.
+
+## Apresentação.
