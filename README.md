@@ -14,7 +14,7 @@ Entretanto, devemos levantar as limitações e as desvantagens dessa tecnologia.
 
 ### Roadmap
 
-#### Entra Preliminar.
+#### Entrega Preliminar.
 
 - [ ] Criação de wireframes.
 
@@ -45,6 +45,12 @@ Entretanto, devemos levantar as limitações e as desvantagens dessa tecnologia.
 ## Escolha do Design ( Wireframe ).
 
 ## Escolha da API.
+
+Requisitos funcionais da API.
+1. Informações dinâmicas que atualizam periodicamente.
+2. Suporte a mecanismos de paginação.
+3. Conteúdo dinâmico (Imagens, textos.) - tipo feed de notícias.
+4. Uso gratuito.
 
 ## APK.
 
