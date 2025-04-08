@@ -11,6 +11,7 @@ Para o projeto do 3º semestre utilizaremos um api gratuita que nos forneça, da
 ## Opções de API pesquisadas.
 
 1. [Dummyjson](https://dummyjson.com/docs).
+
 - Esta api é capaz de fornecer dados estáticos entre as seguintes categorias: Produtos de ecommerce(Vestuário, Alimentos, Esportes e etc...)
 - Além do mais, esta api também é capaz de fornecer: Publicações, comentários, uma lista de tarefas, frases famosas e receitas culinárias.
 
@@ -18,10 +19,12 @@ Para o projeto do 3º semestre utilizaremos um api gratuita que nos forneça, da
 Ainda assim, esta api é útil.
 
 2. [Dados Abertos da Câmara dos deputados](https://dadosabertos.camara.leg.br/swagger/api.html).
+
 - É uma api com dados dos parlamentares, líderes, grupos, blocos, órgãos e mais importante proposições, eventos e votos nos projetos.
 - É possível verificar o que acontece na câmara dos deputados, o que está sendo votado, e quem está votando. E muito mais...
 
 3. [API's do Banco Central](https://dadosabertos.bcb.gov.br/).
+
 - O Banco central possui uma gama de serviços de dados disponibilizados gratuitamente, esses serviços vão desde datasets á api's.
 - Algumas api's que chama atenção são:
 
@@ -30,6 +33,7 @@ Ainda assim, esta api é útil.
   2. [Índice de Atividade Econômica do Banco Central - IBC-Br](https://dadosabertos.bcb.gov.br/dataset/24363-indice-de-atividade-economica-do-banco-central---ibc-br)
 
   3. [Estatísticas do PIX](https://dadosabertos.bcb.gov.br/dataset/pix)
+
   - Essa api fornece informações sobre:
   - Quantidade de chaves por participante.
   - Quantidade de transações por município.
@@ -59,6 +63,22 @@ Ainda assim, esta api é útil.
     Terminais POS/PDV
     Programas de recompensa e fidelidade
 
-  Mais:
-  - [API de dados da Saúde](https://servicos-datasus.saude.gov.br/)
-  - [API de dados do IBGE](https://servicodados.ibge.gov.br/api/docs/)
+5. [API do Spotify](https://developer.spotify.com/documentation/web-api)
+
+- Recuperar dados do seu artista, álbum ou programa favorito
+- Pesquisar conteúdo no Spotify
+- Controlar e interagir com a reprodução, tocar e retomar, avançar posição ou acessar sua fila
+- Gerenciar sua biblioteca pessoal, criando novas playlists e adicionando suas músicas favoritas
+- Acessar recursos de áudio e análises
+- Obter recomendações personalizadas
+- Visualizar histórico de reprodução
+- Seguir e gerenciar artistas
+- Salvar álbuns na biblioteca
+- Controlar reprodução em diferentes dispositivos
+- Acessar lançamentos e charts
+- Gerenciar perfil de usuário
+
+Mais:
+
+1. [API de dados da Saúde](https://servicos-datasus.saude.gov.br/)
+2. [API de dados do IBGE](https://servicodados.ibge.gov.br/api/docs/)
