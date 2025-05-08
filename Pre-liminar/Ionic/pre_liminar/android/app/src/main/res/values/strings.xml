@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">FutData</string>
+    <string name="title_activity_main">FutData</string>
+    <string name="package_name">com.g2l2.futdata</string>
+    <string name="custom_url_scheme">com.g2l2.futdata</string>
+</resources>

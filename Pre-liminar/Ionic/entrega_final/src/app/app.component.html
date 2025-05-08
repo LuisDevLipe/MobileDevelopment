@@ -1,0 +1,48 @@
+<ion-app>
+  <ion-split-pane contentId="main-content" mode="md">
+    <ion-header mode="md">
+      <ion-toolbar color="primary">
+        <ion-buttons>
+          <ion-menu-button > 
+            <ion-icon name="menu" slot="icon-only"> </ion-icon>
+          </ion-menu-button>
+          <ion-title>Menu</ion-title>
+        </ion-buttons>
+        <ion-buttons slot="end">
+          <ion-button slot="end">
+            <ion-icon slot="icon-only" name="person-circle-outline" size="default"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-menu contentId="main-content" side="start" mode="md">
+      <ion-header>
+        <ion-toolbar color="primary">
+          <ion-buttons>
+            <ion-menu-button>
+              <ion-icon name="menu"> </ion-icon>
+            </ion-menu-button>
+            <ion-title>Menu</ion-title>
+          </ion-buttons>
+          <ion-buttons slot="secondary">
+            <ion-button slot="end">
+              <ion-icon slot="icon-only" ios="logo-apple" md="settings-sharp" size="small"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <ion-list>
+          <ion-item
+            routerLink="/home"
+            routerDirecting="root"
+            routerLinkActive="active"
+          >
+            Funcionalidade principal
+          </ion-item>
+        </ion-list>
+      </ion-content>
+    </ion-menu>
+    <ion-router-outlet mode="md" id="main-content"></ion-router-outlet>
+  </ion-split-pane>
+</ion-app>
