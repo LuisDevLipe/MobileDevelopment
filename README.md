@@ -16,13 +16,13 @@ Entretanto, devemos levantar as limitações e as desvantagens dessa tecnologia.
 
 #### Entrega Preliminar.
 
-- [ ] Criação de wireframes.
+- [X] Criação de wireframes.
 
 - [ ] Documentação do Design escolhido e tomadas de decisão.
 
-- [ ] Definição da API.
+- [X] Definição da API.
 
-- [ ] Documentação dos critérios de escolha da api.
+- [X] Documentação dos critérios de escolha da api.
 
 - [ ] Apresentar um apk instalado em dispositivo móvel utilizando o Ionic.
 
@@ -30,27 +30,29 @@ Entretanto, devemos levantar as limitações e as desvantagens dessa tecnologia.
 
 - [ ] Apresentação em slideshow do conteúdo desenvolvido e dos insights obtidos.
 
-#### Entrega Final.
-
-## Integrantes
-
 # Wireframe
 
 [Escolha do design](../Wireframe/README.md)
 
-# API
-
-# Entrega pre-liminar
-
-## Escolha do Design ( Wireframe ).
-
 ## Escolha da API.
+
+<!-- [Documentação da API](./API/README.md) -->
+
+Escolhemos uma api que se encaixa na concepção do projeto, nosso aplicativo consolida dados informativos e estatísticos do futebol, possibilitando que o utilizador se mantenha informado e antenado. Filtramos entre diversas APIs disponíveis. Encontramos uma API brasileira inclusive que gostaríamos de utilizar, mas não conseguimos permissão para acesso.
+A API escolhida foi a [Football Data](https://www.football-data.org/), uma API de dados de futebol que fornece informações sobre ligas, times, jogadores e estatísticas de partidas. A API é gratuita para uso básico, com opções pagas para acesso a dados mais avançados. Esta API é amplamente utilizada por desenvolvedores e empresas que desejam integrar dados de futebol em seus aplicativos e serviços.
 
 Requisitos funcionais da API.
 1. Informações dinâmicas que atualizam periodicamente.
 2. Suporte a mecanismos de paginação.
 3. Conteúdo dinâmico (Imagens, textos.) - tipo feed de notícias.
 4. Uso gratuito.
+
+#### Entrega Final.
+
+
+## Integrantes
+
+Luis Felipe Macedo, Lucas Augusto, Gabriel Mufalani, Gabriel.
 
 ## APK.
 

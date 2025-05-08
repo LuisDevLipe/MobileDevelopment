@@ -10,6 +10,8 @@ Para o projeto do 3º semestre utilizaremos um api gratuita que nos forneça, da
 
 ## Opções de API pesquisadas.
 
+Vencedora: [Football Data](https://www.football-data.org/)
+
 1. [Dummyjson](https://dummyjson.com/docs).
 
 - Esta api é capaz de fornecer dados estáticos entre as seguintes categorias: Produtos de ecommerce(Vestuário, Alimentos, Esportes e etc...)
