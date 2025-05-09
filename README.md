@@ -22,13 +22,13 @@ Entretanto, devemos levantar as limitações e as desvantagens dessa tecnologia.
 
 -   [x] Criação de wireframes.
 
--   [ ] Documentação do Design escolhido e tomadas de decisão.
+-   [x] Documentação do Design escolhido e tomadas de decisão.
 
 -   [x] Definição da API.
 
 -   [x] Documentação dos critérios de escolha da api.
 
--   [ ] Apresentar um apk instalado em dispositivo móvel utilizando o Ionic.
+-   [x] Apresentar um apk instalado em dispositivo móvel utilizando o Ionic.
 
 -   [ ] Atualização da plataforma de projetos ( fase de iniciação e planjemento ).
 
