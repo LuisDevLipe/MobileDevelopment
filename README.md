@@ -2,17 +2,14 @@
 
 ## Sobre o Desenvolvimento de Aplicativos Móveis.
 
-        Precisa consertar esse texto
-        Tá muito desconexo e sem estrutura nenhuma.
+O desenvolvimento de aplicativos móveis é uma área em constante evolução, com novas tecnologias e abordagens surgindo regularmente. Existem três principais abordagens para o desenvolvimento de aplicativos móveis: nativo, híbrido e web (PWAs).
 
-O desenvolvimento de aplicativos móveis é uma área em constante evolução, com novas tecnologias e abordagens surgindo regularmente. Existem três principais abordagens para o desenvolvimento de aplicativos móveis: nativo, híbrido e web.
-O desenvolvimento móvel requer um nível de conhecimento mais especializado, soluções mobile requerem uma quantidade maior de desenvolvedores, estes são especializados nos desenvolvimento de diferentes plataformas (Android e iOS). O desenvolvimento de aplicativos nativos é complexa, custosa e possui um grande overhead no planejamento tanto financeiro quanto do ciclo de vida do aplicativo.
-Aplicativos nativos são rápidos, extremamente performáticos possuindo acesso direto aos recursos do dispositivos e leves.
+O desenvolvimento móvel requer um nível de conhecimento mais especializado, soluções mobile requerem uma quantidade maior de desenvolvedores, estes são especializados nos desenvolvimento de diferentes plataformas (Android e iOS).
+O desenvolvimento de aplicativos nativos é complexa, custosa e possui um grande "overhead" no planejamento tanto financeiro quanto do ciclo de vida do aplicativo.
 
-O desenvolvimento de aplicativos móveis híbridos traz a simplicidade e facilidade do desenvolvimento web para os dispositivos móveis. Os aplicativos serão executados em um navegador 'embutido' ou uma 'webview', e uma camada adicional é responsável por fornecer uma api que fornece acesso a funções nativas como acesso a câmera, GPS, Conectividade e etc... Tecnologias modernas como React Native, Flutter e Xamarin, além de frameworks como Ionic e Cordova/Capacitor, permitem o desenvolvimento de aplicativos móveis híbridos com comportamentos e desempenho pŕoximos de aplicativos nativos.
-Essa abordagem diminui drasticamente o tempo de desenvolvimento, o custo de ciclo de vida do aplicativo e a complexidade do projeto.
+Aplicativos nativos são rápidos, extremamente performáticos possuindo acesso direto aos recursos do dispositivos e leves. Em contrapartida, o aplicativo híbrido têm um ciclo de vida mais rápido, novas atualizações surgem com mais frequência e o custo de desenvolvimento é reduzido.
 
-Entretanto, devemos levantar as limitações e as desvantagens dessa tecnologia. O desenvolvimento híbrido feito de maneira incorrreta pode levar a uma péssima experiência do usuário, aplicativos lentos, pesados e com desempenho insatisfatório.
+Entretanto, devemos levantar as limitações e as desvantagens de cada tecnologia, assim como os benefícios que  cada uma pode oferecer. O desenvolvimento híbrido feito de maneira incorrreta pode levar a uma péssima experiência do usuário, aplicativos lentos, pesados e com desempenho insatisfatório.
 
 ## Sobre o Projeto.
 
@@ -42,7 +39,7 @@ O primeiro design oferece uma interface voltada para o e-commerce, e é uma boa 
 
 Portanto, dos designs apresentados podemos dizer que o segundo apresenta uma conexão maior e mais coesa com a proposta do projeto. A escolha do mesmo foi principalmente impulsionada pela escolha da api. Visto que, a o design é voltado para a apresentação de informações e dessa forma será mais propício para utilização na aplicação já que a api escolhida fornece dados em tempo real sobre o futebol.
 
-[Escolha do design](../Wireframe/README.md)
+[Wireframe escolhido](https://www.figma.com/design/8w1FQAyWoI9W8ZJiUuh3VZ/Wireframe-Mobile-2?node-id=0-1&t=Kpxm1eMkuq3NiR30-1)
 
 ## Escolha da API.
 
@@ -74,8 +71,9 @@ Requisitos funcionais da API.
 
 Luis Felipe Macedo, Lucas Augusto, Gabriel Mufalani, Gabriel Vargas.
 básico
+
 ## APK.
 
-[Link para o arquivo apk de testes da entrega pre-liminar](./Pre-liminar/APK/app-pre-liminar.apk)
+[Link para o arquivo apk de testes da entrega pre-liminar](./Pre-liminar/APK)
 
 ## Apresentação.
