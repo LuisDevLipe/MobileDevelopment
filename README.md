@@ -30,6 +30,10 @@ Entretanto, devemos levantar as limitações e as desvantagens dessa tecnologia.
 
 - [ ] Apresentação em slideshow do conteúdo desenvolvido e dos insights obtidos.
 
+#### Entrega Final.
+
+- [ ] Implementação de um feed que consuma dados periodicamente da api escolhida na Etapa 1.
+
 # Wireframe
 
 [Escolha do design](../Wireframe/README.md)
