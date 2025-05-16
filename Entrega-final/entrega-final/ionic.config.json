@@ -1,0 +1,9 @@
+{
+  "name": "entrega-final",
+  "integrations": {
+    "capacitor": {
+      
+    }
+  },
+  "type": "angular-standalone"
+}

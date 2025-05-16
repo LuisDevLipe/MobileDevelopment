@@ -1,0 +1,44 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title> Campeonatos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Campeonatos</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-searchbar
+    placeholder="Pesquisar"
+    debounce="500"
+    ></ion-searchbar>
+  @if(loaded){
+  <ion-list>
+    @for(competition of competitions; track competition.id){
+
+    <ion-item id="{{competition.id}}" routerLink="/competitions/{{competition.code}}">
+      <ion-thumbnail slot="start">
+        <ion-img src="{{competition.emblem}}" alt="Emblem of {{competition.name}}"></ion-img>
+      </ion-thumbnail>
+      <ion-card-title>{{competition.name}}</ion-card-title>
+      <ion-note slot="end">{{competition.area.name}}</ion-note>
+    </ion-item>
+    }
+  </ion-list>
+  } @else {
+  <ion-spinner name="crescent">
+  </ion-spinner>
+}
+@if(error){
+  <ion-text>
+    fudeu tb
+  </ion-text>
+  <pre>
+    {{errorMessage}}
+  </pre>
+} @else {
+  <ion-text>fudeu</ion-text>
+}
+</ion-content>

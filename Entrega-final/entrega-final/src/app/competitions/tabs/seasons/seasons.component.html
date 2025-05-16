@@ -1,0 +1,21 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-back-button defaultHref="/home" slot="start"></ion-back-button>
+    <ion-title size="large">Seasons {{competition?.name}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-img src="{{competition?.emblem}}" style="height: 200px;"></ion-img>
+    <ion-card-header>
+      <ion-card-title>{{competition?.name}}</ion-card-title>
+      <ion-card-subtitle>{{competition?.description}}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <p>Start Date: {{currentSeason?.startDate | date}}</p>
+      <p>End Date: {{currentSeason?.endDate | date}}</p>
+      <p>Winner: {{currentSeason?.winner || "To be decided"}}</p>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+  

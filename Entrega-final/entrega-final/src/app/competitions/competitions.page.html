@@ -1,0 +1,35 @@
+<!-- <ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-back-button defaultHref="/home" slot="start"></ion-back-button>
+    <ion-title>{{competition?.name}}</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+<ion-tabs>
+  <ion-tab tab="standings">
+    <tab-standings></tab-standings>
+  </ion-tab>
+  <ion-tab tab="seasons">
+    <tab-seasons></tab-seasons>
+  </ion-tab>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="standings">
+      <ion-icon name="trophy"></ion-icon>
+      <ion-label>Standings</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="matches">
+      <ion-icon name="football"></ion-icon>
+      <ion-label>Matches</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="teams">
+      <ion-icon name="people"></ion-icon>
+      <ion-label>Teams</ion-label>
+    </ion-tab-button>
+    <ion-tab-button tab="seasons">
+      <ion-icon name="calendar"></ion-icon>
+      <ion-label>Seasons</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>
+<!-- </ion-content> -->

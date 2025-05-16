@@ -1,0 +1,134 @@
+export const competition = {
+    "area": {
+      "id": 2032,
+      "name": "Brazil",
+      "code": "BRA",
+      "flag": "https://crests.football-data.org/764.svg"
+    },
+    "id": 2013,
+    "name": "Campeonato Brasileiro Série A",
+    "code": "BSA",
+    "type": "LEAGUE",
+    "emblem": "https://crests.football-data.org/bsa.png",
+    "currentSeason": {
+      "id": 2371,
+      "startDate": "2025-03-29",
+      "endDate": "2025-12-21",
+      "currentMatchday": 9,
+      "winner": null
+    },
+    "seasons": [
+      {
+        "id": 2371,
+        "startDate": "2025-03-29",
+        "endDate": "2025-12-21",
+        "currentMatchday": 9,
+        "winner": null
+      },
+      {
+        "id": 2257,
+        "startDate": "2024-04-13",
+        "endDate": "2024-12-08",
+        "currentMatchday": 38,
+        "winner": null
+      },
+      {
+        "id": 1557,
+        "startDate": "2023-04-15",
+        "endDate": "2023-12-03",
+        "currentMatchday": 37,
+        "winner": null
+      },
+      {
+        "id": 1377,
+        "startDate": "2022-04-10",
+        "endDate": "2022-11-13",
+        "currentMatchday": 38,
+        "winner": null
+      },
+      {
+        "id": 726,
+        "startDate": "2021-05-30",
+        "endDate": "2021-12-05",
+        "currentMatchday": 37,
+        "winner": null
+      },
+      {
+        "id": 589,
+        "startDate": "2020-08-09",
+        "endDate": "2021-02-24",
+        "currentMatchday": 38,
+        "winner": {
+          "id": 1783,
+          "name": "CR Flamengo",
+          "shortName": "Flamengo",
+          "tla": "FLA",
+          "crest": "https://crests.football-data.org/1783.png",
+          "address": "null Rio de Janeiro, RJ null",
+          "website": "https://www.flamengo.com.br/pagina-inicial-basquete",
+          "founded": 1919,
+          "clubColors": "Red / Black / White",
+          "venue": "Estadio Jornalista Mário Filho",
+          "lastUpdated": "2022-04-06T13:13:43Z"
+        }
+      },
+      {
+        "id": 460,
+        "startDate": "2019-04-28",
+        "endDate": "2019-12-08",
+        "currentMatchday": 38,
+        "winner": {
+          "id": 1783,
+          "name": "CR Flamengo",
+          "shortName": "Flamengo",
+          "tla": "FLA",
+          "crest": "https://crests.football-data.org/1783.png",
+          "address": "null Rio de Janeiro, RJ null",
+          "website": "https://www.flamengo.com.br/pagina-inicial-basquete",
+          "founded": 1919,
+          "clubColors": "Red / Black / White",
+          "venue": "Estadio Jornalista Mário Filho",
+          "lastUpdated": "2022-04-06T13:13:43Z"
+        }
+      },
+      {
+        "id": 15,
+        "startDate": "2018-04-14",
+        "endDate": "2018-12-02",
+        "currentMatchday": 38,
+        "winner": {
+          "id": 1769,
+          "name": "SE Palmeiras",
+          "shortName": "Palmeiras",
+          "tla": "PAL",
+          "crest": "https://crests.football-data.org/1769.png",
+          "address": "Rua Palestra Italia nº 214, Perdizes São Paulo, SP 05005-030",
+          "website": "http://www.palmeiras.com.br",
+          "founded": 1914,
+          "clubColors": "Green / White",
+          "venue": "Allianz Parque",
+          "lastUpdated": "2022-04-06T13:14:55Z"
+        }
+      },
+      {
+        "id": 459,
+        "startDate": "2017-05-13",
+        "endDate": "2017-12-03",
+        "currentMatchday": null,
+        "winner": {
+          "id": 1779,
+          "name": "SC Corinthians Paulista",
+          "shortName": "Corinthians",
+          "tla": "COR",
+          "crest": "https://crests.football-data.org/1779.png",
+          "address": "Rua São Jorge 777, Tatuapé São Paulo, SP 03087-000",
+          "website": "http://www.corinthians.com.br",
+          "founded": 1910,
+          "clubColors": "Black / White",
+          "venue": "Neo Química Arena",
+          "lastUpdated": "2024-07-29T17:24:47Z"
+        }
+      }
+    ],
+    "lastUpdated": "2024-09-13T16:55:53Z"
+  }
