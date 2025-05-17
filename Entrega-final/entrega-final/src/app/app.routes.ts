@@ -14,4 +14,12 @@ export const routes: Routes = [
     path: 'competitions/:code',
     loadComponent: () => import('./competitions/competitions.page').then( m => m.CompetitionsPage)
   },
+  {
+    path: 'login',
+    loadComponent: () => import('./login/login.page').then( m => m.LoginPage)
+  },
+  {
+    path: 'cadastro',
+    loadComponent: () => import('./cadastro/cadastro.page').then( m => m.CadastroPage)
+  },
 ];
