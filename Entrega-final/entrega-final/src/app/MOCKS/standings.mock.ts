@@ -1,4 +1,4 @@
-export const Standinngs = {
+export const Standings = {
   filters: {
     season: '2025',
   },
@@ -412,4 +412,3 @@ export const Standinngs = {
     },
   ],
 };
-export type Standings = typeof Standinngs;

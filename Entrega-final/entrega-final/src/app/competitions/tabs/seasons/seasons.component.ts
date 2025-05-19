@@ -3,7 +3,7 @@ import { IonCardContent, IonCardSubtitle, IonCardTitle, IonImg, IonContent, IonT
 import { DatePipe } from '@angular/common';
 import { FootballdataService } from '../../../services/footballdata.service';
 import {ActivatedRoute} from '@angular/router';
-import { competition } from 'src/app/MOCKS/competition.mock';
+import { Competition } from 'src/app/MOCKS/competition.mock';
 @Component({
   selector: 'tab-seasons',
   templateUrl: './seasons.component.html',
@@ -31,12 +31,12 @@ export class SeasonsComponent  implements OnInit {
   }
 
   ngOnInit() {
-    this.footballdata.Competitions(this.competitionId, 'seasons').then((data: any) => {
-      this.competition = data;
-      this.seasons = data.seasons;
-      this.currentSeason = data.currentSeason;
-    }).catch(error => {
-      this.competition = competition
-    })
+    //   this.footballdata.Competitions(this.competitionId, 'seasons').then((data: any) => {
+    //     this.competition = data;
+    //     this.seasons = data.seasons;
+    //     this.currentSeason = data.currentSeason;
+    //   }).catch(error => {
+    //     this.competition = Competition
+    //   })
   }
 }
