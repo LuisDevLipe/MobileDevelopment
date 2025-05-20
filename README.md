@@ -27,9 +27,9 @@ Entretanto, devemos levantar as limitações e as desvantagens de cada tecnologi
 
 -   [x] Apresentar um apk instalado em dispositivo móvel utilizando o Ionic.
 
--   [ ] Atualização da plataforma de projetos ( fase de iniciação e planjemento ).
+-   [x] Atualização da plataforma de projetos ( fase de iniciação e planjemento ).
 
--   [ ] Apresentação em slideshow do conteúdo desenvolvido e dos insights obtidos.
+-   [x] Apresentação em slideshow do conteúdo desenvolvido e dos insights obtidos.
 
 #### Entrega Final.
 
