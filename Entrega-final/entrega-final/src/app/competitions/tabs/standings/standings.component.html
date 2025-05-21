@@ -26,7 +26,7 @@
     @for
   (position of standing.table ; track position?.position) {
     <ion-grid>
-      <ion-row routerLink="/matches/{{position.team.id}}/{{code}}" class="ion-activatable ripple-parent">
+      <ion-row routerLink="/matches/{{position.team.id}}/{{competitionCode}}" class="ion-activatable ripple-parent">
         <ion-col>{{ position?.position }}</ion-col>
         <ion-col>
           <ion-thumbnail mode="md" style="width: fit-content; height: fit-content; display: grid; place-items: center;">

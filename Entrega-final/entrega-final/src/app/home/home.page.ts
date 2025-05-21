@@ -17,6 +17,8 @@ import { OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { AsyncPipe } from '@angular/common';
 import { Competition } from '../MOCKS/competition.mock';
+import { CompetitionRequest } from 'src/app/services/entities/competition.request';
+import { CompetitionResponse } from '../services/entities/competition.response';
 
 @Component({
   selector: 'app-home',
@@ -39,9 +41,11 @@ import { Competition } from '../MOCKS/competition.mock';
   ],
 })
 export class HomePage implements OnInit {
-  public competitions: Promise<(typeof Competition)[]>;
+  public competitions: Promise<CompetitionResponse[]>;
   constructor(private footballdata: FootballdataService) {
-    this.competitions = this.footballdata.Competitions();
+    this.competitions = this.footballdata.Competitions(
+      new CompetitionRequest()
+    );
     this.competitions.then((data) => {
       console.log(data);
     });

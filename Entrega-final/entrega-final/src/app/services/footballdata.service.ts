@@ -1,10 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.development';
-import { StandingsRequest } from '../entities/standings.request';
-import { StandingsResponse } from '../entities/standings.response';
-import { MatchesRequest } from '../entities/matches.request';
-import { MatchesResponse } from '../entities/matches.response';
+import {
+  CompetitionRequest,
+  StandingsRequest,
+  CompetitionMatchesRequest,
+} from 'src/app/services/entities/competition.request';
+import {
+  CompetitionResponse,
+  StandingsResponse,
+  CompetitionMatchesResponse,
+} from 'src/app/services/entities/competition.response';
+
 import { CapacitorHttp } from '@capacitor/core';
 
 @Injectable({
@@ -21,20 +28,16 @@ export class FootballdataService {
     this.url = environment.FOOTBALL_DATA_API_URL;
   }
 
-  async Competitions(id?: number, competition?: string) {
-    if (competition) {
+  async Competitions(
+    request: CompetitionRequest
+  ): Promise<CompetitionResponse[]> {
+    const competitionCode = request.id;
+    if (competitionCode) {
       const response = await CapacitorHttp.get({
-        url: `${this.url}/competitions/${competition}`,
+        url: `${this.url}/competitions/${competitionCode}`,
         headers: this.headers,
       });
       return response.data;
-    }
-    if (id) {
-      const response = await CapacitorHttp.get({
-        url: `${this.url}/competitions/${id}`,
-        headers: this.headers,
-      });
-      return response.data.competitions as any;
     } else {
       const response = await CapacitorHttp.get({
         url: `${this.url}/competitions`,
@@ -45,24 +48,36 @@ export class FootballdataService {
   }
 
   async Standings(request: StandingsRequest): Promise<StandingsResponse> {
+    const competitionCode = request.id;
     const response = await CapacitorHttp.get({
-      url: `${this.url}/competitions/${request.code}/standings`,
+      url: `${this.url}/competitions/${competitionCode}/standings`,
       headers: this.headers,
       params: {
-        season: request.season ?? '',
+        matchday: request.filters?.matchday?.toString() ?? '',
+        season: request.filters?.season ?? '',
+        date: request.filters?.date ?? '', // YYYY-MM-DD
       },
     });
     return response.data as StandingsResponse;
   }
 
-  async Matches(request: MatchesRequest): Promise<MatchesResponse> {
+  async CompetitionMatches(
+    request: CompetitionMatchesRequest
+  ): Promise<CompetitionMatchesResponse> {
+    const competitionCode = request.id;
     const response = await CapacitorHttp.get({
-      url: `${this.url}/teams/${request.teamId}/matches`,
+      url: `${this.url}/competitions/${competitionCode}/matches`,
       headers: this.headers,
       params: {
-        competition: request.competition ?? '',
+        dateFrom: request.filters?.dateFrom ?? '',
+        dateTo: request.filters?.dateTo ?? '',
+        stage: request.filters?.stage ?? '',
+        status: request.filters?.status ?? '',
+        matchday: request.filters?.matchday?.toString() ?? '',
+        group: request.filters?.group ?? '',
+        season: request.filters?.season?.toString() ?? '',
       },
     });
-    return response.data as MatchesResponse;
+    return response.data as CompetitionMatchesResponse;
   }
 }

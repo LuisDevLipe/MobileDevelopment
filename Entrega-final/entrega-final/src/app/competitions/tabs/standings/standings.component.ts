@@ -24,54 +24,38 @@ import {
 } from '@ionic/angular/standalone';
 import { FootballdataService } from 'src/app/services/footballdata.service';
 import { ActivatedRoute } from '@angular/router';
-import { StandingsResponse } from 'src/app/entities/standings.response';
-import { StandingsRequest } from 'src/app/entities/standings.request';
-import { environment } from 'src/environments/environment.development';
-import { Standings } from 'src/app/MOCKS/standings.mock';
-import { AsyncPipe } from '@angular/common';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { StandingsRequest } from 'src/app/services/entities/competition.request';
+import { StandingsResponse } from 'src/app/services/entities/competition.response';
+import { RouterLink } from '@angular/router';
 @Component({
   selector: 'tab-standings',
   templateUrl: './standings.component.html',
   styleUrls: ['./standings.component.scss'],
   standalone: true,
   imports: [
-    IonSegment,
     IonCol,
     IonRow,
     IonGrid,
-    IonNote,
-    IonLabel,
-    IonItem,
-    IonList,
-    IonCardContent,
-    IonCardSubtitle,
-    IonCardTitle,
-    IonCardHeader,
-    IonImg,
-    IonCard,
     IonBackButton,
-    IonText,
     IonHeader,
     IonToolbar,
     IonTitle,
     IonContent,
-    AsyncPipe,
     IonThumbnail,
     RouterLink,
-    RouterLinkActive,
   ],
 })
 export class StandingsComponent implements OnInit {
   public competition?: StandingsResponse['competition'];
   public season?: StandingsResponse['season'];
   public standings?: StandingsResponse['standings'];
-  public code: string;
+  public competitionCode: string;
   constructor(
     private footballdata: FootballdataService,
     private route: ActivatedRoute
   ) {
-    this.code = this.route.snapshot.paramMap.get('code') || '';
+    this.competitionCode =
+      this.route.snapshot.paramMap.get('competitionCode') || '';
   }
 
   ngOnInit() {
@@ -79,11 +63,15 @@ export class StandingsComponent implements OnInit {
   }
 
   loadStandings() {
-    const request = new StandingsRequest(this.code);
-    this.footballdata.Standings(request).then((response: StandingsResponse) => {
-      this.competition = response.competition;
-      this.season = response.season;
-      this.standings = response.standings;
-    });
+    this.footballdata
+      .Standings(new StandingsRequest({ id: this.competitionCode }))
+      .then((response: StandingsResponse) => {
+        this.competition = response.competition;
+        this.season = response.season;
+        this.standings = response.standings;
+      })
+      .catch((error) => {
+        console.error('Error loading standings:', error);
+      });
   }
 }

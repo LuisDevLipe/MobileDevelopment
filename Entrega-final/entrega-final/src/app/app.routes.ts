@@ -11,7 +11,7 @@ export const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'competitions/:code',
+    path: 'competitions/:competitionCode',
     loadComponent: () =>
       import('./competitions/competitions.page').then(
         (m) => m.CompetitionsPage

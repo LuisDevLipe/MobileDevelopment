@@ -33,14 +33,8 @@ import { MatchesComponent } from './tabs/matches/matches.component';
   ],
 })
 export class CompetitionsPage implements OnInit {
-  public id: number;
   public competition: any;
-  constructor(
-    private footballdata: FootballdataService,
-    private route: ActivatedRoute
-  ) {
-    this.id = this.route.snapshot.params['code'];
-  }
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
     addIcons({
@@ -49,13 +43,5 @@ export class CompetitionsPage implements OnInit {
       calendar,
       people,
     });
-    this.footballdata
-      .Competitions(this.id)
-      .then((data) => {
-        this.competition = data;
-      })
-      .catch((error) => {
-        this.competition = Competition;
-      });
   }
 }

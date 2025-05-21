@@ -6,36 +6,72 @@ import {
   IonBackButton,
   IonToolbar,
   IonHeader,
+  IonList,
+  IonItem,
+  IonCard,
+  IonCardHeader,
+  IonCardTitle,
+  IonCardSubtitle,
+  IonImg,
+  IonCardContent,
 } from '@ionic/angular/standalone';
+import { CompetitionMatchesRequest } from 'src/app/services/entities/competition.request';
+import { CompetitionMatchesResponse } from 'src/app/services/entities/competition.response';
 import { FootballdataService } from 'src/app/services/footballdata.service';
-import { MatchesResponse } from 'src/app/entities/matches.response';
 
 @Component({
   selector: 'tab-matches',
   templateUrl: './matches.component.html',
   styleUrls: ['./matches.component.scss'],
   standalone: true,
-  imports: [IonContent, IonTitle, IonBackButton, IonToolbar, IonHeader],
+  imports: [
+    IonCardContent,
+    IonImg,
+    IonCardSubtitle,
+    IonCardTitle,
+    IonCardHeader,
+    IonCard,
+    IonItem,
+    IonList,
+    IonContent,
+    IonTitle,
+    IonBackButton,
+    IonToolbar,
+    IonHeader,
+  ],
 })
 export class MatchesComponent implements OnInit {
   public competitionCode: string;
-  public teamId: number;
-  public metadata?: MatchesResponse['resultSet'];
-  public matches?: MatchesResponse['matches'];
+  public filters!: CompetitionMatchesResponse['filters'];
+  public resultSet!: CompetitionMatchesResponse['resultSet'];
+  public competition!: CompetitionMatchesResponse['competition'];
+  public matches!: CompetitionMatchesResponse['matches'];
+
   constructor(
     private route: ActivatedRoute,
     private footballdata: FootballdataService
   ) {
     this.competitionCode =
       this.route.snapshot.paramMap.get('competitionCode') || '';
-    this.teamId = Number(this.route.snapshot.paramMap.get('teamId')) || 0;
-    this.footballdata
-      .Matches({ teamId: this.teamId, competition: this.competitionCode })
-      .then((response) => {
-        this.metadata = response.resultSet;
-        this.matches = response.matches;
-      });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.loadMatches();
+  }
+  loadMatches() {
+    this.footballdata
+      .CompetitionMatches(
+        new CompetitionMatchesRequest({ id: this.competitionCode })
+      )
+      .then((res: CompetitionMatchesResponse) => {
+        this.competition = res.competition;
+        this.filters = res.filters;
+        this.resultSet = res.resultSet;
+        this.matches = res.matches;
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
 }
+

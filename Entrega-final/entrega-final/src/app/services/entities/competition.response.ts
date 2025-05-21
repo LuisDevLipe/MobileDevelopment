@@ -1,0 +1,145 @@
+class CompetitionResponse {
+  area!: Area;
+  id!: number;
+  name!: string;
+  code!: string;
+  type!: string;
+  emblem!: string;
+  currentSeason!: Season;
+  seasons!: Season[];
+  lastUpdated!: string;
+}
+interface Area {
+  id: number;
+  name: string;
+  code: string;
+  flag: string;
+}
+
+interface Winner {
+  id: number;
+  name: string;
+  shortName: string;
+  tla: string;
+  crest: string;
+  address: string;
+  website: string;
+  founded: number;
+  clubColors: string;
+  venue: string;
+  lastUpdated: string;
+}
+
+interface Season {
+  id: number;
+  startDate: string;
+  endDate: string;
+  currentMatchday: number | null;
+  winner: Winner | null;
+}
+
+interface StandingsResponse {
+  filters: {
+    season: string;
+  };
+  area: Area;
+  competition: {
+    id: number;
+    name: string;
+    code: string;
+    type: string;
+    emblem: string;
+  };
+  season: Season;
+  standings: Standing[];
+}
+
+interface Standing {
+  stage: string;
+  type: string;
+  group: string | null;
+  table: StandingTableEntry[];
+}
+
+interface StandingTableEntry {
+  position: number;
+  team: Team;
+  playedGames: number;
+  form: string | null;
+  won: number;
+  draw: number;
+  lost: number;
+  points: number;
+  goalsFor: number;
+  goalsAgainst: number;
+  goalDifference: number;
+}
+
+interface Team {
+  id: number;
+  name: string;
+  shortName: string;
+  tla: string;
+  crest: string;
+}
+
+class CompetitionMatchesResponse {
+  filters!: {
+    season: string;
+  };
+  resultSet!: {
+    count: number;
+    first: string;
+    last: string;
+    played: number;
+  };
+  competition!: {
+    id: number;
+    name: string;
+    code: string;
+    type: string;
+    emblem: string;
+  };
+  matches!: CompetitionMatch[];
+}
+
+interface CompetitionMatch {
+  area: Area;
+  competition: {
+    id: number;
+    name: string;
+    code: string;
+    type: string;
+    emblem: string;
+  };
+  season: Season;
+  id: number;
+  utcDate: string;
+  status: string;
+  matchday: number;
+  stage: string;
+  group: string | null;
+  lastUpdated: string;
+  homeTeam: Team;
+  awayTeam: Team;
+  score: MatchScore;
+  odds: {
+    msg: string;
+  };
+  referees: any[];
+}
+
+interface MatchScore {
+  winner: string;
+  duration: string;
+  fullTime: {
+    home: number;
+    away: number;
+  };
+  halfTime: {
+    home: number;
+    away: number;
+  };
+}
+
+export { CompetitionResponse, StandingsResponse, CompetitionMatchesResponse };
