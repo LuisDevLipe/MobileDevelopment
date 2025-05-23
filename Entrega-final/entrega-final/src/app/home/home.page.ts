@@ -11,12 +11,20 @@ import {
   IonCardTitle,
   IonNote,
   IonSearchbar,
+  IonMenu,
+  IonIcon,
+  IonLabel,
+  IonMenuButton,
+  IonButtons,
+  IonMenuToggle,
 } from '@ionic/angular/standalone';
+import { addIcons } from 'ionicons';
+import { peopleCircleSharp, helpCircleSharp } from 'ionicons/icons';
 import { FootballdataService } from '../services/footballdata.service';
 import { OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import {IonRouterLink} from '@ionic/angular/standalone';
 import { AsyncPipe } from '@angular/common';
-import { Competition } from '../MOCKS/competition.mock';
 import { CompetitionRequest } from 'src/app/services/entities/competition.request';
 import { CompetitionResponse } from '../services/entities/competition.response';
 
@@ -25,6 +33,9 @@ import { CompetitionResponse } from '../services/entities/competition.response';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
   imports: [
+    IonButtons,
+    IonLabel,
+    IonIcon,
     IonSearchbar,
     RouterLink,
     IonNote,
@@ -38,6 +49,11 @@ import { CompetitionResponse } from '../services/entities/competition.response';
     IonTitle,
     IonContent,
     AsyncPipe,
+    IonMenu,
+    IonMenuButton,
+    RouterLink,
+    IonRouterLink,
+    RouterLinkActive,
   ],
 })
 export class HomePage implements OnInit {
@@ -46,10 +62,12 @@ export class HomePage implements OnInit {
     this.competitions = this.footballdata.Competitions(
       new CompetitionRequest()
     );
-    this.competitions.then((data) => {
-      console.log(data);
-    });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    addIcons({
+      peopleCircleSharp,
+      helpCircleSharp,
+    });
+  }
 }

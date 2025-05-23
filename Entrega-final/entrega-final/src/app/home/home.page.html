@@ -1,13 +1,18 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true" mode="md">
   <ion-toolbar>
-    <ion-title> Campeonatos</ion-title>
+    <ion-title>Campeonatos</ion-title>
+    <ion-buttons slot="end">
+        <ion-menu-button menu="main"></ion-menu-button>
+      </ion-buttons> 
   </ion-toolbar>
 </ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
+<ion-content [fullscreen]="true" id="main">
+  <ion-header collapse="condense" mode="md">
     <ion-toolbar>
-      <ion-title size="large">Campeonatos</ion-title>
+      <ion-title size="small">Campeonatos</ion-title>
+      <ion-buttons slot="end">
+        <ion-menu-button menu="main"></ion-menu-button>
+      </ion-buttons>
     </ion-toolbar>
   </ion-header>
   <ion-searchbar placeholder="Pesquisar" debounce="500"></ion-searchbar>

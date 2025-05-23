@@ -1,3 +1,37 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-menu contentId="main" side="end" menuId="main" class="ion-no-border">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Menu global</ion-title>
+        <ion-buttons slot="end">
+          <ion-menu-button menu="main"></ion-menu-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list lines="none" mode="md">
+        <ion-menu-toggle auto-hide="false">
+
+          <ion-item routerLink="/home" routerLinkActive="active">
+            <ion-icon slot="end" name="home-sharp"></ion-icon>
+            <ion-label>Home</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle auto-hide="false">
+          <ion-item>
+            <ion-icon slot="end" name="people-circle-sharp"></ion-icon>
+            <ion-label>Profile</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle auto-hide="false">
+
+          <ion-item routerLink="/about" routerLinkActive="active">
+            <ion-icon slot="end" name="help-circle-sharp"></ion-icon>
+            <ion-label>About us</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet id="main"> </ion-router-outlet>
 </ion-app>

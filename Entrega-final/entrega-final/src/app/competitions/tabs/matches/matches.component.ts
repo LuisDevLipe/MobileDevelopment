@@ -122,6 +122,7 @@ export class MatchesComponent implements OnInit {
   }
   paginate(event: InfiniteScrollCustomEvent) {
     this.page = this.page++;
+    event.target.complete();
   }
 }
 
