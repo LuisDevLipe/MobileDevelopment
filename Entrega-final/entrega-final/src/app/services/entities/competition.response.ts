@@ -1,3 +1,4 @@
+import { CompetitionMatchesRequest } from './competition.request';
 class CompetitionResponse {
   area!: Area;
   id!: number;
@@ -84,9 +85,7 @@ interface Team {
 }
 
 class CompetitionMatchesResponse {
-  filters!: {
-    season: string;
-  };
+  filters!: CompetitionMatchesRequest['filters'];
   resultSet!: {
     count: number;
     first: string;

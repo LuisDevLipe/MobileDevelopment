@@ -29,29 +29,51 @@
     </ion-card-header>
     <ion-card-content> </ion-card-content>
   </ion-card>
-  <ion-list>
-    @for(match of matches; track match?.id){
-    <ion-item>
-      <ion-thumbnail mode="md" slot="start" aria-hidden="true">
-        <img
-          src="{{ match.homeTeam.crest }}"
-          alt="Picute of {{ match.homeTeam.name }} crest"
-        />
-      </ion-thumbnail>
-
-      <ion-label class="ion-text-center">
-        {{ match.score.fullTime.home }} - {{ match.score.fullTime.away }}
-      </ion-label>
-      <ion-note slot="end">
-        {{ match.utcDate | date: 'dd/MM/yyyy HH:mm' }}
-      </ion-note>
-      <ion-thumbnail mode="md" slot="end" aria-hidden="true">
-        <img
-          src="{{ match.awayTeam.crest }}"
-          alt="Picute of {{ match.awayTeam.name }} crest"
-        />
-      </ion-thumbnail>
-    </ion-item>
-    }
-  </ion-list>
-</ion-content>
+  <ion-select
+    mode="md"
+    interface="alert"
+    placeholder="Match Status"
+    [multiple]="true"
+    justify="space-between"
+    fill="solid"
+    label-placement="floating"
+  >
+    <ion-label slot="label">Match Status</ion-label>
+    <ion-select-option> In play </ion-select-option>
+    <ion-select-option> Finished </ion-select-option>
+    <ion-select-option> Scheduled </ion-select-option>
+  </ion-select>
+  <ion-infinite-scroll (ionInfinite)="paginate($event)">
+    <ion-infinite-scroll-content
+      loadingText="Please wait..."
+      loadingSpinner="bubbles"
+    >
+    <ion-list>
+      @for(match of matches; track match?.id){
+        <ion-item>
+          <ion-thumbnail mode="md" slot="start" aria-hidden="true">
+            <img
+            src="{{ match.homeTeam.crest }}"
+            alt="Picute of {{ match.homeTeam.name }} crest"
+            />
+          </ion-thumbnail>
+          
+          <ion-label class="ion-text-center">
+            {{ match.score.fullTime.home }} - {{ match.score.fullTime.away }}
+          </ion-label>
+          <ion-note slot="end">
+            {{ match.utcDate | date : "dd/MM/yyyy HH:mm" }}
+          </ion-note>
+          <ion-thumbnail mode="md" slot="end" aria-hidden="true">
+            <img
+            src="{{ match.awayTeam.crest }}"
+            alt="Picute of {{ match.awayTeam.name }} crest"
+            />
+          </ion-thumbnail>
+        </ion-item>
+      }
+    </ion-list>
+  </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+  </ion-content>
+  

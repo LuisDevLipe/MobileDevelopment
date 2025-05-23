@@ -76,6 +76,8 @@ export class FootballdataService {
         matchday: request.filters?.matchday?.toString() ?? '',
         group: request.filters?.group ?? '',
         season: request.filters?.season?.toString() ?? '',
+        limit: request.filters?.limit?.toString() ?? '',
+        offset: request.filters?.offset?.toString() ?? '',
       },
     });
     return response.data as CompetitionMatchesResponse;
