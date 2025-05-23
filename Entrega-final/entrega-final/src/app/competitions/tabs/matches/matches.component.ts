@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { DatePipe } from '@angular/common';
 import {
   IonContent,
   IonTitle,
@@ -14,6 +15,12 @@ import {
   IonCardSubtitle,
   IonImg,
   IonCardContent,
+  IonSelect,
+  IonSelectOption,
+  IonLabel,
+  IonNote,
+  IonThumbnail,
+  IonText,
 } from '@ionic/angular/standalone';
 import { CompetitionMatchesRequest } from 'src/app/services/entities/competition.request';
 import { CompetitionMatchesResponse } from 'src/app/services/entities/competition.response';
@@ -25,6 +32,9 @@ import { FootballdataService } from 'src/app/services/footballdata.service';
   styleUrls: ['./matches.component.scss'],
   standalone: true,
   imports: [
+    IonText,
+    IonNote,
+    IonLabel,
     IonCardContent,
     IonImg,
     IonCardSubtitle,
@@ -38,6 +48,10 @@ import { FootballdataService } from 'src/app/services/footballdata.service';
     IonBackButton,
     IonToolbar,
     IonHeader,
+    IonSelect,
+    IonSelectOption,
+    IonThumbnail,
+    DatePipe,
   ],
 })
 export class MatchesComponent implements OnInit {
@@ -46,6 +60,7 @@ export class MatchesComponent implements OnInit {
   public resultSet!: CompetitionMatchesResponse['resultSet'];
   public competition!: CompetitionMatchesResponse['competition'];
   public matches!: CompetitionMatchesResponse['matches'];
+  public selectedSeasons: string[] = [''];
 
   constructor(
     private route: ActivatedRoute,

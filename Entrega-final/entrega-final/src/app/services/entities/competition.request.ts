@@ -42,35 +42,39 @@ class StandingsRequest {
 }
 
 class CompetitionMatchesRequest {
-    public id!: number | string;
-    public filters?: {
-        dateFrom?: string; // YYYY-MM-DD
-        dateTo?: string;   // YYYY-MM-DD
-        stage?: string;
-        status?: string;
-        matchday?: number;
-        group?: string;
-        season?: string | number;
+  public id!: number | string;
+  public filters?: {
+    dateFrom?: string; // YYYY-MM-DD
+    dateTo?: string; // YYYY-MM-DD
+    stage?: string;
+    status?: string;
+    matchday?: number;
+    group?: string;
+    season?: string | number;
+    limit?: number; // [1-500]
+    offset?: number; // [1-500]
+  };
+  // named parameters using destructuring
+  constructor({
+    id,
+    filters,
+  }: {
+    id: number | string;
+    filters?: {
+      dateFrom?: string; // YYYY-MM-DD
+      dateTo?: string; // YYYY-MM-DD
+      stage?: string;
+      status?: string;
+      matchday?: number;
+      group?: string;
+      season?: string | number;
+      limit?: number; // [1-500]
+      offset?: number; // [1-500]
     };
-    // named parameters using destructuring
-    constructor({
-        id,
-        filters,
-    }: {
-        id: number | string;
-        filters?: {
-            dateFrom?: string; // YYYY-MM-DD
-            dateTo?: string;   // YYYY-MM-DD
-            stage?: string;
-            status?: string;
-            matchday?: number;
-            group?: string;
-            season?: string | number;
-        };
-    }) {
-        this.id = id;
-        this.filters = filters;
-    }
+  }) {
+    this.id = id;
+    this.filters = filters;
+  }
 }
 
 export { CompetitionRequest, StandingsRequest, CompetitionMatchesRequest };
