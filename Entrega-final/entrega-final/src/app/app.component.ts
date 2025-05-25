@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   IonApp,
   IonRouterOutlet,
@@ -16,6 +16,8 @@ import {
   IonMenuToggle,
 } from '@ionic/angular/standalone';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { logInSharp, rocketSharp } from 'ionicons/icons';
+import { addIcons } from 'ionicons';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -38,6 +40,12 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
     IonMenuToggle,
   ],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   constructor() {}
+  ngOnInit() {
+    addIcons({
+      logInSharp,
+      rocketSharp,
+    });
+  }
 }
