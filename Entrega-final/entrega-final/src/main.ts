@@ -9,13 +9,14 @@ import { provideHttpClient } from '@angular/common/http';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { provideAuth, getAuth, connectAuthEmulator } from '@angular/fire/auth';
 
+import { environment } from './environments/environment.development';
 bootstrapApplication(AppComponent, {
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     provideIonicAngular(),
     provideRouter(routes, withPreloading(PreloadAllModules)),
     provideHttpClient(),
-    provideFirebaseApp(() => initializeApp()),
+    provideFirebaseApp(() => initializeApp(environment.FIREBASE_CONFIG)),
     provideAuth(() => {
       const auth = getAuth();
       connectAuthEmulator(auth, 'http://127.0.0.1:9099', {
