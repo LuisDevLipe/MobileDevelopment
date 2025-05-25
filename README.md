@@ -71,6 +71,17 @@ Requisitos funcionais da API.
 
 #### Entrega Final.
 
+
+## Documentação suplementar firebase auth
+
+- [Introdução ao Firebase Authentication (Documentação Oficial)](https://firebase.google.com/docs/auth/web/start?hl=pt-br)
+
+- [Guia de Autenticação com AngularFire](https://github.com/angular/angularfire/blob/main/docs/auth.md#authentication)
+
+- [Configuração do Firebase Authentication para Web](https://firebase.google.com/docs/auth/web/start?hl=pt-br#web_2)
+
+- [Referência da API de Autenticação do Firebase](https://firebase.google.com/docs/reference/js/auth?hl=pt-br)
+
 ## Integrantes
 
 Luis Felipe Macedo, Lucas Augusto, Gabriel Mufalani, Gabriel Vargas.
