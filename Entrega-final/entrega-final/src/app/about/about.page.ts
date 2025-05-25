@@ -12,10 +12,15 @@ import {
   IonItem,
   IonList,
   IonMenu,
-  IonMenuButton
+  IonMenuButton,
+  IonItemGroup,
+  IonItemDivider,
+  IonThumbnail,
+  IonImg,
+  IonNote,
 } from '@ionic/angular/standalone';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
-import {IonRouterLink} from '@ionic/angular/standalone';
+import { IonRouterLink } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { peopleCircleSharp, helpCircleSharp, homeSharp } from 'ionicons/icons';
 @Component({
@@ -24,6 +29,10 @@ import { peopleCircleSharp, helpCircleSharp, homeSharp } from 'ionicons/icons';
   styleUrls: ['./about.page.scss'],
   standalone: true,
   imports: [
+    IonNote,
+    IonImg,
+    IonItemDivider,
+    IonItemGroup,
     IonList,
     IonItem,
     IonLabel,
@@ -35,11 +44,12 @@ import { peopleCircleSharp, helpCircleSharp, homeSharp } from 'ionicons/icons';
     IonToolbar,
     CommonModule,
     FormsModule,
-      IonMenu,
-  IonMenuButton,
-  RouterLink,
-  IonRouterLink,
-  RouterLinkActive
+    IonThumbnail,
+    IonMenu,
+    IonMenuButton,
+    RouterLink,
+    IonRouterLink,
+    RouterLinkActive,
   ],
 })
 export class AboutPage implements OnInit {
