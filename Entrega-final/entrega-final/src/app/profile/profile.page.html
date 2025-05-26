@@ -1,0 +1,66 @@
+<ion-header [translucent]="true" mode="md">
+  <ion-toolbar>
+    <ion-title>profile</ion-title>
+    <ion-buttons slot="end">
+        <ion-menu-button menu="main"></ion-menu-button>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense" mode="md">
+    <ion-toolbar>
+      <ion-title size="large">profile</ion-title>
+      <ion-buttons slot="end">
+        <ion-menu-button menu="main"></ion-menu-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content *ngIf="dataLoaded">
+    <ion-img src="{{user.photoURL ?? 'assets/person-sharp.svg'}}" style="height: 30%;"></ion-img>
+    <ion-list>
+      <ion-item-group>
+        <ion-item-divider>
+          <ion-label>User info</ion-label>
+        </ion-item-divider>
+        <ion-item>
+          <ion-label>Name</ion-label>
+          <ion-text>{{user.displayName?? 'Not assigned'}}</ion-text>
+        </ion-item>
+        <ion-item>
+          <ion-label>Email</ion-label>
+          <ion-text>{{user.email}}</ion-text>
+        </ion-item>
+        <ion-item>
+          <ion-label>Phone</ion-label>
+          <ion-text>{{user.phoneNumber ?? 'Not assigned'}}</ion-text>
+        </ion-item>
+        <ion-item>
+          <ion-label>Is Verified</ion-label>
+          <ion-text>{{user.emailVerified ? 'Yes' : 'No'}}</ion-text>
+        </ion-item>
+      </ion-item-group>
+      <ion-item-group>
+        <ion-item-divider>
+          <ion-label>Account info</ion-label>
+        </ion-item-divider>
+        <ion-item>
+          <ion-label>UID</ion-label>
+          <ion-text>{{user.uid}}</ion-text>
+        </ion-item>
+        <ion-item>
+          <ion-label>Provider ID</ion-label>
+          <ion-text>{{user.providerId}}</ion-text>
+        </ion-item>
+        <ion-item>
+          <ion-label>Creation time</ion-label>
+          <ion-text>{{user.metadata.creationTime}}</ion-text>
+        </ion-item>
+        <ion-item>
+          <ion-label>Last sign-in time</ion-label>
+          <ion-text>{{user.metadata.lastSignInTime}}</ion-text>
+        </ion-item>
+      </ion-item-group>
+    </ion-list>
+  </ion-content>
+</ion-content>

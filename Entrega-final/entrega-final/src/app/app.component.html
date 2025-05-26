@@ -11,20 +11,18 @@
     <ion-content>
       <ion-list lines="none" mode="md">
         <ion-menu-toggle auto-hide="false">
-
           <ion-item routerLink="/home" routerLinkActive="active">
             <ion-icon slot="end" name="home-sharp"></ion-icon>
             <ion-label>Home</ion-label>
           </ion-item>
         </ion-menu-toggle>
         <ion-menu-toggle auto-hide="false">
-          <ion-item>
+          <ion-item routerLink="/profile" routerLinkActive="active">
             <ion-icon slot="end" name="people-circle-sharp"></ion-icon>
             <ion-label>Profile</ion-label>
           </ion-item>
         </ion-menu-toggle>
         <ion-menu-toggle auto-hide="false">
-
           <ion-item routerLink="/about" routerLinkActive="active">
             <ion-icon slot="end" name="help-circle-sharp"></ion-icon>
             <ion-label>About us</ion-label>
@@ -40,6 +38,12 @@
           <ion-item routerLink="/register" routerLinkActive="active">
             <ion-icon slot="end" name="rocket-sharp"></ion-icon>
             <ion-label>Cadastro</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+        <ion-item button (click)="onLogOut()">
+            <ion-icon slot="end" name="log-out-sharp"></ion-icon>
+            <ion-label>Logout</ion-label>
           </ion-item>
         </ion-menu-toggle>
       </ion-list>

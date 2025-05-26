@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Auth, signOut } from '@angular/fire/auth';
 import {
   IonApp,
   IonRouterOutlet,
@@ -16,7 +18,7 @@ import {
   IonMenuToggle,
 } from '@ionic/angular/standalone';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { logInSharp, rocketSharp } from 'ionicons/icons';
+import { logInSharp, rocketSharp, logOutSharp } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 @Component({
   selector: 'app-root',
@@ -41,11 +43,21 @@ import { addIcons } from 'ionicons';
   ],
 })
 export class AppComponent implements OnInit {
-  constructor() {}
+  constructor(private router: Router, private auth: Auth) {}
   ngOnInit() {
     addIcons({
       logInSharp,
       rocketSharp,
+      logOutSharp,
     });
   }
+
+  onLogOut() {
+    signOut(this.auth).then(() => {
+      this.router.navigate(['/login']).catch((error) => {
+        console.error('Error during sign out:', error);
+      });
+    });
+  }
+  
 }

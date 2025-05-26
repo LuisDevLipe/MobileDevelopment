@@ -12,22 +12,20 @@ import {
   IonLabel,
   IonInputPasswordToggle,
   IonRippleEffect,
+  IonButtons,
+  IonMenuButton,
 } from '@ionic/angular/standalone';
 import { eyeSharp, rocketSharp } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
-import {
-  Auth,
-  createUserWithEmailAndPassword,
-  User,
-  user,
-} from '@angular/fire/auth';
-import { Observable } from 'rxjs';
+import { Auth, createUserWithEmailAndPassword, User } from '@angular/fire/auth';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
   styleUrls: ['./register.page.scss'],
   standalone: true,
   imports: [
+    IonButtons,
     IonRippleEffect,
     IonLabel,
     IonIcon,
@@ -40,6 +38,7 @@ import { Observable } from 'rxjs';
     CommonModule,
     FormsModule,
     IonInputPasswordToggle,
+    IonMenuButton,
   ],
 })
 export class RegisterPage implements OnInit {
@@ -47,10 +46,8 @@ export class RegisterPage implements OnInit {
   public inputModel: string = '';
   public passwordModel: string = '';
   public password: string = '';
-  private user: Observable<User | null>;
-  constructor(private auth: Auth) {
-    this.user = user(this.auth);
-  }
+
+  constructor(private auth: Auth, private router: Router) {}
 
   ngOnInit() {
     // Add the eye icon to the Ionicons library
@@ -82,7 +79,8 @@ export class RegisterPage implements OnInit {
      * Update both the state variable and
      * the component to keep them in sync.
      */
-    this.ionPasswordInputEl.value = this.passwordModel = filteredValue as string;
+    this.ionPasswordInputEl.value = this.passwordModel =
+      filteredValue as string;
   }
 
   signUp() {
@@ -92,8 +90,10 @@ export class RegisterPage implements OnInit {
       this.passwordModel
     )
       .then((userCredential) => {
-        // this.user = userCredential.user;
-        console.log(this.user);
+        // Signed in user
+        // redirect to the home page
+        console.log(userCredential.user);
+        this.router.navigate(['/home']);
       })
       .catch((error) => {
         const errorCode = error.code;
