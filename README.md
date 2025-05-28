@@ -33,7 +33,18 @@ Entretanto, devemos levantar as limitações e as desvantagens de cada tecnologi
 
 #### Entrega Final.
 
-- [ ] Implementação de um feed que consuma dados periodicamente da api escolhida na Etapa 1.
+- [x] Implementação de um feed que consuma dados periodicamente da api escolhida na Etapa 1.
+
+- [ ] Design e Layout
+
+- [x] Implementação de uma tela de apresentação dos integrantes do grupo.
+
+- [x] Implementação de autenticação com Firebase Auth.
+
+- [x] Implementação de cadastro de usuário para autenticação com o Firebase Auth.
+
+- [ ] Implementação de funcionalidade livre.
+
 
 # Wireframe
 
