@@ -1,7 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Auth, User, signInWithEmailAndPassword } from '@angular/fire/auth';
+import {
+  Auth,
+  User,
+  authState,
+  signInWithEmailAndPassword,
+} from '@angular/fire/auth';
 import { Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {
   IonContent,
@@ -18,9 +23,11 @@ import {
   IonIcon,
   IonRippleEffect,
   IonInputPasswordToggle,
+  IonBackButton,
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { logInSharp } from 'ionicons/icons';
+import { arrowForwardCircleSharp, logInSharp } from 'ionicons/icons';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -28,6 +35,7 @@ import { logInSharp } from 'ionicons/icons';
   styleUrls: ['./login.page.scss'],
   standalone: true,
   imports: [
+    IonBackButton,
     IonIcon,
     IonList,
     IonButtons,
@@ -44,20 +52,47 @@ import { logInSharp } from 'ionicons/icons';
     IonMenuButton,
     IonRippleEffect,
     IonInputPasswordToggle,
+    RouterLink,
+    RouterLinkActive,
   ],
 })
 export class LoginPage implements OnInit {
   public emailModel: string = '';
   public passwordModel: string = '';
 
-  constructor(private auth: Auth, private router: Router) {
-    addIcons({ logInSharp });
+  constructor(
+    private auth: Auth,
+    private router: Router,
+    private location: Location
+  ) {
+    // addIcons({ logInSharp });
+    addIcons({ logInSharp, arrowForwardCircleSharp });
   }
 
   ngOnInit() {
     // Add the logIn icon to the Ionicons library
-    addIcons({
-      logInSharp,
+
+    authState(this.auth).subscribe({
+      next: (user) => {
+        console.log(user);
+        if (user !== null) {
+          // User is signed in, redirect back in the history, fallback to homepage
+          this.location.back();
+          this.router.navigate(['/home']);
+        } else {
+          // user is not signed in leave him here.
+          return;
+        }
+      },
+      error: (e) => {
+        // Something Ocurred probably a network issue.
+        // redirect to the welcome page
+        // it will then be checked there for the auth state again
+        console.error(e);
+        this.router.navigate(['welcome']);
+        // if the user cant be verified, than we should probably evict
+        // not exposing the app data which could contain sensitive data
+      },
     });
   }
 
@@ -68,7 +103,6 @@ export class LoginPage implements OnInit {
         const user: User = userCredential.user;
         console.log('User signed in:', user);
         // Navigate to the home page or any other page
-        // this.router.navigate(['/home']);
       })
       .catch((error) => {
         console.error('Error signing in:', error);

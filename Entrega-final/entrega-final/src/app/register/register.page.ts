@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {
   IonContent,
@@ -14,17 +14,30 @@ import {
   IonRippleEffect,
   IonButtons,
   IonMenuButton,
+  IonItem,
+  IonList,
+  IonBackButton,
 } from '@ionic/angular/standalone';
-import { eyeSharp, rocketSharp } from 'ionicons/icons';
+import { eyeSharp, rocketSharp, arrowForwardCircleSharp } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
-import { Auth, createUserWithEmailAndPassword, User } from '@angular/fire/auth';
+import {
+  Auth,
+  createUserWithEmailAndPassword,
+  User,
+  authState,
+} from '@angular/fire/auth';
 import { Router } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
   styleUrls: ['./register.page.scss'],
   standalone: true,
   imports: [
+    IonBackButton,
+    IonList,
+    IonItem,
     IonButtons,
     IonRippleEffect,
     IonLabel,
@@ -39,6 +52,8 @@ import { Router } from '@angular/router';
     FormsModule,
     IonInputPasswordToggle,
     IonMenuButton,
+    RouterLink,
+    RouterLinkActive,
   ],
 })
 export class RegisterPage implements OnInit {
@@ -47,13 +62,41 @@ export class RegisterPage implements OnInit {
   public passwordModel: string = '';
   public password: string = '';
 
-  constructor(private auth: Auth, private router: Router) {}
+  constructor(
+    private auth: Auth,
+    private router: Router,
+    private location: Location
+  ) {
+    addIcons({ rocketSharp, arrowForwardCircleSharp });
+  }
 
   ngOnInit() {
     // Add the eye icon to the Ionicons library
     addIcons({
       eyeSharp,
       rocketSharp,
+    });
+    authState(this.auth).subscribe({
+      next: (user) => {
+        console.log(user);
+        if (user !== null) {
+          // User is signed in, redirect back in the history, fallback to homepage
+          this.location.back();
+          this.router.navigate(['/home']);
+        } else {
+          // user is not signed in leave him here.
+          return;
+        }
+      },
+      error: (e) => {
+        // Something Ocurred probably a network issue.
+        // redirect to the welcome page
+        // it will then be checked there for the auth state again
+        console.error(e);
+        this.router.navigate(['welcome']);
+        // if the user cant be verified, than we should probably evict
+        // not exposing the app data which could contain sensitive data
+      },
     });
   }
 

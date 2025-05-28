@@ -54,10 +54,10 @@ export class AppComponent implements OnInit {
 
   onLogOut() {
     signOut(this.auth).then(() => {
-      this.router.navigate(['/login']).catch((error) => {
+      this.router.navigate(['/welcome']).catch((error) => {
         console.error('Error during sign out:', error);
       });
     });
   }
-  
+
 }

@@ -1,8 +1,9 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>login</ion-title>
-    <ion-buttons slot="end">
-      <ion-menu-button menu="main"></ion-menu-button>
+    <ion-buttons slot="start">
+      <!-- <ion-menu-button menu="main"></ion-menu-button> -->
+       <ion-back-button defaultHref="/welcome"></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -11,47 +12,50 @@
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">login</ion-title>
-      <ion-buttons slot="end">
-        <ion-menu-button menu="main"></ion-menu-button>
+      <ion-buttons slot="start">
+        <!-- <ion-menu-button menu="main"></ion-menu-button> -->
+        <ion-back-button defaultHref="/welcome"></ion-back-button>
       </ion-buttons>
     </ion-toolbar>
   </ion-header>
-  <ion-content>
-    <ion-list>
-      <ion-item>
-        <ion-input
-          type="email"
-          required
-          label="Email"
-          labelPlacement="floating"
-          (ionInput)="onEmailInput($event)"
-          inputmode="email"
-          enterkeyhint="next"
-          #ionEmailInputEl
-          [value]="emailModel"
-        ></ion-input>
-      </ion-item>
+  <ion-content class="ion-padding">
+    <ion-input
+      type="email"
+      required
+      label="Email"
+      labelPlacement="floating"
+      (ionInput)="onEmailInput($event)"
+      inputmode="email"
+      #ionEmailInputEl
+      [value]="emailModel"
+      type="email"
+      enterkeyhint="next"
+      errorText="Invalid Email"
+    ></ion-input>
+    <ion-input
+      required
+      label="Password"
+      labelPlacement="floating"
+      (ionInput)="onPasswordInput($event)"
+      #ionPasswordInputEl
+      [value]="passwordModel"
+      type="password"
+      enterkeyhint="done"
+      errorText="invalid Password"
+    >
+      <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+    </ion-input>
 
-      <ion-item>
-        <ion-input
-          type="password"
-          required
-          label="Password"
-          labelPlacement="floating"
-          (ionInput)="onPasswordInput($event)"
-          enterkeyhint="done"
-          #ionPasswordInputEl
-          [value]="passwordModel"
-        >
-          <ion-input-password-toggle slot="end"></ion-input-password-toggle>
-        </ion-input>
+    <ion-button expand="block" (click)="onSignIn()">
+      <ion-icon slot="end" name="log-in-sharp"></ion-icon>
+      <ion-label>Login</ion-label>
+      <ion-ripple-effect></ion-ripple-effect>
+    </ion-button>
+    <ion-list inset="false">
+      <ion-item routerLink="/register" routerLinkActive="active">
+        <a> Register now </a>
+        <ion-icon slot="end" name="arrow-forward-circle-sharp"></ion-icon>
       </ion-item>
-
-      <ion-button expand="block" class="ion-margin" (click)="onSignIn()">
-        <ion-icon slot="end" name="log-in-sharp"></ion-icon>
-        <ion-label>Login</ion-label>
-        <ion-ripple-effect></ion-ripple-effect>
-      </ion-button>
     </ion-list>
   </ion-content>
 </ion-content>

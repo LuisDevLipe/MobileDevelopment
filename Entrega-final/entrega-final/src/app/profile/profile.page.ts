@@ -15,13 +15,15 @@ import {
   IonItemDivider,
   IonLabel, IonText, IonImg } from '@ionic/angular/standalone';
 import { Auth, authState } from '@angular/fire/auth';
-
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
   styleUrls: ['./profile.page.scss'],
   standalone: true,
-  imports: [IonImg, IonText,
+  imports: [
+    IonImg,
+    IonText,
     IonLabel,
     IonItemDivider,
     IonItemGroup,
@@ -41,30 +43,35 @@ export class ProfilePage implements OnInit {
   public user!: any;
   public dataLoaded: boolean = false;
 
-  constructor(private auth: Auth, private router: Router) {}
+  constructor(
+    private auth: Auth,
+    private router: Router,
+    private location: Location
+  ) {}
 
-  ngOnInit() {}
-
-  ionViewWillEnter() {
+  ngOnInit() {
     authState(this.auth).subscribe({
       next: (user) => {
         this.user = user;
         this.dataLoaded = true;
         console.log('User data:', this.user);
-        if (user === null){
+        if (user === null) {
           console.warn('No user is currently signed in.');
           this.dataLoaded = false;
-          this.router.navigate(['/login']).catch((error) => {
+          this.location.back();
+          this.router.navigate(['/welcome']).catch((error) => {
             console.error('Error navigating to login:', error);
-          })
+          });
         }
-      },  
+      },
       error: (error) => {
         console.error('Error fetching user data:', error);
         this.dataLoaded = false;
       },
     });
   }
+
+  ionViewWillEnter() {}
   ionViewDidLeave() {
     this.user = null;
     this.dataLoaded = false;
