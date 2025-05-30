@@ -137,6 +137,7 @@ export class RegisterPage implements OnInit {
         // redirect to the home page
         console.log(userCredential.user);
         this.router.navigate(['/home']);
+        // sign in the user
       })
       .catch((error) => {
         const errorCode = error.code;

@@ -13,7 +13,11 @@ import {
   IonItem,
   IonItemGroup,
   IonItemDivider,
-  IonLabel, IonText, IonImg } from '@ionic/angular/standalone';
+  IonLabel,
+  IonText,
+  IonImg,
+  IonAvatar,
+} from '@ionic/angular/standalone';
 import { Auth, authState } from '@angular/fire/auth';
 import { Location } from '@angular/common';
 @Component({
@@ -22,6 +26,7 @@ import { Location } from '@angular/common';
   styleUrls: ['./profile.page.scss'],
   standalone: true,
   imports: [
+    IonAvatar,
     IonImg,
     IonText,
     IonLabel,

@@ -15,6 +15,7 @@ import { trophy, football, calendar, people } from 'ionicons/icons';
 import { StandingsComponent } from './tabs/standings/standings.component';
 import { SeasonsComponent } from './tabs/seasons/seasons.component';
 import { MatchesComponent } from './tabs/matches/matches.component';
+import { TeamsComponent } from './tabs/teams/teams.component';
 @Component({
   selector: 'app-competitions',
   templateUrl: './competitions.page.html',
@@ -30,11 +31,14 @@ import { MatchesComponent } from './tabs/matches/matches.component';
     StandingsComponent,
     SeasonsComponent,
     MatchesComponent,
+    TeamsComponent,
   ],
 })
 export class CompetitionsPage implements OnInit {
   public competition: any;
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute) {
+    addIcons({ trophy, football, people, calendar });
+  }
 
   ngOnInit() {
     addIcons({

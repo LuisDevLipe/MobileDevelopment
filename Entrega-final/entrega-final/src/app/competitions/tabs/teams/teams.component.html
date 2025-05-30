@@ -1,0 +1,26 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-back-button defaultHref="/home" slot="start"></ion-back-button>
+    <ion-title size="large">Partidas</ion-title>
+  </ion-toolbar> </ion-header
+><ion-content [fullscreen]="true">
+  <ion-list>
+
+    @for(team of teams; track team?.id){
+
+      <ion-item>
+        <ion-card>
+          <ion-card-content>
+            <ion-chip>
+              <ion-avatar>
+                <ion-img></ion-img>
+              </ion-avatar>
+              <ion-label></ion-label>
+            </ion-chip>
+            
+          </ion-card-content>
+        </ion-card>
+      </ion-item>
+    }
+  </ion-list>
+</ion-content>
