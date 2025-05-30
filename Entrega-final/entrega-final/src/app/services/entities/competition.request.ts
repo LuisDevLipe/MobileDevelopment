@@ -77,4 +77,23 @@ class CompetitionMatchesRequest {
   }
 }
 
-export { CompetitionRequest, StandingsRequest, CompetitionMatchesRequest };
+class CompetitionTeamsRequest {
+  public competitionCode: number | string;
+  public filters?: {
+    season?: string; // YYYY-MM-DD
+  };
+  constructor({
+    competitionCode,
+    filters,
+  }: {
+    competitionCode: number | string;
+    filters?: {
+      season?: string; // YYYY-MM-DD
+    };
+  }) {
+    this.competitionCode = competitionCode;
+    this.filters = filters;
+  }
+}
+
+export { CompetitionRequest, StandingsRequest, CompetitionMatchesRequest, CompetitionTeamsRequest };

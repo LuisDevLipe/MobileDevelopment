@@ -5,11 +5,13 @@ import {
   CompetitionRequest,
   StandingsRequest,
   CompetitionMatchesRequest,
+  CompetitionTeamsRequest,
 } from 'src/app/services/entities/competition.request';
 import {
   CompetitionResponse,
   StandingsResponse,
   CompetitionMatchesResponse,
+  CompetitionTeamsResponse,
 } from 'src/app/services/entities/competition.response';
 
 import { CapacitorHttp } from '@capacitor/core';
@@ -81,5 +83,18 @@ export class FootballdataService {
       },
     });
     return response.data as CompetitionMatchesResponse;
+  }
+
+  async CompetitionTeams(
+    request: CompetitionTeamsRequest
+  ): Promise<CompetitionTeamsResponse> {
+    const response = await CapacitorHttp.get({
+      url: `${this.url}/competitions/${request.competitionCode}/teams`,
+      headers: this.headers,
+      params: {
+        season: request.filters?.season ?? '',
+      },
+    });
+    return response.data as CompetitionTeamsResponse;
   }
 }

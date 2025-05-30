@@ -1,23 +1,23 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-back-button defaultHref="/home" slot="start"></ion-back-button>
-    <ion-title size="large">Partidas</ion-title>
+    <ion-title size="large">Teams</ion-title>
   </ion-toolbar> </ion-header
 ><ion-content [fullscreen]="true">
-  <ion-list>
+  <ion-list inset="false" mode="md" lines="none">
 
     @for(team of teams; track team?.id){
 
-      <ion-item>
-        <ion-card>
+      <ion-item id="{{team.tla}}">
+        <ion-card style="width: 100%;">
           <ion-card-content>
             <ion-chip>
               <ion-avatar>
-                <ion-img></ion-img>
+                <ion-img src="{{team.crest}}" alt="Image of {{team.name}} crest"></ion-img>
               </ion-avatar>
-              <ion-label></ion-label>
-            </ion-chip>
-            
+              <ion-label style="font-family: monospace;">{{team.tla}}</ion-label>
+            </ion-chip> 
+            <ion-note slot="end">{{team.tla}}</ion-note>
           </ion-card-content>
         </ion-card>
       </ion-item>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import {
   IonContent,
   IonTitle,
@@ -13,7 +14,11 @@ import {
   IonCardContent,
   IonList,
   IonLabel,
+  IonNote,
 } from '@ionic/angular/standalone';
+import { CompetitionTeamsRequest } from 'src/app/services/entities/competition.request';
+import { CompetitionTeamsResponse } from 'src/app/services/entities/competition.response';
+import { FootballdataService } from 'src/app/services/footballdata.service';
 
 @Component({
   selector: 'tab-teams',
@@ -21,6 +26,7 @@ import {
   styleUrls: ['./teams.component.scss'],
   standalone: true,
   imports: [
+    IonNote,
     IonLabel,
     IonList,
     IonCardContent,
@@ -37,7 +43,27 @@ import {
   ],
 })
 export class TeamsComponent implements OnInit {
-  constructor() {}
+  public readonly competitionCode: string | number;
+  public competition!: CompetitionTeamsResponse['competition'];
+  public teams!: CompetitionTeamsResponse['teams'];
+  public season!: CompetitionTeamsResponse['season'];
+  constructor(
+    private football: FootballdataService,
+    private route: ActivatedRoute
+  ) {
+    this.competitionCode = this.route.snapshot.params['competitionCode'];
+  }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.football
+      .CompetitionTeams(
+        new CompetitionTeamsRequest({ competitionCode: this.competitionCode })
+      )
+      .then((res) => {
+        // console.log(res)
+        this.competition = res.competition;
+        this.teams = res.teams;
+        this.season = res.season;
+      });
+  }
 }

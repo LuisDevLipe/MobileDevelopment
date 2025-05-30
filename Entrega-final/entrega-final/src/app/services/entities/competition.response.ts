@@ -92,25 +92,19 @@ class CompetitionMatchesResponse {
     last: string;
     played: number;
   };
-  competition!: {
-    id: number;
-    name: string;
-    code: string;
-    type: string;
-    emblem: string;
-  };
+  competition!: Competition;
   matches!: CompetitionMatch[];
 }
-
+interface Competition {
+  id: number;
+  name: string;
+  code: string;
+  type: string;
+  emblem: string;
+}
 interface CompetitionMatch {
   area: Area;
-  competition: {
-    id: number;
-    name: string;
-    code: string;
-    type: string;
-    emblem: string;
-  };
+  competition: Competition;
   season: Season;
   id: number;
   utcDate: string;
@@ -141,4 +135,19 @@ interface MatchScore {
   };
 }
 
-export { CompetitionResponse, StandingsResponse, CompetitionMatchesResponse };
+type CompetitionTeamsResponse = {
+  count: number;
+  filters: {
+    season: string;
+  };
+  competition: Competition;
+  season: Season;
+  teams: Team[];
+};
+
+export {
+  CompetitionResponse,
+  StandingsResponse,
+  CompetitionMatchesResponse,
+  CompetitionTeamsResponse,
+};
