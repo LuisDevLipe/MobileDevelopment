@@ -9,14 +9,23 @@
     mode="md"
     interface="alert"
     placeholder="Selecione uma temporada"
-    [multiple]="true"
+    [multiple]="false"
     justify="space-between"
     fill="solid"
     label-placement="floating"
+    (ionCancel)="onSeasonChange($event)"
+    (ionChange)="onSeasonChange($event)"
+    (ionDismiss)="onSeasonChange($event)"
   >
     <ion-label slot="label">Temporada</ion-label>
-    <ion-select-option [value]=""> Current Season </ion-select-option>
-    <ion-select-option [value]=""> 2022-2023 </ion-select-option>
+    @for(season of seasons; track season.id){
+      <ion-select-option
+        value="{{season.startDate | date : 'yyyy'}}">  
+      >
+      {{season.startDate | date : "yyyy"}} - {{season.endDate | date : "yyyy"}}
+    </ion-select-option>
+
+    }
   </ion-select>
   <ion-card>
     <ion-img
@@ -37,11 +46,14 @@
     justify="space-between"
     fill="solid"
     label-placement="floating"
+    (ionCancel)="onMatchStatusChange($event)"
+    (ionChange)="onMatchStatusChange($event)"
+    (ionDismiss)="onMatchStatusChange($event)"
   >
     <ion-label slot="label">Match Status</ion-label>
-    <ion-select-option> In play </ion-select-option>
-    <ion-select-option> Finished </ion-select-option>
-    <ion-select-option> Scheduled </ion-select-option>
+    @for(status of matchStatuses; track status){
+    <ion-select-option value="{{status}}">{{status.replace("_", " ")}} </ion-select-option>
+    }
   </ion-select>
   <ion-infinite-scroll (ionInfinite)="paginate($event)">
     <ion-infinite-scroll-content

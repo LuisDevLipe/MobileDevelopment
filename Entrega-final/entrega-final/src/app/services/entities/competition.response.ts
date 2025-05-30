@@ -1,4 +1,14 @@
 import { CompetitionMatchesRequest } from './competition.request';
+
+type CompetitionsResponse = {
+  count: number;
+  filters: {
+    area?: Area;
+    client?: string;
+  };
+  competitions: Competition[];
+};
+
 class CompetitionResponse {
   area!: Area;
   id!: number;
@@ -146,6 +156,7 @@ type CompetitionTeamsResponse = {
 };
 
 export {
+  CompetitionsResponse,
   CompetitionResponse,
   StandingsResponse,
   CompetitionMatchesResponse,

@@ -25,8 +25,8 @@ import { OnInit } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import {IonRouterLink} from '@ionic/angular/standalone';
 import { AsyncPipe } from '@angular/common';
-import { CompetitionRequest } from 'src/app/services/entities/competition.request';
-import { CompetitionResponse } from '../services/entities/competition.response';
+import { CompetitionRequest, CompetitionsRequest } from 'src/app/services/entities/competition.request';
+import { CompetitionResponse, CompetitionsResponse } from '../services/entities/competition.response';
 import { Auth, authState } from '@angular/fire/auth';
 import { Location } from '@angular/common';
 @Component({
@@ -58,7 +58,7 @@ import { Location } from '@angular/common';
   ],
 })
 export class HomePage implements OnInit {
-  public competitions: Promise<CompetitionResponse[]>;
+  public competitions: Promise<CompetitionsResponse>;
   constructor(
     private footballdata: FootballdataService,
     private auth: Auth,
@@ -66,7 +66,7 @@ export class HomePage implements OnInit {
     private router: Router
   ) {
     this.competitions = this.footballdata.Competitions(
-      new CompetitionRequest()
+      new CompetitionsRequest({})
     );
   }
 

@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { CompetitionsPage } from './competitions/competitions.page';
 
 export const routes: Routes = [
   {
@@ -12,10 +13,37 @@ export const routes: Routes = [
   },
   {
     path: 'competitions/:competitionCode',
-    loadComponent: () =>
-      import('./competitions/competitions.page').then(
-        (m) => m.CompetitionsPage
-      ),
+    component: CompetitionsPage,
+    children: [
+      {
+        path: 'standings',
+        loadChildren: () =>
+          import('./competitions/tabs/standings/standings.component').then(
+            (m) => m.StandingsComponent
+          ),
+      },
+      {
+        path: 'matches',
+        loadChildren: () =>
+          import('./competitions/tabs/matches/matches.component').then(
+            (m) => m.MatchesComponent
+          ),
+      },
+      {
+        path: 'teams',
+        loadChildren: () =>
+          import('./competitions/tabs/teams/teams.component').then(
+            (m) => m.TeamsComponent
+          ),
+      },
+      {
+        path: 'seasons',
+        loadChildren: () =>
+          import('./competitions/tabs/seasons/seasons.component').then(
+            (m) => m.SeasonsComponent
+          ),
+      },
+    ],
   },
   {
     path: 'login',
@@ -23,18 +51,21 @@ export const routes: Routes = [
   },
   {
     path: 'about',
-    loadComponent: () => import('./about/about.page').then( m => m.AboutPage)
+    loadComponent: () => import('./about/about.page').then((m) => m.AboutPage),
   },
   {
     path: 'register',
-    loadComponent: () => import('./register/register.page').then( m => m.RegisterPage)
+    loadComponent: () =>
+      import('./register/register.page').then((m) => m.RegisterPage),
   },
   {
     path: 'profile',
-    loadComponent: () => import('./profile/profile.page').then( m => m.ProfilePage)
+    loadComponent: () =>
+      import('./profile/profile.page').then((m) => m.ProfilePage),
   },
   {
     path: 'welcome',
-    loadComponent: () => import('./welcome/welcome.page').then( m => m.WelcomePage)
+    loadComponent: () =>
+      import('./welcome/welcome.page').then((m) => m.WelcomePage),
   },
 ];

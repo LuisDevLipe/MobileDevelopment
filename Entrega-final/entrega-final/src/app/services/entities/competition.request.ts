@@ -1,20 +1,28 @@
-class CompetitionRequest {
-  public id?: number;
+class CompetitionsRequest {
   public filters?: {
-    areas?: string; // comma separated list of area ids
+    areas?: string;
   };
-
   constructor({
-    id,
     filters,
   }: {
-    id?: number;
     filters?: {
-      areas: string; // comma separated list of area ids
+      areas?: string;
     };
-  } = {}) {
-    this.id = id;
+  }) {
     this.filters = filters;
+  }
+}
+interface Area {
+  id: number;
+  name: string;
+  code: string;
+  flag: string;
+}
+class CompetitionRequest {
+  public competitionCode?: number | string;
+
+  constructor({ competitionCode }: { competitionCode: number | string }) {
+    this.competitionCode = competitionCode;
   }
 }
 
@@ -50,7 +58,7 @@ class CompetitionMatchesRequest {
     status?: string;
     matchday?: number;
     group?: string;
-    season?: string | number;
+    season?: string;
     limit?: number; // [1-500]
     offset?: number; // [1-500]
   };
@@ -67,7 +75,7 @@ class CompetitionMatchesRequest {
       status?: string;
       matchday?: number;
       group?: string;
-      season?: string | number;
+      season?: string;
       limit?: number; // [1-500]
       offset?: number; // [1-500]
     };
@@ -96,4 +104,10 @@ class CompetitionTeamsRequest {
   }
 }
 
-export { CompetitionRequest, StandingsRequest, CompetitionMatchesRequest, CompetitionTeamsRequest };
+export {
+  CompetitionsRequest,
+  CompetitionRequest,
+  StandingsRequest,
+  CompetitionMatchesRequest,
+  CompetitionTeamsRequest,
+};

@@ -2,12 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.development';
 import {
+  CompetitionsRequest,
   CompetitionRequest,
   StandingsRequest,
   CompetitionMatchesRequest,
   CompetitionTeamsRequest,
 } from 'src/app/services/entities/competition.request';
 import {
+  CompetitionsResponse,
   CompetitionResponse,
   StandingsResponse,
   CompetitionMatchesResponse,
@@ -31,22 +33,24 @@ export class FootballdataService {
   }
 
   async Competitions(
-    request: CompetitionRequest
-  ): Promise<CompetitionResponse[]> {
-    const competitionCode = request.id;
-    if (competitionCode) {
-      const response = await CapacitorHttp.get({
-        url: `${this.url}/competitions/${competitionCode}`,
-        headers: this.headers,
-      });
-      return response.data;
-    } else {
-      const response = await CapacitorHttp.get({
-        url: `${this.url}/competitions`,
-        headers: this.headers,
-      });
-      return response.data.competitions;
-    }
+    request: CompetitionsRequest
+  ): Promise<CompetitionsResponse> {
+    const response = await CapacitorHttp.get({
+      url: `${this.url}/competitions/`,
+      headers: this.headers,
+      params: {
+        areas: request.filters?.areas ?? '',
+      },
+    });
+    return response.data;
+  }
+
+  async Competition(request: CompetitionRequest): Promise<CompetitionResponse> {
+    const response = await CapacitorHttp.get({
+      url: `${this.url}/competitions/${request.competitionCode}`,
+      headers: this.headers,
+    });
+    return response.data as CompetitionResponse;
   }
 
   async Standings(request: StandingsRequest): Promise<StandingsResponse> {
@@ -66,6 +70,7 @@ export class FootballdataService {
   async CompetitionMatches(
     request: CompetitionMatchesRequest
   ): Promise<CompetitionMatchesResponse> {
+    console.log(request);
     const competitionCode = request.id;
     const response = await CapacitorHttp.get({
       url: `${this.url}/competitions/${competitionCode}/matches`,
@@ -77,7 +82,7 @@ export class FootballdataService {
         status: request.filters?.status ?? '',
         matchday: request.filters?.matchday?.toString() ?? '',
         group: request.filters?.group ?? '',
-        season: request.filters?.season?.toString() ?? '',
+        season: request.filters?.season ?? '',
         limit: request.filters?.limit?.toString() ?? '',
         offset: request.filters?.offset?.toString() ?? '',
       },

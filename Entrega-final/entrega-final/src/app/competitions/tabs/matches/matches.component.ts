@@ -25,10 +25,16 @@ import {
   IonInfiniteScrollContent,
 } from '@ionic/angular/standalone';
 import { InfiniteScrollCustomEvent } from '@ionic/core';
-import { CompetitionMatchesRequest } from 'src/app/services/entities/competition.request';
-import { CompetitionMatchesResponse } from 'src/app/services/entities/competition.response';
+import {
+  CompetitionMatchesRequest,
+  CompetitionRequest,
+} from 'src/app/services/entities/competition.request';
+import {
+  CompetitionMatchesResponse,
+  CompetitionResponse,
+} from 'src/app/services/entities/competition.response';
 import { FootballdataService } from 'src/app/services/footballdata.service';
-
+import { MatchStatuses } from 'src/app/services/enums/match.status';
 @Component({
   selector: 'tab-matches',
   templateUrl: './matches.component.html',
@@ -37,7 +43,6 @@ import { FootballdataService } from 'src/app/services/footballdata.service';
   imports: [
     IonInfiniteScrollContent,
     IonInfiniteScroll,
-    IonText,
     IonNote,
     IonLabel,
     IonCardContent,
@@ -65,9 +70,12 @@ export class MatchesComponent implements OnInit {
   public resultSet!: CompetitionMatchesResponse['resultSet'];
   public competition!: CompetitionMatchesResponse['competition'];
   public matches!: CompetitionMatchesResponse['matches'];
-  public selectedSeasons: string[] = [''];
+  public selectedSeason?: string;
+  public seasons!: CompetitionResponse['seasons'];
+  public selectedStatus: string[] = ['IN_PLAY', 'FINISHED'];
   public page: number = 1;
   public pageSize: number = 20;
+  public readonly matchStatuses?: string[] = Object.keys(MatchStatuses);
 
   constructor(
     private route: ActivatedRoute,
@@ -78,24 +86,27 @@ export class MatchesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadMatches();
+    this.loadMatches({
+      season: this.selectedSeason,
+      limit: this.pageSize,
+      offset: this.page * this.pageSize - this.pageSize,
+      status: this.selectedStatus.join(','),
+      // dateFrom: this.drillDownByDate().dateFrom,
+      // dateTo: this.drillDownByDate().dateTo,
+    });
+    this.loadSeasons();
   }
-  loadMatches() {
+  loadMatches(filters?: CompetitionMatchesRequest['filters']) {
+    console.log(this.selectedStatus);
     this.footballdata
       .CompetitionMatches(
         new CompetitionMatchesRequest({
           id: this.competitionCode,
-          filters: {
-            season: this.selectedSeasons.join(','),
-            limit: this.pageSize,
-            offset: this.page * this.pageSize - this.pageSize,
-            status: ['IN_PLAY', 'FINISHED'].join(','),
-            // dateFrom: this.drillDownByDate().dateFrom,
-            // dateTo: this.drillDownByDate().dateTo,
-          },
+          filters,
         })
       )
       .then((res: CompetitionMatchesResponse) => {
+        console.log(res);
         this.competition = res.competition;
         this.filters = res.filters;
         this.resultSet = res.resultSet;
@@ -110,6 +121,7 @@ export class MatchesComponent implements OnInit {
         console.error(err);
       });
   }
+
   drillDownByDate(date?: string) {
     const dateTo = new Date();
     dateTo.setDate(dateTo.getDate() + 7);
@@ -124,5 +136,55 @@ export class MatchesComponent implements OnInit {
     this.page = this.page++;
     event.target.complete();
   }
-}
 
+  onSeasonChange(event: CustomEvent) {
+    console.log(event);
+    if (event.type === 'ionChange') {
+      this.selectedSeason = (event.target as HTMLIonSelectElement).value;
+      console.log(this.selectedSeason);
+      this.loadMatches({
+        dateFrom: '',
+        dateTo: '',
+        season: this.selectedSeason,
+        offset: this.page * this.pageSize - this.pageSize,
+        limit: this.pageSize,
+        status: this.selectedStatus.join(','),
+      } as CompetitionMatchesRequest['filters']);
+    }
+  }
+
+  onMatchStatusChange(event: CustomEvent) {
+    console.log(event);
+    if (event.type === 'ionChange') {
+      this.selectedStatus = (event.target as HTMLIonSelectElement).value;
+      this.loadMatches({
+        dateFrom: '',
+        dateTo: '',
+        season: this.selectedSeason,
+        offset: this.page * this.pageSize - this.pageSize,
+        limit: this.pageSize,
+        status: this.selectedStatus.join(','),
+      } as CompetitionMatchesRequest['filters']);
+    }
+  }
+
+  loadSeasons() {
+    console.log('seasons', this.selectedSeason, this.seasons);
+    const competitionRequest = new CompetitionRequest({
+      competitionCode: this.competitionCode,
+    });
+    this.footballdata
+      .Competition(competitionRequest)
+      .then((res) => {
+        console.log(res.seasons);
+        this.seasons = res.seasons.sort((a, b) => {
+          const dateA = new Date(a.startDate);
+          const dateB = new Date(b.startDate);
+          return dateB.getTime() - dateA.getTime();
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
+}

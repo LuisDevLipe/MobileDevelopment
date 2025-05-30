@@ -18,7 +18,7 @@
   <ion-searchbar placeholder="Pesquisar" debounce="500"></ion-searchbar>
 
   <ion-list>
-    @for(competition of (competitions | async); track competition.id){
+    @for(competition of (competitions | async)?.competitions; track competition.id){
 
     <ion-item
       id="{{competition.id}}"
@@ -31,7 +31,7 @@
         ></ion-img>
       </ion-thumbnail>
       <ion-card-title>{{competition.name}}</ion-card-title>
-      <ion-note slot="end">{{competition.area.name}}</ion-note>
+      <!-- <ion-note slot="end">{{competition.area.name}}</ion-note> -->
     </ion-item>
     }
   </ion-list>
