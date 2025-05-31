@@ -19,10 +19,10 @@
   >
     <ion-label slot="label">Temporada</ion-label>
     @for(season of seasons; track season.id){
-      <ion-select-option
-        value="{{season.startDate | date : 'yyyy'}}">  
+    <ion-select-option value="{{ season.startDate | date : 'yyyy' }}">
       >
-      {{season.startDate | date : "yyyy"}} - {{season.endDate | date : "yyyy"}}
+      {{ season.startDate | date : "yyyy" }} -
+      {{ season.endDate | date : "yyyy" }}
     </ion-select-option>
 
     }
@@ -52,7 +52,9 @@
   >
     <ion-label slot="label">Match Status</ion-label>
     @for(status of matchStatuses; track status){
-    <ion-select-option value="{{status}}">{{status.replace("_", " ")}} </ion-select-option>
+    <ion-select-option value="{{ status }}"
+      >{{ status.replace("_", " ") }}
+    </ion-select-option>
     }
   </ion-select>
   <ion-infinite-scroll (ionInfinite)="paginate($event)">
@@ -60,16 +62,16 @@
       loadingText="Please wait..."
       loadingSpinner="bubbles"
     >
-    <ion-list>
-      @for(match of matches; track match?.id){
+      <ion-list>
+        @for(match of matches; track match?.id){
         <ion-item>
           <ion-thumbnail mode="md" slot="start" aria-hidden="true">
             <img
-            src="{{ match.homeTeam.crest }}"
-            alt="Picute of {{ match.homeTeam.name }} crest"
+              src="{{ match.homeTeam.crest }}"
+              alt="Picute of {{ match.homeTeam.name }} crest"
             />
           </ion-thumbnail>
-          
+
           <ion-label class="ion-text-center">
             {{ match.score.fullTime.home }} - {{ match.score.fullTime.away }}
           </ion-label>
@@ -78,14 +80,13 @@
           </ion-note>
           <ion-thumbnail mode="md" slot="end" aria-hidden="true">
             <img
-            src="{{ match.awayTeam.crest }}"
-            alt="Picute of {{ match.awayTeam.name }} crest"
+              src="{{ match.awayTeam.crest }}"
+              alt="Picute of {{ match.awayTeam.name }} crest"
             />
           </ion-thumbnail>
         </ion-item>
-      }
-    </ion-list>
-  </ion-infinite-scroll-content>
+        }
+      </ion-list>
+    </ion-infinite-scroll-content>
   </ion-infinite-scroll>
-  </ion-content>
-  
+</ion-content>

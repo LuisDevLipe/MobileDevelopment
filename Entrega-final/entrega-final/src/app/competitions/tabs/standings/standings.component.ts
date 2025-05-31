@@ -56,6 +56,8 @@ export class StandingsComponent implements OnInit {
   ) {
     this.competitionCode =
       this.route.snapshot.paramMap.get('competitionCode') || '';
+    // console.log(this.competitionCode);
+    // this.route.
   }
 
   ngOnInit() {

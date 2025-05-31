@@ -75,7 +75,7 @@ export class MatchesComponent implements OnInit {
   public selectedStatus: string[] = ['IN_PLAY', 'FINISHED'];
   public page: number = 1;
   public pageSize: number = 20;
-  public readonly matchStatuses?: string[] = Object.keys(MatchStatuses);
+  public readonly matchStatuses: string[] = Object.keys(MatchStatuses);
 
   constructor(
     private route: ActivatedRoute,
@@ -86,6 +86,7 @@ export class MatchesComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.loadSeasons();
     this.loadMatches({
       season: this.selectedSeason,
       limit: this.pageSize,
@@ -94,10 +95,9 @@ export class MatchesComponent implements OnInit {
       // dateFrom: this.drillDownByDate().dateFrom,
       // dateTo: this.drillDownByDate().dateTo,
     });
-    this.loadSeasons();
   }
   loadMatches(filters?: CompetitionMatchesRequest['filters']) {
-    console.log(this.selectedStatus);
+    // console.log(this.selectedStatus);
     this.footballdata
       .CompetitionMatches(
         new CompetitionMatchesRequest({
@@ -106,7 +106,7 @@ export class MatchesComponent implements OnInit {
         })
       )
       .then((res: CompetitionMatchesResponse) => {
-        console.log(res);
+        // console.log(res);
         this.competition = res.competition;
         this.filters = res.filters;
         this.resultSet = res.resultSet;
@@ -120,6 +120,7 @@ export class MatchesComponent implements OnInit {
       .catch((err) => {
         console.error(err);
       });
+    // console.log(this.seasons, this.selectedSeason);
   }
 
   drillDownByDate(date?: string) {
@@ -138,10 +139,10 @@ export class MatchesComponent implements OnInit {
   }
 
   onSeasonChange(event: CustomEvent) {
-    console.log(event);
+    // console.log(event);
     if (event.type === 'ionChange') {
       this.selectedSeason = (event.target as HTMLIonSelectElement).value;
-      console.log(this.selectedSeason);
+      // console.log(this.selectedSeason);
       this.loadMatches({
         dateFrom: '',
         dateTo: '',
@@ -154,7 +155,7 @@ export class MatchesComponent implements OnInit {
   }
 
   onMatchStatusChange(event: CustomEvent) {
-    console.log(event);
+    // console.log(event);
     if (event.type === 'ionChange') {
       this.selectedStatus = (event.target as HTMLIonSelectElement).value;
       this.loadMatches({
@@ -169,14 +170,14 @@ export class MatchesComponent implements OnInit {
   }
 
   loadSeasons() {
-    console.log('seasons', this.selectedSeason, this.seasons);
+    // console.log('seasons', this.selectedSeason, this.seasons);
     const competitionRequest = new CompetitionRequest({
       competitionCode: this.competitionCode,
     });
     this.footballdata
       .Competition(competitionRequest)
       .then((res) => {
-        console.log(res.seasons);
+        // console.log(res.seasons);
         this.seasons = res.seasons.sort((a, b) => {
           const dateA = new Date(a.startDate);
           const dateB = new Date(b.startDate);

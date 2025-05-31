@@ -70,7 +70,7 @@ export class FootballdataService {
   async CompetitionMatches(
     request: CompetitionMatchesRequest
   ): Promise<CompetitionMatchesResponse> {
-    console.log(request);
+    // console.log(request);
     const competitionCode = request.id;
     const response = await CapacitorHttp.get({
       url: `${this.url}/competitions/${competitionCode}/matches`,

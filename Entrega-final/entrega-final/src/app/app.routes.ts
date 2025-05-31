@@ -1,5 +1,7 @@
 import { Routes } from '@angular/router';
 import { CompetitionsPage } from './competitions/competitions.page';
+import { StandingsComponent } from './competitions/tabs/standings/standings.component';
+import { NotfoundComponent } from './notfound/notfound.component';
 
 export const routes: Routes = [
   {
@@ -17,28 +19,28 @@ export const routes: Routes = [
     children: [
       {
         path: 'standings',
-        loadChildren: () =>
+        loadComponent: () =>
           import('./competitions/tabs/standings/standings.component').then(
             (m) => m.StandingsComponent
           ),
       },
       {
         path: 'matches',
-        loadChildren: () =>
+        loadComponent: () =>
           import('./competitions/tabs/matches/matches.component').then(
             (m) => m.MatchesComponent
           ),
       },
       {
         path: 'teams',
-        loadChildren: () =>
+        loadComponent: () =>
           import('./competitions/tabs/teams/teams.component').then(
             (m) => m.TeamsComponent
           ),
       },
       {
         path: 'seasons',
-        loadChildren: () =>
+        loadComponent: () =>
           import('./competitions/tabs/seasons/seasons.component').then(
             (m) => m.SeasonsComponent
           ),
@@ -67,5 +69,10 @@ export const routes: Routes = [
     path: 'welcome',
     loadComponent: () =>
       import('./welcome/welcome.page').then((m) => m.WelcomePage),
+  },
+  {
+    path: '**',
+    // redirectTo: 'home' // mudar para página de 404
+    component: NotfoundComponent,
   },
 ];

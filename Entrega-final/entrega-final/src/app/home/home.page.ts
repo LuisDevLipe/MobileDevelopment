@@ -80,11 +80,10 @@ export class HomePage implements OnInit {
   ionViewWillEnter() {
     authState(this.auth).subscribe({
       next: (user) => {
-        console.log(user);
+        // console.log(user);
         if (user !== null) {
           // User is signed in leave him here.
           return;
-          
         } else {
           // user is not signed in leave him here.
           this.router.navigate(['welcome']);

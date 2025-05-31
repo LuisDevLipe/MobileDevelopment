@@ -38,6 +38,7 @@ export class CompetitionsPage implements OnInit {
   public competition: any;
   constructor(private route: ActivatedRoute) {
     addIcons({ trophy, football, people, calendar });
+    // console.log(this.route.snapshot.params);
   }
 
   ngOnInit() {
