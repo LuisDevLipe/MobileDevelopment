@@ -4,29 +4,17 @@ import {
   IonToolbar,
   IonTitle,
   IonContent,
-  IonText,
   IonBackButton,
-  IonCard,
-  IonImg,
-  IonCardHeader,
-  IonCardTitle,
-  IonCardSubtitle,
-  IonCardContent,
-  IonList,
-  IonItem,
-  IonLabel,
-  IonNote,
   IonGrid,
   IonRow,
   IonCol,
-  IonThumbnail,
-  IonSegment,
+  IonThumbnail
 } from '@ionic/angular/standalone';
 import { FootballdataService } from 'src/app/services/footballdata.service';
 import { ActivatedRoute } from '@angular/router';
 import { StandingsRequest } from 'src/app/services/entities/competition.request';
 import { StandingsResponse } from 'src/app/services/entities/competition.response';
-import { RouterLink } from '@angular/router';
+import { RouterLink , RouterLinkActive} from '@angular/router';
 @Component({
   selector: 'tab-standings',
   templateUrl: './standings.component.html',
@@ -43,6 +31,7 @@ import { RouterLink } from '@angular/router';
     IonContent,
     IonThumbnail,
     RouterLink,
+    RouterLinkActive,
   ],
 })
 export class StandingsComponent implements OnInit {
@@ -56,8 +45,6 @@ export class StandingsComponent implements OnInit {
   ) {
     this.competitionCode =
       this.route.snapshot.paramMap.get('competitionCode') || '';
-    // console.log(this.competitionCode);
-    // this.route.
   }
 
   ngOnInit() {

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { User } from 'firebase/auth';
 import {
   IonContent,
   IonHeader,
@@ -18,8 +18,7 @@ import {
   IonImg,
   IonAvatar,
 } from '@ionic/angular/standalone';
-import { Auth, authState } from '@angular/fire/auth';
-import { Location } from '@angular/common';
+import { AuthService } from '../services/fire/auth.service';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
@@ -48,37 +47,18 @@ export class ProfilePage implements OnInit {
   public user!: any;
   public dataLoaded: boolean = false;
 
-  constructor(
-    private auth: Auth,
-    private router: Router,
-    private location: Location
-  ) {}
+  constructor(private authService: AuthService) {}
 
   ngOnInit() {
-    authState(this.auth).subscribe({
-      next: (user) => {
+    this.authService.getUser().subscribe({
+      next: (user: User | null) => {
         this.user = user;
         this.dataLoaded = true;
-        console.log('User data:', this.user);
-        if (user === null) {
-          console.warn('No user is currently signed in.');
-          this.dataLoaded = false;
-          this.location.back();
-          this.router.navigate(['/welcome']).catch((error) => {
-            console.error('Error navigating to login:', error);
-          });
-        }
       },
       error: (error) => {
         console.error('Error fetching user data:', error);
         this.dataLoaded = false;
       },
     });
-  }
-
-  ionViewWillEnter() {}
-  ionViewDidLeave() {
-    this.user = null;
-    this.dataLoaded = false;
   }
 }

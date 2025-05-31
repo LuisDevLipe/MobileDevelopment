@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { CompetitionsPage } from './competitions/competitions.page';
-import { StandingsComponent } from './competitions/tabs/standings/standings.component';
 import { NotfoundComponent } from './notfound/notfound.component';
+import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
   {
@@ -16,6 +16,7 @@ export const routes: Routes = [
   {
     path: 'competitions/:competitionCode',
     component: CompetitionsPage,
+    canActivateChild: [authGuard], // Use the authGuard to protect child routes
     children: [
       {
         path: 'standings',
@@ -45,6 +46,11 @@ export const routes: Routes = [
             (m) => m.SeasonsComponent
           ),
       },
+      {
+        path: '',
+        redirectTo: 'matches',
+        pathMatch: 'full',
+      },
     ],
   },
   {
@@ -64,6 +70,7 @@ export const routes: Routes = [
     path: 'profile',
     loadComponent: () =>
       import('./profile/profile.page').then((m) => m.ProfilePage),
+    canActivate: [authGuard], // Use the authGuard to protect the profile route
   },
   {
     path: 'welcome',

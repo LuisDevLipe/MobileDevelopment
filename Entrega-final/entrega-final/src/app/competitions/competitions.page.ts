@@ -1,52 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {
   IonTabs,
   IonTabButton,
   IonLabel,
   IonIcon,
   IonTabBar,
-  IonTab,
 } from '@ionic/angular/standalone';
-import { FootballdataService } from '../services/footballdata.service';
-import { Competition } from '../MOCKS/competition.mock';
-import { ActivatedRoute } from '@angular/router';
 import { addIcons } from 'ionicons';
 import { trophy, football, calendar, people } from 'ionicons/icons';
-import { StandingsComponent } from './tabs/standings/standings.component';
-import { SeasonsComponent } from './tabs/seasons/seasons.component';
-import { MatchesComponent } from './tabs/matches/matches.component';
-import { TeamsComponent } from './tabs/teams/teams.component';
 @Component({
   selector: 'app-competitions',
   templateUrl: './competitions.page.html',
   styleUrls: ['./competitions.page.scss'],
   standalone: true,
-  imports: [
-    IonTab,
-    IonTabBar,
-    IonIcon,
-    IonLabel,
-    IonTabButton,
-    IonTabs,
-    StandingsComponent,
-    SeasonsComponent,
-    MatchesComponent,
-    TeamsComponent,
-  ],
+  imports: [IonTabBar, IonIcon, IonLabel, IonTabButton, IonTabs],
 })
-export class CompetitionsPage implements OnInit {
-  public competition: any;
-  constructor(private route: ActivatedRoute) {
+export class CompetitionsPage {
+  constructor() {
     addIcons({ trophy, football, people, calendar });
-    // console.log(this.route.snapshot.params);
-  }
-
-  ngOnInit() {
-    addIcons({
-      trophy,
-      football,
-      calendar,
-      people,
-    });
   }
 }

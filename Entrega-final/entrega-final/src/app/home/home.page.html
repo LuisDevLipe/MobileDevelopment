@@ -22,7 +22,8 @@
 
     <ion-item
       id="{{competition.id}}"
-      routerLink="/competitions/{{competition.code}}"
+      [routerLink]="['/competitions', competition.code]"
+      routerLinkActive="active"
     >
       <ion-thumbnail slot="start">
         <ion-img

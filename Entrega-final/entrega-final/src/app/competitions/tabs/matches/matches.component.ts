@@ -20,7 +20,6 @@ import {
   IonLabel,
   IonNote,
   IonThumbnail,
-  IonText,
   IonInfiniteScroll,
   IonInfiniteScrollContent,
 } from '@ionic/angular/standalone';
