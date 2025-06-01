@@ -9,7 +9,7 @@ O desenvolvimento de aplicativos nativos é complexa, custosa e possui um grande
 
 Aplicativos nativos são rápidos, extremamente performáticos possuindo acesso direto aos recursos do dispositivos e leves. Em contrapartida, o aplicativo híbrido têm um ciclo de vida mais rápido, novas atualizações surgem com mais frequência e o custo de desenvolvimento é reduzido.
 
-Entretanto, devemos levantar as limitações e as desvantagens de cada tecnologia, assim como os benefícios que  cada uma pode oferecer. O desenvolvimento híbrido feito de maneira incorrreta pode levar a uma péssima experiência do usuário, aplicativos lentos, pesados e com desempenho insatisfatório.
+Entretanto, devemos levantar as limitações e as desvantagens de cada tecnologia, assim como os benefícios que cada uma pode oferecer. O desenvolvimento híbrido feito de maneira incorrreta pode levar a uma péssima experiência do usuário, aplicativos lentos, pesados e com desempenho insatisfatório.
 
 ## Sobre o Projeto.
 
@@ -33,18 +33,17 @@ Entretanto, devemos levantar as limitações e as desvantagens de cada tecnologi
 
 #### Entrega Final.
 
-- [x] Implementação de um feed que consuma dados periodicamente da api escolhida na Etapa 1.
+-   [x] Implementação de um feed que consuma dados periodicamente da api escolhida na Etapa 1.
 
-- [ ] Design e Layout
+-   [ ] Design e Layout
 
-- [x] Implementação de uma tela de apresentação dos integrantes do grupo.
+-   [x] Implementação de uma tela de apresentação dos integrantes do grupo.
 
-- [x] Implementação de autenticação com Firebase Auth.
+-   [x] Implementação de autenticação com Firebase Auth.
 
-- [x] Implementação de cadastro de usuário para autenticação com o Firebase Auth.
+-   [x] Implementação de cadastro de usuário para autenticação com o Firebase Auth.
 
-- [ ] Implementação de funcionalidade livre.
-
+-   [ ] Implementação de funcionalidade livre.
 
 # Wireframe
 
@@ -63,12 +62,11 @@ Portanto, dos designs apresentados podemos dizer que o segundo apresenta uma con
 As api's são serviços externos, nas arquiteturas modernas é comum encontrar a utilização de diversas api's em um único projeto. Elas forncem uma forma de agregar informações e funcionalidades a uma aplicação sem necessariamente passar pelo processo de desenvolvimento de servidores e bancos de dados.
 Nosso projeto consiste em um aplicativo informativo, fornece dados de futebol, estatísticas, tabelas de campeonatos, informações sobre jogadores e mais. Com esse conceito em mente buscamos uma api que fosse capaz de nos fornecer dados estáticos e em tempo real, que houvesse suporte a paginação e que fosse composta por dados dinâmicos como imagens, vídeos e listas.
 
-
 Enquanto filtramos entre diversas api's disponíveis encontramos uma API brasileira que inclusive gostaríamos de ter utilizado, mas não conseguimos permissão para acesso.
-Durante a pesquisa encontramos diversas api's pagas e pouquíssimas gratuitas. 
-Das api's gratuitas a grande maioria não oferecia suporte a dados brasileiros ou não cumpriam 100% os requisitos do projeto. 
+Durante a pesquisa encontramos diversas api's pagas e pouquíssimas gratuitas.
+Das api's gratuitas a grande maioria não oferecia suporte a dados brasileiros ou não cumpriam 100% os requisitos do projeto.
 No final, a api escolhida foi a [Football Data](https://www.football-data.org/). É uma API de dados de futebol que fornece informações sobre ligas, times, jogadores e estatísticas de partidas. Possui endpoints para acessar listas de campeonatos, partidas encerradas e em andamento, assim como detalhes de campeonatos, times e jogadores.
-A API é gratuita para uso com opções pagas para acesso a dados mais específicos e séries históricas. 
+A API é gratuita para uso com opções pagas para acesso a dados mais específicos e séries históricas.
 
 Ao escolhermos uma api que se encaixa na concepção do projeto o desenvolvedor ganha um aumento de produtiviade durante o ciclo de vida da aplicação e também facilidade para implementar novas funcionalidades. Além disso, o utilizador se beneficiará com uma aplicação concisa e com atualizações regulares, o que contribuirá com a experiência do usuário.
 A escolha correta da api também evita a aglomeração de serviços utilizados em uma única/múltiplas funcionaliade(s), o que pode trazer um aumento de complexidade no código e dificuldade de manutenção.
@@ -82,16 +80,38 @@ Requisitos funcionais da API.
 
 #### Entrega Final.
 
+## Documentação de implementação da Autenticação.
+
+Usuário são autenticados na tela de login, caso o usuário se registre, ele será automaticamente autenticado e redirecionado a tela principal.
+O usuário é proibido de acessar qualquer tela que não seja a de login, cadastro, boas-vindas e sobre.
+
+O protocolo de proteção das páginas é feito através do Angular Router, onde as rotas estão protegidas com Angular Guards.
+
+Internamente os guards chamam o servilo authService, que verifica através do sdk do firebase se o usuário está autenticado.
+Há um observable que se inscreve no método de estado de autenticação do firebase e resolve o estado do usuário,
+retornando um booleano ou urlTree para redirecionamento.
+
+Angular Guards são declaradas no módulo de rotas, onde cada rota que deve ser protegida possui o guard associado.
+
+![Módulo Guard e método do serviço de autenticação](./Entrega-final/evidencias/guards.png)
+
+![Rotas da aplicação protegidas pelo Angular Guards com autentição do firebase](./Entrega-final/evidencias/routes-guards.png)
+
+Referências:
+
+- [Preventing Unauthorized Access with Angular Router](https://angular.dev/guide/routing/common-router-tasks#preventing-unauthorized-access)
+
+- [AngularFire Authentication Guide](https://github.com/angular/angularfire/blob/main/docs/auth.md)
 
 ## Documentação suplementar firebase auth
 
-- [Introdução ao Firebase Authentication (Documentação Oficial)](https://firebase.google.com/docs/auth/web/start?hl=pt-br)
+-   [Introdução ao Firebase Authentication (Documentação Oficial)](https://firebase.google.com/docs/auth/web/start?hl=pt-br)
 
-- [Guia de Autenticação com AngularFire](https://github.com/angular/angularfire/blob/main/docs/auth.md#authentication)
+-   [Guia de Autenticação com AngularFire](https://github.com/angular/angularfire/blob/main/docs/auth.md#authentication)
 
-- [Configuração do Firebase Authentication para Web](https://firebase.google.com/docs/auth/web/start?hl=pt-br#web_2)
+-   [Configuração do Firebase Authentication para Web](https://firebase.google.com/docs/auth/web/start?hl=pt-br#web_2)
 
-- [Referência da API de Autenticação do Firebase](https://firebase.google.com/docs/reference/js/auth?hl=pt-br)
+-   [Referência da API de Autenticação do Firebase](https://firebase.google.com/docs/reference/js/auth?hl=pt-br)
 
 ## Integrantes
 
