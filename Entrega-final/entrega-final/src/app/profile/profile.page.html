@@ -1,51 +1,95 @@
 <ion-header [translucent]="true" mode="md">
   <ion-toolbar>
-    <ion-title>profile</ion-title>
+    <ion-title>Profile</ion-title>
     <ion-buttons slot="end">
-        <ion-menu-button menu="main"></ion-menu-button>
-      </ion-buttons>
+      <ion-menu-button menu="main"></ion-menu-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense" mode="md">
     <ion-toolbar>
-      <ion-title size="large">profile</ion-title>
+      <ion-title size="large">Profile</ion-title>
       <ion-buttons slot="end">
         <ion-menu-button menu="main"></ion-menu-button>
       </ion-buttons>
     </ion-toolbar>
   </ion-header>
   <ion-content *ngIf="dataLoaded">
-    <ion-avatar>
+    <ion-avatar class="profile-avatar">
+      @if(user.photoURL){
 
-      <ion-img src="{{user.photoURL ?? 'assets/person-sharp.svg'}}" style="height: 30%;"></ion-img>
+      <ion-img src="{{user.photoURL}}"></ion-img>
+      } @else{
+      <ion-img src="assets/person-circle-sharp.svg"></ion-img>
+      }
     </ion-avatar>
+
+    <ion-button fill="outline" expand="block" (click)="updateProfile()">
+      <ion-icon name="cloudy-sharp"></ion-icon>
+      <ion-label>Save changes to profile</ion-label>
+      <ion-ripple-effect></ion-ripple-effect>
+    </ion-button>
+
     <ion-list>
       <ion-item-group>
         <ion-item-divider>
           <ion-label>User info</ion-label>
+          <ion-note slot="end">Editable</ion-note>
         </ion-item-divider>
         <ion-item>
-          <ion-label>Name</ion-label>
-          <ion-text>{{user.displayName?? 'Not assigned'}}</ion-text>
+          <ion-input
+            label="Name"
+            labelPlacement="stacked"
+            value="{{user.displayName ?? 'Not assigned'}}"
+            [readonly]="true"
+            ><ion-icon name="create-sharp" slot="end"></ion-icon
+          ></ion-input>
+          <!-- <ion-label>Name</ion-label> -->
+          <!-- <ion-text>{{user.displayName?? 'Not assigned'}}</ion-text> -->
         </ion-item>
         <ion-item>
-          <ion-label>Email</ion-label>
-          <ion-text>{{user.email}}</ion-text>
+          <ion-input
+            label="Email"
+            labelPlacement="stacked"
+            value="{{user.email ?? 'Not assigned'}}"
+            [readonly]="true"
+            ><ion-icon name="create-sharp" slot="end"></ion-icon
+          ></ion-input>
+
+          <!-- <ion-label>Email</ion-label>
+          <ion-text>{{user.email}}</ion-text> -->
         </ion-item>
         <ion-item>
-          <ion-label>Phone</ion-label>
-          <ion-text>{{user.phoneNumber ?? 'Not assigned'}}</ion-text>
+          <ion-input
+            label="Phone"
+            labelPlacement="stacked"
+            value="{{user.phoneNumber ?? 'Not assigned'}}"
+            [readonly]="true"
+            ><ion-icon name="create-sharp" slot="end"></ion-icon
+          ></ion-input>
+          <!-- <ion-label>Phone</ion-label>
+          <ion-text>{{user.phoneNumber ?? 'Not assigned'}}</ion-text> -->
         </ion-item>
         <ion-item>
-          <ion-label>Is Verified</ion-label>
-          <ion-text>{{user.emailVerified ? 'Yes' : 'No'}}</ion-text>
+          <ion-input
+            label="Email Verified"
+            labelPlacement="stacked"
+            value="{{user.emailVerified ? 'Yes' : 'No'}}"
+            [readonly]="true"
+            [disabled]="true"
+            >
+          </ion-input>
+          <!-- <ion-label>Is Verified</ion-label>
+          <ion-text>{{user.emailVerified ? 'Yes' : 'No'}}</ion-text> -->
         </ion-item>
       </ion-item-group>
+
       <ion-item-group>
         <ion-item-divider>
           <ion-label>Account info</ion-label>
+          <ion-note slot="end">Readonly</ion-note>
         </ion-item-divider>
         <ion-item>
           <ion-label>UID</ion-label>

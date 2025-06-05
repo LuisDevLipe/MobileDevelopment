@@ -15,6 +15,11 @@ import {
   IonIcon,
   IonLabel,
   IonNote,
+  IonCardSubtitle,
+  IonCardContent,
+  IonCardHeader,
+  IonCard,
+  IonText,
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { peopleCircleSharp, helpCircleSharp, homeSharp } from 'ionicons/icons';
@@ -30,6 +35,11 @@ import { CompetitionsResponse } from '../services/entities/competition.response'
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
   imports: [
+    IonText,
+    IonCard,
+    IonCardHeader,
+    IonCardContent,
+    IonCardSubtitle,
     IonNote,
     IonLabel,
     IonIcon,

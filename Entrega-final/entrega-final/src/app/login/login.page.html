@@ -68,4 +68,16 @@
       </ion-item>
     </ion-list>
   </ion-content>
+  <ion-alert
+    [isOpen]="isLoginErrorAlertOpen"
+    trigger="loginError"
+    header="Login Error"
+    subHeader="Invalid credentials"
+    message="Please check your email and password and try again."
+    [buttons]="loginErrorButtons"
+    (didDismiss)="onLoginErrorAlert(false)"
+    #ionAlert
+  >
+
+  </ion-alert>
 </ion-content>

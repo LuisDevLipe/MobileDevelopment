@@ -30,10 +30,12 @@ import {
   IonCardTitle,
   IonCardHeader,
   IonImg,
+  IonAlert,
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { arrowForwardCircleSharp, logInSharp } from 'ionicons/icons';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { FirebaseError } from '@angular/fire/app';
 
 @Component({
   selector: 'app-login',
@@ -41,6 +43,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   styleUrls: ['./login.page.scss'],
   standalone: true,
   imports: [
+    IonAlert,
     IonImg,
     IonCardHeader,
     IonCardTitle,
@@ -71,6 +74,8 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 export class LoginPage implements OnInit {
   public emailModel: string = '';
   public passwordModel: string = '';
+  public readonly loginErrorButtons = ['OK'];
+  public isLoginErrorAlertOpen = false;
 
   constructor(
     private auth: Auth,
@@ -95,9 +100,22 @@ export class LoginPage implements OnInit {
           this.location.replaceState('/home');
         });
       })
-      .catch((error) => {
-        console.error('Error signing in:', error);
+      .catch((error: FirebaseError) => {
+        console.error('Error signing in:', error.code);
         // Handle error (e.g., show an alert)
+        if (error.code === 'auth/network-request-failed') {
+          this.onLoginErrorAlert(true, LoginError.NetworkError);
+        } else if (error.code === 'auth/missing-password') {
+          this.onLoginErrorAlert(true, LoginError.MissingPassword);
+        } else if (error.code === 'auth/user-not-found') {
+          this.onLoginErrorAlert(true, LoginError.UserNotFound);
+        } else if (error.code === 'auth/wrong-password') {
+          this.onLoginErrorAlert(true, LoginError.WrongPassword);
+        } else if (error.code === 'auth/invalid-email') {
+          this.onLoginErrorAlert(true, LoginError.InvalidEmail);
+        } else {
+          this.onLoginErrorAlert(true, LoginError.Default);
+        }
       });
   }
   @ViewChild('ionEmailInputEl', { static: true })
@@ -114,4 +132,22 @@ export class LoginPage implements OnInit {
     this.ionPasswordInputEl.value = this.passwordModel =
       filteredValue as string;
   }
+  @ViewChild('ionAlert', { static: false })
+  ionAlert!: IonAlert;
+  onLoginErrorAlert(show: boolean, message?: string) {
+    this.isLoginErrorAlertOpen = show;
+    if (typeof message !== 'undefined') {
+      this.ionAlert.message = message;
+    }
+  }
+}
+
+enum LoginError {
+  NetworkError = 'Network error. Please try again later.',
+  MissingPassword = 'Please enter your password.',
+  UserNotFound = 'Please check your email and password and try again.',
+  WrongPassword = 'Please check your email and password and try again.',
+  UnexpectedError = 'An unexpected error occurred. Please try again later.',
+  InvalidEmail = 'Please enter a valid email address.',
+  Default = 'An error occurred. Please try again later.',
 }

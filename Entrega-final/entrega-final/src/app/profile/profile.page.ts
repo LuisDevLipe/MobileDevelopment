@@ -17,7 +17,14 @@ import {
   IonText,
   IonImg,
   IonAvatar,
+  IonInput,
+  IonIcon,
+  IonNote,
+  IonButton,
+  IonRippleEffect,
 } from '@ionic/angular/standalone';
+import { createSharp, cloudySharp, personSharp } from 'ionicons/icons';
+import { addIcons } from 'ionicons';
 import { AuthService } from '../services/fire/auth.service';
 @Component({
   selector: 'app-profile',
@@ -25,6 +32,11 @@ import { AuthService } from '../services/fire/auth.service';
   styleUrls: ['./profile.page.scss'],
   standalone: true,
   imports: [
+    IonRippleEffect,
+    IonButton,
+    IonNote,
+    IonIcon,
+    IonInput,
     IonAvatar,
     IonImg,
     IonText,
@@ -47,7 +59,9 @@ export class ProfilePage implements OnInit {
   public user!: any;
   public dataLoaded: boolean = false;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService) {
+    addIcons({ personSharp, cloudySharp, createSharp });
+  }
 
   ngOnInit() {
     this.authService.getUser().subscribe({
@@ -61,4 +75,5 @@ export class ProfilePage implements OnInit {
       },
     });
   }
+  updateProfile() {}
 }

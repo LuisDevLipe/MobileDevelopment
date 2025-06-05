@@ -91,4 +91,15 @@
       </ion-item>
     </ion-list>
   </ion-content>
+    <ion-alert
+    [isOpen]="isRegistrationErrorAlertOpen"
+    trigger="registrationError"
+    header="Registration Error"
+    subHeader=""
+    message=""
+    [buttons]="registrationErrorButtons"
+    (didDismiss)="onRegisterErrorAlert(false)"
+    #ionAlert
+  >
+  </ion-alert>
 </ion-content>

@@ -18,7 +18,7 @@ import {
   IonMenuToggle,
 } from '@ionic/angular/standalone';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { logInSharp, rocketSharp, logOutSharp } from 'ionicons/icons';
+import { personSharp, helpSharp, logOutSharp, homeSharp } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 @Component({
   selector: 'app-root',
@@ -46,8 +46,9 @@ export class AppComponent implements OnInit {
   constructor(private router: Router, private auth: Auth) {}
   ngOnInit() {
     addIcons({
-      logInSharp,
-      rocketSharp,
+      homeSharp,
+      personSharp,
+      helpSharp,
       logOutSharp,
     });
   }

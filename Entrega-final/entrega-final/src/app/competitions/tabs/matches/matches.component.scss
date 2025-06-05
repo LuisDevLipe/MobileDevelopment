@@ -1,5 +1,10 @@
-ion-thumbnail {
-    --size: 30px;
+ion-thumbnail.match-thumbnail {
+    --size: 40px;
+}
+
+ion-thumbnail.competition-thumbnail {
+    --size: 80px;
+    // height: 160px;
 }
 
 ion-item{
