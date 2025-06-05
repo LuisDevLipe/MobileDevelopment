@@ -4,7 +4,7 @@
     <ion-buttons slot="end">
         <ion-menu-button menu="main"></ion-menu-button>
       </ion-buttons> 
-  </ion-toolbar>
+    </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true" id="main">
   <ion-header collapse="condense" mode="md">
@@ -15,8 +15,9 @@
       </ion-buttons>
     </ion-toolbar>
   </ion-header>
-  <ion-searchbar placeholder="Pesquisar" debounce="500"></ion-searchbar>
-
+  <ion-toolbar>
+    <ion-searchbar placeholder="Pesquisar" debounce="500" (ionInput)="onSearchInput($event)"></ion-searchbar>
+  </ion-toolbar>
   <ion-list>
     @for(competition of (competitions | async)?.competitions; track competition.id){
 
