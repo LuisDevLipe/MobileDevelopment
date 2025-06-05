@@ -11,7 +11,6 @@ import {
 import {
   CompetitionsResponse,
   CompetitionResponse,
-  CompetitionsResponse,
   StandingsResponse,
   CompetitionMatchesResponse,
   CompetitionTeamsResponse,
@@ -34,26 +33,6 @@ export class FootballdataService {
   }
 
   async Competitions(
-<<<<<<< HEAD
-    request: CompetitionsRequest
-  ): Promise<CompetitionsResponse> {
-    const response = await CapacitorHttp.get({
-      url: `${this.url}/competitions/`,
-      headers: this.headers,
-      params: {
-        areas: request.filters?.areas ?? '',
-      },
-    });
-    return response.data;
-  }
-
-  async Competition(request: CompetitionRequest): Promise<CompetitionResponse> {
-    const response = await CapacitorHttp.get({
-      url: `${this.url}/competitions/${request.competitionCode}`,
-      headers: this.headers,
-    });
-    return response.data as CompetitionResponse;
-=======
     request: CompetitionRequest
   ): Promise<CompetitionResponse | CompetitionsResponse> {
     const response = await CapacitorHttp.get({
@@ -63,7 +42,7 @@ export class FootballdataService {
     return response.data.competitions as CompetitionsResponse;
   }
   async Competition(request: CompetitionRequest): Promise<CompetitionResponse> {
-    const competitionCode = request.id;
+    const competitionCode = request.competitionCode;
     if (competitionCode) {
       const response = await CapacitorHttp.get({
         url: `${this.url}/competitions/${competitionCode}`, 
@@ -72,7 +51,6 @@ export class FootballdataService {
       return response.data as CompetitionResponse;
     }
     throw new Error('Competition ID is required');
->>>>>>> 9d4ad20 (decoupling competition(s) request method)
   }
 
   async Standings(request: StandingsRequest): Promise<StandingsResponse> {
