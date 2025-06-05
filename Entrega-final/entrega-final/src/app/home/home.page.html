@@ -2,6 +2,7 @@
   <ion-toolbar>
     <ion-title>Campeonatos</ion-title>
     <ion-buttons slot="end">
+
         <ion-menu-button menu="main"></ion-menu-button>
       </ion-buttons> 
     </ion-toolbar>
@@ -15,26 +16,29 @@
       </ion-buttons>
     </ion-toolbar>
   </ion-header>
-  <ion-toolbar>
-    <ion-searchbar placeholder="Pesquisar" debounce="500" (ionInput)="onSearchInput($event)"></ion-searchbar>
-  </ion-toolbar>
-  <ion-list>
-    @for(competition of (competitions | async)?.competitions; track competition.id){
+  <ion-content>
 
-    <ion-item
-      id="{{competition.id}}"
-      [routerLink]="['/competitions', competition.code]"
-      routerLinkActive="active"
-    >
-      <ion-thumbnail slot="start">
-        <ion-img
+    <ion-toolbar>
+      <ion-searchbar placeholder="Pesquisar" debounce="500" (ionInput)="onSearchInput($event)"></ion-searchbar>
+    </ion-toolbar>
+    <ion-list mode="md" inset="true">
+      @for(competition of (competitions | async)?.competitions; track competition.id){
+        
+        <ion-item
+        id="{{competition.id}}"
+        [routerLink]="['/competitions', competition.code]"
+        routerLinkActive="active"
+        >
+        <ion-label>{{competition.name}}</ion-label>
+        <!-- <ion-note slot="start">{{competition.type}}</ion-note> -->
+        <ion-thumbnail slot="end">
+          <ion-img
           src="{{competition.emblem}}"
           alt="Emblem of {{competition.name}}"
-        ></ion-img>
-      </ion-thumbnail>
-      <ion-card-title>{{competition.name}}</ion-card-title>
-      <!-- <ion-note slot="end">{{competition.area.name}}</ion-note> -->
-    </ion-item>
+          ></ion-img>
+        </ion-thumbnail>
+      </ion-item>
     }
   </ion-list>
+</ion-content>
 </ion-content>

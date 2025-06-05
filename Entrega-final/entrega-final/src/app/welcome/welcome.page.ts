@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {
@@ -9,21 +9,30 @@ import {
   IonButton,
   IonLabel,
   IonIcon,
+  IonFab,
+  IonFabButton,
+  IonCard,
+  IonCardContent,
+  IonCardTitle,
+  IonCardHeader
 } from '@ionic/angular/standalone';
-import { Router, RouterLink, RouterLinkActive } from '@angular/router';
-import {
-  Auth,
-  authState,
-  signInWithEmailAndPassword,
-  User,
-} from '@angular/fire/auth';
-import { Location } from '@angular/common';
+import { RouterLink, RouterLinkActive } from '@angular/router';
+
+import { helpSharp } from 'ionicons/icons';
+import { addIcons } from 'ionicons';
+
 @Component({
   selector: 'app-welcome',
   templateUrl: './welcome.page.html',
   styleUrls: ['./welcome.page.scss'],
   standalone: true,
   imports: [
+    IonCardHeader,
+    IonCardTitle,
+    IonCardContent,
+    IonCard,
+    IonFabButton,
+    IonFab,
     IonIcon,
     IonLabel,
     IonButton,
@@ -37,32 +46,10 @@ import { Location } from '@angular/common';
     RouterLinkActive,
   ],
 })
-export class WelcomePage implements OnInit {
-  public user!: User;
-  constructor(
-    private auth: Auth,
-    private router: Router,
-    private location: Location
-  ) {}
-
-  ngOnInit() {
-    authState(this.auth).subscribe({
-      next: (user) => {
-        if (user !== null) {
-          // User is signed in, shouldn't be here in the welcome page
-          // Pop back the last history state or redirect home
-          this.location.back();
-          // fallback if there's nothing in the stack
-          this.router.navigate(['/home']);
-        } else {
-          // User is signed out, redirect to welcome page
-          this.router.navigate(['/welcome']);
-        }
-      },
-      error: (e) => {
-        // send some telemetry data like every big company does without your consent...
-        console.error(e);
-      },
+export class WelcomePage {
+  constructor() {
+    addIcons({
+      helpSharp,
     });
   }
 }

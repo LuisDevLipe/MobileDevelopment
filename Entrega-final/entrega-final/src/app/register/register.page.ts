@@ -13,18 +13,23 @@ import {
   IonInputPasswordToggle,
   IonRippleEffect,
   IonButtons,
-  IonMenuButton,
   IonItem,
   IonList,
   IonBackButton,
+  IonCard,
+  IonCardTitle,
+  IonCardContent,
+  IonCardSubtitle,
+  IonCardHeader,
+  IonText,
+  IonImg,
 } from '@ionic/angular/standalone';
 import { eyeSharp, rocketSharp, arrowForwardCircleSharp } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 import {
   Auth,
   createUserWithEmailAndPassword,
-  User,
-  authState,
+  UserCredential,
 } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { RouterLink, RouterLinkActive } from '@angular/router';
@@ -35,6 +40,13 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   styleUrls: ['./register.page.scss'],
   standalone: true,
   imports: [
+    IonImg,
+    IonText,
+    IonCardHeader,
+    IonCardSubtitle,
+    IonCardContent,
+    IonCardTitle,
+    IonCard,
     IonBackButton,
     IonList,
     IonItem,
@@ -51,7 +63,6 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
     CommonModule,
     FormsModule,
     IonInputPasswordToggle,
-    IonMenuButton,
     RouterLink,
     RouterLinkActive,
   ],
@@ -75,28 +86,6 @@ export class RegisterPage implements OnInit {
     addIcons({
       eyeSharp,
       rocketSharp,
-    });
-    authState(this.auth).subscribe({
-      next: (user) => {
-        console.log(user);
-        if (user !== null) {
-          // User is signed in, redirect back in the history, fallback to homepage
-          this.location.back();
-          this.router.navigate(['/home']);
-        } else {
-          // user is not signed in leave him here.
-          return;
-        }
-      },
-      error: (e) => {
-        // Something Ocurred probably a network issue.
-        // redirect to the welcome page
-        // it will then be checked there for the auth state again
-        console.error(e);
-        this.router.navigate(['welcome']);
-        // if the user cant be verified, than we should probably evict
-        // not exposing the app data which could contain sensitive data
-      },
     });
   }
 
@@ -132,10 +121,9 @@ export class RegisterPage implements OnInit {
       this.inputModel,
       this.passwordModel
     )
-      .then((userCredential) => {
+      .then((userCredential: UserCredential) => {
         // Signed in user
         // redirect to the home page
-        console.log(userCredential.user);
         this.router.navigate(['/home']);
         // sign in the user
       })

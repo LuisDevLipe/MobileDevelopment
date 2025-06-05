@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import {
   Auth,
   User,
-  authState,
+  UserCredential,
   signInWithEmailAndPassword,
 } from '@angular/fire/auth';
 import { Router } from '@angular/router';
@@ -18,12 +18,18 @@ import {
   IonLabel,
   IonInput,
   IonButtons,
-  IonMenuButton,
   IonList,
   IonIcon,
   IonRippleEffect,
   IonInputPasswordToggle,
   IonBackButton,
+  IonCard,
+  IonText,
+  IonCardContent,
+  IonCardSubtitle,
+  IonCardTitle,
+  IonCardHeader,
+  IonImg,
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { arrowForwardCircleSharp, logInSharp } from 'ionicons/icons';
@@ -35,6 +41,13 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   styleUrls: ['./login.page.scss'],
   standalone: true,
   imports: [
+    IonImg,
+    IonCardHeader,
+    IonCardTitle,
+    IonCardSubtitle,
+    IonCardContent,
+    IonText,
+    IonCard,
     IonBackButton,
     IonIcon,
     IonList,
@@ -49,7 +62,6 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
     IonToolbar,
     CommonModule,
     FormsModule,
-    IonMenuButton,
     IonRippleEffect,
     IonInputPasswordToggle,
     RouterLink,
@@ -69,40 +81,19 @@ export class LoginPage implements OnInit {
     addIcons({ logInSharp, arrowForwardCircleSharp });
   }
 
-  ngOnInit() {
-    // Add the logIn icon to the Ionicons library
-
-    authState(this.auth).subscribe({
-      next: (user) => {
-        console.log(user);
-        if (user !== null) {
-          // User is signed in, redirect back in the history, fallback to homepage
-          this.location.back();
-          this.router.navigate(['/home']);
-        } else {
-          // user is not signed in leave him here.
-          return;
-        }
-      },
-      error: (e) => {
-        // Something Ocurred probably a network issue.
-        // redirect to the welcome page
-        // it will then be checked there for the auth state again
-        console.error(e);
-        this.router.navigate(['welcome']);
-        // if the user cant be verified, than we should probably evict
-        // not exposing the app data which could contain sensitive data
-      },
-    });
-  }
+  ngOnInit() {}
 
   onSignIn() {
     signInWithEmailAndPassword(this.auth, this.emailModel, this.passwordModel)
-      .then((userCredential) => {
+      .then((userCredential: UserCredential) => {
         // Signed in
         const user: User = userCredential.user;
         console.log('User signed in:', user);
         // Navigate to the home page or any other page
+        this.router.navigate(['/home']).then(() => {
+          // Optionally, you can also reset the navigation stack
+          this.location.replaceState('/home');
+        });
       })
       .catch((error) => {
         console.error('Error signing in:', error);

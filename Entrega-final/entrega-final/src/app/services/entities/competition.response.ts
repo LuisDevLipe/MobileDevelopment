@@ -1,5 +1,4 @@
 import { CompetitionMatchesRequest } from './competition.request';
-<<<<<<< HEAD
 
 type CompetitionsResponse = {
   count: number;
@@ -10,13 +9,6 @@ type CompetitionsResponse = {
   competitions: Competition[];
 };
 
-=======
-class CompetitionsResponse {
-  count!: number;
-  filters!: {};
-  competitions!: CompetitionResponse[];
-}
->>>>>>> 9d4ad20 (decoupling competition(s) request method)
 class CompetitionResponse {
   area!: Area;
   id!: number;
@@ -153,7 +145,6 @@ interface MatchScore {
   };
 }
 
-<<<<<<< HEAD
 type CompetitionTeamsResponse = {
   count: number;
   filters: {
@@ -170,11 +161,4 @@ export {
   StandingsResponse,
   CompetitionMatchesResponse,
   CompetitionTeamsResponse,
-=======
-export {
-  CompetitionResponse,
-  CompetitionsResponse,
-  StandingsResponse,
-  CompetitionMatchesResponse,
->>>>>>> 9d4ad20 (decoupling competition(s) request method)
 };

@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>register</ion-title>
+    <ion-title>Register</ion-title>
     <ion-buttons slot="start">
       <!-- <ion-menu-button menu="main"></ion-menu-button> -->
       <ion-back-button defaultHref="/welcome"></ion-back-button>
@@ -11,57 +11,79 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">register</ion-title>
+      <ion-title size="large">Register</ion-title>
       <ion-buttons slot="start">
-        <!-- <ion-menu-button menu="main"></ion-menu-button> -->
         <ion-back-button defaultHref="/welcome"></ion-back-button>
       </ion-buttons>
     </ion-toolbar>
   </ion-header>
   <ion-content class="ion-padding">
-    <ion-input
-      mode="md"
-      label="Your e-mail goes here"
-      labelPlacement="floating"
-      placeholder="happycustomer@gmail.com"
-      [clearInput]="true"
-      helperText="Enter a valid email"
-      errorText="Invalid email"
-      ngModel
-      email
-      [value]="inputModel"
-      (ionInput)="onInput($event)"
-      #ionInputEl
-      inputmode="email"
-      enterkeyhint="next"
-      required
-      shape="round"
-    >
-    </ion-input>
+    <ion-card>
+      <ion-img src="assets/football-players.png">
 
-    <ion-input
-      type="password"
-      label="Your password goes here"
-      labelPlacement="floating"
-      placeholder="**********"
-      ngModel
-      password
-      [value]="passwordModel"
-      (ionInput)="onPasswordInput($event)"
-      #ionPasswordInputEl
-      enterkeyhint="next"
-      minlength="6"
-      required
-      shape="round"
-    >
-      <ion-input-password-toggle slot="end"> </ion-input-password-toggle>
-    </ion-input>
+      </ion-img>
+      <ion-card-header>
+        <ion-card-title>
+          Register
+        </ion-card-title>
+        <ion-card-subtitle>
+          Please fill in your details to create an account.
+        </ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
 
-    <ion-button expand="block" (click)="signUp()">
-      <ion-icon name="rocket-sharp" aria-hidden="true"></ion-icon>
-      <ion-label slot="start">Sign up</ion-label>
-      <ion-ripple-effect></ion-ripple-effect>
-    </ion-button>
+        <ion-input
+          mode="md"
+          label="Your e-mail goes here"
+          labelPlacement="stacked"
+          placeholder="happycustomer@gmail.com"
+          [clearInput]="true"
+          errorText="Invalid email"
+          ngModel
+          email
+          [value]="inputModel"
+          (ionInput)="onInput($event)"
+          #ionInputEl
+          inputmode="email"
+          enterkeyhint="next"
+          required
+          shape="round"
+        >
+        </ion-input>
+    
+        <ion-input
+          type="password"
+          label="Your password goes here"
+          labelPlacement="stacked"
+          placeholder="**********"
+          ngModel
+          password
+          [value]="passwordModel"
+          (ionInput)="onPasswordInput($event)"
+          #ionPasswordInputEl
+          helperText="Must be at least 6 characters"
+          enterkeyhint="next"
+          minlength="6"
+          required
+          shape="round"
+        >
+        <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+      </ion-input>
+
+      <ion-button expand="block" (click)="signUp()">
+        <ion-icon name="rocket-sharp" aria-hidden="true"></ion-icon>
+        <ion-label slot="start">Sign up</ion-label>
+        <ion-ripple-effect></ion-ripple-effect>
+      </ion-button>
+      <ion-text>
+        By registering, you agree to our
+        <a href="#">Terms of Service</a> and
+        <a href="#">Privacy Policy</a>.
+      </ion-text>
+    </ion-card-content>
+
+    </ion-card>
+    
     <ion-list>
       <ion-item routerLink="/login" routerLinkActive="active">
         <a>Login</a>

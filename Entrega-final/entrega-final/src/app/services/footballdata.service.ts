@@ -33,24 +33,24 @@ export class FootballdataService {
   }
 
   async Competitions(
-    request: CompetitionRequest
-  ): Promise<CompetitionResponse | CompetitionsResponse> {
+    request: CompetitionsRequest
+  ): Promise<CompetitionsResponse> {
     const response = await CapacitorHttp.get({
-      url: `${this.url}/competitions`,
+      url: `${this.url}/competitions/`,
+      headers: this.headers,
+      params: {
+        areas: request.filters?.areas ?? '',
+      },
+    });
+    return response.data;
+  }
+
+  async Competition(request: CompetitionRequest): Promise<CompetitionResponse> {
+    const response = await CapacitorHttp.get({
+      url: `${this.url}/competitions/${request.competitionCode}`,
       headers: this.headers,
     });
-    return response.data.competitions as CompetitionsResponse;
-  }
-  async Competition(request: CompetitionRequest): Promise<CompetitionResponse> {
-    const competitionCode = request.competitionCode;
-    if (competitionCode) {
-      const response = await CapacitorHttp.get({
-        url: `${this.url}/competitions/${competitionCode}`, 
-        headers: this.headers,
-      });
-      return response.data as CompetitionResponse;
-    }
-    throw new Error('Competition ID is required');
+    return response.data as CompetitionResponse;
   }
 
   async Standings(request: StandingsRequest): Promise<StandingsResponse> {

@@ -69,7 +69,7 @@ export class MatchesComponent implements OnInit {
   public resultSet!: CompetitionMatchesResponse['resultSet'];
   public competition!: CompetitionMatchesResponse['competition'];
   public matches!: CompetitionMatchesResponse['matches'];
-  public selectedSeason?: string;
+  public selectedSeason?: CompetitionResponse['seasons'][number]['id'];
   public seasons!: CompetitionResponse['seasons'];
   public selectedStatus: string[] = ['IN_PLAY', 'FINISHED'];
   public page: number = 1;
@@ -87,21 +87,23 @@ export class MatchesComponent implements OnInit {
   ngOnInit() {
     this.loadSeasons();
     this.loadMatches({
-      season: this.selectedSeason,
-      limit: this.pageSize,
-      offset: this.page * this.pageSize - this.pageSize,
       status: this.selectedStatus.join(','),
-      // dateFrom: this.drillDownByDate().dateFrom,
-      // dateTo: this.drillDownByDate().dateTo,
     });
   }
   loadMatches(filters?: CompetitionMatchesRequest['filters']) {
     // console.log(this.selectedStatus);
+    const override_filters = {
+      ...this.filters,
+      ...filters,
+      status: this.selectedStatus.join(','),
+    };
+    console.log(this.selectedStatus);
+    console.log(override_filters.status);
     this.footballdata
       .CompetitionMatches(
         new CompetitionMatchesRequest({
           id: this.competitionCode,
-          filters,
+          filters: override_filters,
         })
       )
       .then((res: CompetitionMatchesResponse) => {
@@ -112,7 +114,7 @@ export class MatchesComponent implements OnInit {
         this.matches = res.matches.sort((a, b) => {
           const dateA = new Date(a.utcDate);
           const dateB = new Date(b.utcDate);
-          return dateA.getTime() + dateB.getTime();
+          return dateA.getTime() < dateB.getTime() ? 1 : -1;
         });
         this.page = this.page++;
       })
@@ -143,13 +145,8 @@ export class MatchesComponent implements OnInit {
       this.selectedSeason = (event.target as HTMLIonSelectElement).value;
       // console.log(this.selectedSeason);
       this.loadMatches({
-        dateFrom: '',
-        dateTo: '',
-        season: this.selectedSeason,
-        offset: this.page * this.pageSize - this.pageSize,
-        limit: this.pageSize,
-        status: this.selectedStatus.join(','),
-      } as CompetitionMatchesRequest['filters']);
+        season: this.selectedSeason?.toString(),
+      });
     }
   }
 
@@ -158,14 +155,10 @@ export class MatchesComponent implements OnInit {
     if (event.type === 'ionChange') {
       this.selectedStatus = (event.target as HTMLIonSelectElement).value;
       this.loadMatches({
-        dateFrom: '',
-        dateTo: '',
-        season: this.selectedSeason,
-        offset: this.page * this.pageSize - this.pageSize,
-        limit: this.pageSize,
         status: this.selectedStatus.join(','),
-      } as CompetitionMatchesRequest['filters']);
+      });
     }
+    // console.log(this.selectedStatus);
   }
 
   loadSeasons() {
@@ -180,8 +173,9 @@ export class MatchesComponent implements OnInit {
         this.seasons = res.seasons.sort((a, b) => {
           const dateA = new Date(a.startDate);
           const dateB = new Date(b.startDate);
-          return dateB.getTime() - dateA.getTime();
+          return dateB.getTime() > dateA.getTime() ? 1 : -1;
         });
+        this.selectedSeason = new Date().getFullYear();
       })
       .catch((err) => {
         console.error(err);
