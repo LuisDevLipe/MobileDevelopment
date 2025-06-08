@@ -16,6 +16,7 @@ export class AuthService {
   }
 
   canActivate(): Observable<GuardResult> {
+
     return new Observable<GuardResult>((subscribe) => {
       this.authState.subscribe({
         next: (user: User | null) => {
@@ -28,6 +29,9 @@ export class AuthService {
         error: (error) => {
           console.error('Error checking authentication state:', error);
           subscribe.next(this.router.createUrlTree(['/welcome']));
+        },
+        complete: () => {
+          subscribe.complete();
         },
       });
     });

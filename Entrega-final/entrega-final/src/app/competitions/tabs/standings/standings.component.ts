@@ -8,8 +8,7 @@ import {
   IonGrid,
   IonRow,
   IonCol,
-  IonThumbnail
-} from '@ionic/angular/standalone';
+  IonThumbnail, IonItem, IonCardHeader, IonCard, IonCardTitle, IonLabel, IonNote, IonCardSubtitle, IonCardContent } from '@ionic/angular/standalone';
 import { FootballdataService } from 'src/app/services/footballdata.service';
 import { ActivatedRoute } from '@angular/router';
 import { StandingsRequest } from 'src/app/services/entities/competition.request';
@@ -20,7 +19,7 @@ import { RouterLink , RouterLinkActive} from '@angular/router';
   templateUrl: './standings.component.html',
   styleUrls: ['./standings.component.scss'],
   standalone: true,
-  imports: [
+  imports: [IonCardContent, IonCardSubtitle, IonNote, IonLabel, IonCardTitle, IonCard, IonCardHeader, IonItem, 
     IonCol,
     IonRow,
     IonGrid,

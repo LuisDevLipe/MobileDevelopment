@@ -5,17 +5,30 @@
   </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+          Standings for {{ competition?.name }}
+      </ion-card-title>
+      <ion-card-subtitle>
+        {{competitionCode}}
+      </ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      
+    </ion-card-content>
+  </ion-card>
   @for(standing of standings ; track standing?.table){
   <ion-grid>
-    <ion-row>
+    <ion-row class="ion-text-row">
       <ion-col></ion-col>
-      <ion-col>Team</ion-col>
-      <ion-col>Played</ion-col>
+      <ion-col></ion-col>
+      <!-- <ion-col>Played</ion-col> -->
       <ion-col>W</ion-col>
       <ion-col>D</ion-col>
       <ion-col>L</ion-col>
-      <ion-col>Pts</ion-col>
-      <ion-col>Form</ion-col>
+      <ion-col>PT</ion-col>
+      <!-- <ion-col>Form</ion-col> -->
       <ion-col>GF</ion-col>
       <ion-col>GA</ion-col>
       <ion-col>GD</ion-col>
@@ -26,35 +39,30 @@
   <ion-grid>
     <ion-row
       [routerLink]="['/matches', position.team.id, competitionCode]"
-      class="ion-activatable ripple-parent"
+      class="ion-activatable ripple-parent ion-text-center"
       routerLinkActive="active"
+
     >
       <ion-col>{{ position?.position }}</ion-col>
       <ion-col>
         <ion-thumbnail
           mode="md"
-          style="
-            width: fit-content;
-            height: fit-content;
-            display: grid;
-            place-items: center;
-          "
+          class="standings-thumbnail"
         >
           <img
             src="{{ position?.team?.crest }}"
             alt="{{ position?.team?.name }}"
-            style="object-position: center"
           />
         </ion-thumbnail>
       </ion-col>
       <!-- <ion-col>{{ position?.team?.name }}</ion-col>  -->
 
-      <ion-col>{{ position?.playedGames }}</ion-col>
+      <!-- <ion-col>{{ position?.playedGames }}</ion-col> -->
       <ion-col>{{ position?.won }}</ion-col>
       <ion-col>{{ position?.draw }}</ion-col>
       <ion-col>{{ position?.lost }}</ion-col>
       <ion-col>{{ position?.points }}</ion-col>
-      <ion-col>{{ position?.form }}</ion-col>
+      <!-- <ion-col>{{ position?.form }}</ion-col> -->
       <ion-col>{{ position?.goalsFor }}</ion-col>
       <ion-col>{{ position?.goalsAgainst }}</ion-col>
       <ion-col>{{ position?.goalDifference }}</ion-col>

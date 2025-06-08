@@ -93,7 +93,7 @@ export class LoginPage implements OnInit {
       .then((userCredential: UserCredential) => {
         // Signed in
         const user: User = userCredential.user;
-        console.log('User signed in:', user);
+        // console.log('User signed in:', user);
         // Navigate to the home page or any other page
         this.router.navigate(['/home']).then(() => {
           // Optionally, you can also reset the navigation stack

@@ -19,7 +19,7 @@ bootstrapApplication(AppComponent, {
     provideFirebaseApp(() => initializeApp(environment.FIREBASE_CONFIG)),
     provideAuth(() => {
       const auth = getAuth();
-      connectAuthEmulator(auth, 'http://192.168.1.188:9099', {
+      connectAuthEmulator(auth, 'http://localhost:9099', {
         disableWarnings: true,
       });
       return auth;
