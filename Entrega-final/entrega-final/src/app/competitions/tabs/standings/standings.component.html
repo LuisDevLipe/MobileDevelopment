@@ -1,72 +1,101 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-back-button defaultHref="/home" slot="start"></ion-back-button>
-    <ion-title size="large">{{ competition?.name }}</ion-title>
+    <ion-title size="large">Standings</ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content [fullscreen]="true">
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>
-          Standings for {{ competition?.name }}
-      </ion-card-title>
-      <ion-card-subtitle>
-        {{competitionCode}}
-      </ion-card-subtitle>
-    </ion-card-header>
-    <ion-card-content>
-      
-    </ion-card-content>
-  </ion-card>
-  @for(standing of standings ; track standing?.table){
-  <ion-grid>
-    <ion-row class="ion-text-row">
-      <ion-col></ion-col>
-      <ion-col></ion-col>
-      <!-- <ion-col>Played</ion-col> -->
-      <ion-col>W</ion-col>
-      <ion-col>D</ion-col>
-      <ion-col>L</ion-col>
-      <ion-col>PT</ion-col>
-      <!-- <ion-col>Form</ion-col> -->
-      <ion-col>GF</ion-col>
-      <ion-col>GA</ion-col>
-      <ion-col>GD</ion-col>
-    </ion-row>
-  </ion-grid>
-
-  @for (position of standing.table ; track position?.position) {
-  <ion-grid>
-    <ion-row
-      [routerLink]="['/matches', position.team.id, competitionCode]"
-      class="ion-activatable ripple-parent ion-text-center"
-      routerLinkActive="active"
-
+@if (competition && standings){
+  <ion-content [fullscreen]="true">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>
+          Standings
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-list inset="false" mode="md" lines="none" class="ion-no-padding">
+          <ion-item>
+            <ion-label position="stacked">{{competition.name}}</ion-label>
+            <ion-note slot="">{{competition.type}}</ion-note>
+            <ion-thumbnail slot="end">
+              <ion-img
+              src="{{competition.emblem}}"
+              alt="Emblem of {{competition.name}}"
+              ></ion-img>
+            </ion-thumbnail>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+    <ion-select
+      mode="md"
+      interface="alert"
+      [multiple]="false"
+      justify="space-between"
+      fill="solid"
+      label="Choose a Season"
+      label-placement="floating"
+      value="2025"
     >
-      <ion-col>{{ position?.position }}</ion-col>
-      <ion-col>
-        <ion-thumbnail
-          mode="md"
-          class="standings-thumbnail"
-        >
-          <img
-            src="{{ position?.team?.crest }}"
-            alt="{{ position?.team?.name }}"
-          />
-        </ion-thumbnail>
-      </ion-col>
-      <!-- <ion-col>{{ position?.team?.name }}</ion-col>  -->
-
-      <!-- <ion-col>{{ position?.playedGames }}</ion-col> -->
-      <ion-col>{{ position?.won }}</ion-col>
-      <ion-col>{{ position?.draw }}</ion-col>
-      <ion-col>{{ position?.lost }}</ion-col>
-      <ion-col>{{ position?.points }}</ion-col>
-      <!-- <ion-col>{{ position?.form }}</ion-col> -->
-      <ion-col>{{ position?.goalsFor }}</ion-col>
-      <ion-col>{{ position?.goalsAgainst }}</ion-col>
-      <ion-col>{{ position?.goalDifference }}</ion-col>
-    </ion-row>
-  </ion-grid>
-  } }
+    <ion-select-option value="2025">2025</ion-select-option>
+      <!-- @for(season of seasons; track season.id){
+        <ion-select-option value="{{ season.startDate | date : 'yyyy' }}">
+          {{ season.startDate | date : "yyyy" }} -
+          {{ season.endDate | date : "yyyy" }}
+        </ion-select-option>
+      } -->
+    </ion-select>
+    @for(standing of standings ; track standing?.table){
+      <ion-grid>
+        <ion-row class="ion-text-center">
+          <ion-col></ion-col>
+          <ion-col></ion-col>
+          <!-- <ion-col>Played</ion-col> -->
+          <ion-col>W</ion-col>
+          <ion-col>D</ion-col>
+          <ion-col>L</ion-col>
+          <ion-col>PT</ion-col>
+          <!-- <ion-col>Form</ion-col> -->
+          <ion-col>GF</ion-col>
+          <ion-col>GA</ion-col>
+          <ion-col>GD</ion-col>
+        </ion-row>
+        
+        @for (position of standing.table ; track position?.position) {
+          
+          <ion-row
+          [routerLink]="['/matches', position.team.id, competitionCode]"
+          class="ion-text-center team-position-data"
+          routerLinkActive="active"
+                    >
+          <ion-col>{{ position?.position }}</ion-col>
+          <ion-col>
+            <ion-thumbnail mode="md" class="standings-thumbnail">
+              <img
+              src="{{ position?.team?.crest }}"
+              alt="{{ position?.team?.name }}"
+              />
+            </ion-thumbnail>
+          </ion-col>
+          <!-- <ion-col>{{ position?.team?.name }}</ion-col>  -->
+          
+          <!-- <ion-col>{{ position?.playedGames }}</ion-col> -->
+          <ion-col>{{ position?.won }}</ion-col>
+          <ion-col>{{ position?.draw }}</ion-col>
+          <ion-col>{{ position?.lost }}</ion-col>
+          <ion-col>{{ position?.points }}</ion-col>
+          <!-- <ion-col>{{ position?.form }}</ion-col> -->
+          <ion-col>{{ position?.goalsFor }}</ion-col>
+          <ion-col>{{ position?.goalsAgainst }}</ion-col>
+          <ion-col>{{ position?.goalDifference }}</ion-col>
+        </ion-row>
+        
+      }
+    </ion-grid>
+  }
 </ion-content>
+} @else {
+  <ion-content [fullscreen]="true">
+    <ion-spinner name="dots" class="ion-padding main-loader"></ion-spinner>
+  </ion-content>
+}

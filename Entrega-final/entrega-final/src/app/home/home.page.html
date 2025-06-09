@@ -1,6 +1,6 @@
 <ion-header [translucent]="true" mode="md">
   <ion-toolbar>
-    <ion-title>Campeonatos</ion-title>
+    <ion-title>Competitions</ion-title>
     <ion-buttons slot="end">
       <ion-menu-button menu="main"></ion-menu-button>
     </ion-buttons>
@@ -26,13 +26,7 @@
         <ion-card-subtitle> </ion-card-subtitle>
       </ion-card-header>
       <ion-card-content>
-        <ion-text>
-          This app provides a comprehensive overview of various football
-          competitions, including their current status, teams, and match
-          schedules. Explore the competitions to find detailed information about
-          each one. Use the search bar to quickly find a specific competition by
-          name or code.
-        </ion-text>
+        <ion-img src="assets/football-player.png"></ion-img>
       </ion-card-content>
     </ion-card>
     <ion-toolbar mode="md">
@@ -43,25 +37,34 @@
       ></ion-searchbar>
     </ion-toolbar>
 
-    <ion-list mode="md" inset="true">
-      @for(competition of (competitions | async)?.competitions; track
-      competition.id){
+    <ion-list mode="md" inset="false" lines="full" class="ion-no-padding">
+      <ion-item-group>
+        <ion-item-divider>
+          <ion-label>Competitions</ion-label>
 
-      <ion-item
-        id="{{competition.id}}"
-        [routerLink]="['/competitions', competition.code]"
-        routerLinkActive="active"
-      >
-        <ion-label>{{competition.name}}</ion-label>
-        <!-- <ion-note slot="start">{{competition.type}}</ion-note> -->
-        <ion-thumbnail slot="end">
-          <ion-img
-            src="{{competition.emblem}}"
-            alt="Emblem of {{competition.name}}"
-          ></ion-img>
-        </ion-thumbnail>
-      </ion-item>
-      }
+          <ion-note slot="end">Tap a competition to view details</ion-note>
+        </ion-item-divider>
+
+        @for(competition of (competitions | async)?.competitions; track
+        competition.id){
+
+        <ion-item
+          id="{{competition.id}}"
+          [routerLink]="['/competitions', competition.code]"
+          routerLinkActive="active"
+        >
+          <ion-label position="stacked">{{competition.name}}</ion-label>
+          <ion-note slot="">{{competition.type}}</ion-note>
+          <ion-note slot="end">{{competition.code}}</ion-note>
+          <ion-thumbnail slot="end">
+            <ion-img
+              src="{{competition.emblem}}"
+              alt="Emblem of {{competition.name}}"
+            ></ion-img>
+          </ion-thumbnail>
+        </ion-item>
+        }
+      </ion-item-group>
     </ion-list>
   </ion-content>
 </ion-content>

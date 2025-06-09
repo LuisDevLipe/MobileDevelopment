@@ -1,5 +1,5 @@
 ion-thumbnail.match-thumbnail {
-    --size: 40px;
+    --size: 20px;
 }
 
 ion-thumbnail.competition-thumbnail {
@@ -13,4 +13,11 @@ ion-item{
 }
 ion-label {
     margin: 0 auto;
+}
+
+ion-spinner.main-loader {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }

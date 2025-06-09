@@ -155,10 +155,42 @@ type CompetitionTeamsResponse = {
   teams: Team[];
 };
 
+type CompetitionScorersResponse = {
+  count: number;
+  filters: {
+    season: string;
+    limit: number;
+  };
+  competition: Competition;
+  season: Season;
+  scorers: Array<{
+    player: Player;
+    team: Team;
+    playedMatches: number;
+    goals: number;
+    assists: number | null;
+    penalties: number | null;
+  }>;
+};
+
+interface Player {
+  id: number;
+  name: string;
+  firstName: string;
+  lastName: string;
+  dateOfBirth: string;
+  nationality: string;
+  section: string;
+  position: string | null;
+  shirtNumber: number | null;
+  lastUpdated: string;
+}
+
 export {
   CompetitionsResponse,
   CompetitionResponse,
   StandingsResponse,
   CompetitionMatchesResponse,
   CompetitionTeamsResponse,
+  CompetitionScorersResponse,
 };

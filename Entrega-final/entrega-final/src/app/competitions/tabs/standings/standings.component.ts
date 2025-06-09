@@ -8,18 +8,43 @@ import {
   IonGrid,
   IonRow,
   IonCol,
-  IonThumbnail, IonItem, IonCardHeader, IonCard, IonCardTitle, IonLabel, IonNote, IonCardSubtitle, IonCardContent } from '@ionic/angular/standalone';
+  IonThumbnail,
+  IonItem,
+  IonCardHeader,
+  IonCard,
+  IonCardTitle,
+  IonLabel,
+  IonNote,
+  IonCardSubtitle,
+  IonCardContent,
+  IonList,
+  IonImg,
+  IonSpinner,
+  IonSelect,
+  IonSelectOption,
+} from '@ionic/angular/standalone';
 import { FootballdataService } from 'src/app/services/footballdata.service';
 import { ActivatedRoute } from '@angular/router';
 import { StandingsRequest } from 'src/app/services/entities/competition.request';
 import { StandingsResponse } from 'src/app/services/entities/competition.response';
-import { RouterLink , RouterLinkActive} from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 @Component({
   selector: 'tab-standings',
   templateUrl: './standings.component.html',
   styleUrls: ['./standings.component.scss'],
   standalone: true,
-  imports: [IonCardContent, IonCardSubtitle, IonNote, IonLabel, IonCardTitle, IonCard, IonCardHeader, IonItem, 
+  imports: [
+    IonSpinner,
+    IonImg,
+    IonList,
+    IonCardContent,
+    IonCardSubtitle,
+    IonNote,
+    IonLabel,
+    IonCardTitle,
+    IonCard,
+    IonCardHeader,
+    IonItem,
     IonCol,
     IonRow,
     IonGrid,
@@ -31,12 +56,14 @@ import { RouterLink , RouterLinkActive} from '@angular/router';
     IonThumbnail,
     RouterLink,
     RouterLinkActive,
+    IonSelect,
+    IonSelectOption,
   ],
 })
 export class StandingsComponent implements OnInit {
-  public competition?: StandingsResponse['competition'];
-  public season?: StandingsResponse['season'];
-  public standings?: StandingsResponse['standings'];
+  public competition!: StandingsResponse['competition'];
+  public season!: StandingsResponse['season'];
+  public standings!: StandingsResponse['standings'];
   public competitionCode: string;
   constructor(
     private footballdata: FootballdataService,
@@ -62,4 +89,5 @@ export class StandingsComponent implements OnInit {
         console.error('Error loading standings:', error);
       });
   }
+
 }

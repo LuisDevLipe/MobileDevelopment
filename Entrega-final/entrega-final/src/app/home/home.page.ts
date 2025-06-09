@@ -19,8 +19,7 @@ import {
   IonCardContent,
   IonCardHeader,
   IonCard,
-  IonText,
-} from '@ionic/angular/standalone';
+  IonText, IonListHeader, IonItemGroup, IonItemDivider } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { peopleCircleSharp, helpCircleSharp, homeSharp } from 'ionicons/icons';
 import { FootballdataService } from '../services/footballdata.service';
@@ -34,7 +33,7 @@ import { CompetitionsResponse } from '../services/entities/competition.response'
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [
+  imports: [IonItemDivider, IonItemGroup, IonListHeader, 
     IonText,
     IonCard,
     IonCardHeader,

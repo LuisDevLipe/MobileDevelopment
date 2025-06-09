@@ -33,18 +33,19 @@ export const routes: Routes = [
             (m) => m.MatchesComponent
           ),
       },
+      // {
+
+      //   path: 'teams',
+      //   loadComponent: () =>
+      //     import('./competitions/tabs/teams/teams.component').then(
+      //       (m) => m.TeamsComponent
+      //     ),
+      // },
       {
-        path: 'teams',
+        path: 'scorers',
         loadComponent: () =>
-          import('./competitions/tabs/teams/teams.component').then(
-            (m) => m.TeamsComponent
-          ),
-      },
-      {
-        path: 'seasons',
-        loadComponent: () =>
-          import('./competitions/tabs/seasons/seasons.component').then(
-            (m) => m.SeasonsComponent
+          import('./competitions/tabs/scorers/scorers.component').then(
+            (m) => m.ScorersComponent
           ),
       },
       {

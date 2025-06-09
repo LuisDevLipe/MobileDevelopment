@@ -14,7 +14,8 @@ import {
   IonCard,
   IonCardContent,
   IonCardTitle,
-  IonCardHeader
+  IonCardHeader,
+  IonImg,
 } from '@ionic/angular/standalone';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
@@ -27,6 +28,7 @@ import { addIcons } from 'ionicons';
   styleUrls: ['./welcome.page.scss'],
   standalone: true,
   imports: [
+    IonImg,
     IonCardHeader,
     IonCardTitle,
     IonCardContent,

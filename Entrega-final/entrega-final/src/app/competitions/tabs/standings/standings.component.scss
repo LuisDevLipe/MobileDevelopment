@@ -1,3 +1,26 @@
 ion-thumbnail.standings-thumbnail {
-    --size: 25px;
+  --size: 20px;
+}
+
+ion-spinner.main-loader {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+ion-row.team-position-data:nth-child(2n) {
+  background: var(--ion-color-light);
+}
+
+ion-row.team-position-data:nth-child(2) {
+  background: var(--ion-color-success);
+}
+ion-row.team-position-data:nth-child(3),
+ion-row.team-position-data:nth-child(4) {
+  background: var(--ion-color-warning);
+}
+
+ion-row.team-position-data:nth-child(n+12) {
+  background: var(--ion-color-danger-tint);
 }

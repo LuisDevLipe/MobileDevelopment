@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.development';
 import {
@@ -7,6 +7,7 @@ import {
   StandingsRequest,
   CompetitionMatchesRequest,
   CompetitionTeamsRequest,
+  CompetitionScorersRequest,
 } from 'src/app/services/entities/competition.request';
 import {
   CompetitionsResponse,
@@ -14,9 +15,10 @@ import {
   StandingsResponse,
   CompetitionMatchesResponse,
   CompetitionTeamsResponse,
+  CompetitionScorersResponse,
 } from 'src/app/services/entities/competition.response';
 
-import { CapacitorHttp } from '@capacitor/core';
+import { CapacitorHttp, HttpOptions } from '@capacitor/core';
 
 @Injectable({
   providedIn: 'root',
@@ -101,5 +103,30 @@ export class FootballdataService {
       },
     });
     return response.data as CompetitionTeamsResponse;
+  }
+
+  async CompetitionScorers(
+    request: CompetitionScorersRequest
+  ): Promise<CompetitionScorersResponse> {
+    const response = await CapacitorHttp.get({
+      headers: this.headers,
+      url: this.parseUrl([
+        'competitions',
+        request.competitionCode.toString(),
+        'scorers',
+      ]),
+      params: {
+        ...(request.filters as HttpParams),
+      },
+    } as HttpOptions);
+
+    return response.data as CompetitionScorersResponse;
+  }
+
+  parseUrl(fragments: string[]): string {
+    if (fragments.length === 0) {
+      return this.url;
+    }
+    return `${this.url}/${fragments.join('/')}`;
   }
 }

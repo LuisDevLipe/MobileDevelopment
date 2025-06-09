@@ -24,6 +24,7 @@ import {
   IonInfiniteScrollContent,
   IonListHeader,
   IonText,
+  IonSpinner,
 } from '@ionic/angular/standalone';
 import { InfiniteScrollCustomEvent } from '@ionic/core';
 import {
@@ -42,6 +43,7 @@ import { MatchStatuses } from 'src/app/services/enums/match.status';
   styleUrls: ['./matches.component.scss'],
   standalone: true,
   imports: [
+    IonSpinner,
     IonText,
     IonListHeader,
     IonInfiniteScrollContent,

@@ -7,7 +7,7 @@ import {
   IonTabBar,
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { trophy, football, calendar, people } from 'ionicons/icons';
+import { trophy, football, calendar, people, flame, flameSharp, peopleSharp } from 'ionicons/icons';
 @Component({
   selector: 'app-competitions',
   templateUrl: './competitions.page.html',
@@ -17,6 +17,6 @@ import { trophy, football, calendar, people } from 'ionicons/icons';
 })
 export class CompetitionsPage {
   constructor() {
-    addIcons({ trophy, football, people, calendar });
+    addIcons({trophy,football,peopleSharp,flameSharp,people,flame,calendar});
   }
 }

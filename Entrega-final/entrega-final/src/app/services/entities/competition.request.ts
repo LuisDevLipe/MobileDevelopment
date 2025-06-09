@@ -104,10 +104,33 @@ class CompetitionTeamsRequest {
   }
 }
 
+class CompetitionScorersRequest{
+  competitionCode: number | string;
+  filters?: {
+    limit?: number;
+    season?: string; // YYYY
+  }
+
+  constructor({
+    competitionCode,
+    filters
+  }: {
+    competitionCode: number | string;
+    filters?: {
+      limit?: number;
+      season?: string; // YYYY
+    }
+  }) {
+    this.competitionCode = competitionCode;
+    this.filters = filters;
+  }
+}
+
 export {
   CompetitionsRequest,
   CompetitionRequest,
   StandingsRequest,
   CompetitionMatchesRequest,
   CompetitionTeamsRequest,
+  CompetitionScorersRequest,
 };
