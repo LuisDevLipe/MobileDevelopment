@@ -1,5 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Auth, authState, User, user } from '@angular/fire/auth';
+import {
+  Auth,
+  authState,
+  User,
+  user,
+  updateProfile,
+  updatePhoneNumber,
+  getAuth,
+} from '@angular/fire/auth';
 import { GuardResult, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
@@ -16,7 +24,6 @@ export class AuthService {
   }
 
   canActivate(): Observable<GuardResult> {
-
     return new Observable<GuardResult>((subscribe) => {
       this.authState.subscribe({
         next: (user: User | null) => {
@@ -39,5 +46,15 @@ export class AuthService {
 
   getUser(): Observable<User | null> {
     return this.user;
+  }
+  updateUserProfile(displayName = '', photoURL = ''): Promise<void> {
+    const auth = getAuth();
+    if (auth.currentUser === null) {
+      return Promise.reject('No user is currently signed in.');
+    }
+    return updateProfile(auth.currentUser, {
+      displayName: displayName,
+      photoURL: photoURL,
+    });
   }
 }

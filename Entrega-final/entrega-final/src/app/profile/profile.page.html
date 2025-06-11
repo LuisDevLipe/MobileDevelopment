@@ -33,19 +33,29 @@
     </ion-button>
 
     <ion-list>
+      <ion-item>
+        <ion-toggle
+          [checked]="false"
+          [enableOnOffLabels]="true"
+          mode="md"
+          (ionChange)="switchEditMode($event)"
+          >Edit mode</ion-toggle
+        >
+      </ion-item>
       <ion-item-group>
         <ion-item-divider>
           <ion-label>User info</ion-label>
-          <ion-note slot="end">Editable</ion-note>
+          <ion-note slot="end">Writable</ion-note>
         </ion-item-divider>
         <ion-item>
           <ion-input
             label="Name"
+            (ionChange)="newUser.displayName = $event.detail.value"
             labelPlacement="stacked"
             value="{{user.displayName ?? 'Not assigned'}}"
-            [readonly]="true"
-            ><ion-icon name="create-sharp" slot="end"></ion-icon
-          ></ion-input>
+            [readonly]="inputsAreReadonly"
+          >
+          </ion-input>
           <!-- <ion-label>Name</ion-label> -->
           <!-- <ion-text>{{user.displayName?? 'Not assigned'}}</ion-text> -->
         </ion-item>
@@ -54,9 +64,9 @@
             label="Email"
             labelPlacement="stacked"
             value="{{user.email ?? 'Not assigned'}}"
-            [readonly]="true"
-            ><ion-icon name="create-sharp" slot="end"></ion-icon
-          ></ion-input>
+            [readonly]="inputsAreReadonly"
+          >
+          </ion-input>
 
           <!-- <ion-label>Email</ion-label>
           <ion-text>{{user.email}}</ion-text> -->
@@ -66,26 +76,14 @@
             label="Phone"
             labelPlacement="stacked"
             value="{{user.phoneNumber ?? 'Not assigned'}}"
-            [readonly]="true"
-            ><ion-icon name="create-sharp" slot="end"></ion-icon
-          ></ion-input>
+            [readonly]="inputsAreReadonly"
+          >
+          </ion-input>
           <!-- <ion-label>Phone</ion-label>
           <ion-text>{{user.phoneNumber ?? 'Not assigned'}}</ion-text> -->
         </ion-item>
-        <ion-item>
-          <ion-input
-            label="Email Verified"
-            labelPlacement="stacked"
-            value="{{user.emailVerified ? 'Yes' : 'No'}}"
-            [readonly]="true"
-            [disabled]="true"
-            >
-          </ion-input>
-          <!-- <ion-label>Is Verified</ion-label>
-          <ion-text>{{user.emailVerified ? 'Yes' : 'No'}}</ion-text> -->
-        </ion-item>
       </ion-item-group>
-
+      
       <ion-item-group>
         <ion-item-divider>
           <ion-label>Account info</ion-label>
@@ -96,6 +94,10 @@
           <ion-text>{{user.uid}}</ion-text>
         </ion-item>
         <ion-item>
+          <ion-label>Email Verified</ion-label>
+          <ion-note slot="end">{{user.emailVerified}}</ion-note>
+        </ion-item>
+        <!-- <ion-item>
           <ion-label>Provider ID</ion-label>
           <ion-text>{{user.providerId}}</ion-text>
         </ion-item>
@@ -106,7 +108,7 @@
         <ion-item>
           <ion-label>Last sign-in time</ion-label>
           <ion-text>{{user.metadata.lastSignInTime}}</ion-text>
-        </ion-item>
+        </ion-item> -->
       </ion-item-group>
     </ion-list>
   </ion-content>
