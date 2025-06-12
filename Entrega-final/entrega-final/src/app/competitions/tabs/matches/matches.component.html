@@ -59,7 +59,7 @@
         (ionCancel)="onMatchStatusChange($event)"
         (ionChange)="onMatchStatusChange($event)"
         (ionDismiss)="onMatchStatusChange($event)"
-        value=""
+        [value]="selectedStatus"
       >
         @for(status of matchStatuses; track status){
         <ion-select-option value="{{ status }}"
