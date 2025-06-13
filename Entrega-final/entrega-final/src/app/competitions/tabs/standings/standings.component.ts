@@ -25,9 +25,19 @@ import {
 } from '@ionic/angular/standalone';
 import { FootballdataService } from 'src/app/services/footballdata.service';
 import { ActivatedRoute } from '@angular/router';
-import { StandingsRequest } from 'src/app/services/entities/competition.request';
-import { StandingsResponse } from 'src/app/services/entities/competition.response';
+import {
+  CompetitionRequest,
+  CompetitionsRequest,
+  StandingsRequest,
+} from 'src/app/services/entities/competition.request';
+import {
+  CompetitionResponse,
+  CompetitionsResponse,
+  StandingsResponse,
+} from 'src/app/services/entities/competition.response';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { DatePipe } from '@angular/common';
+import { SelectCustomEvent } from '@ionic/core';
 @Component({
   selector: 'tab-standings',
   templateUrl: './standings.component.html',
@@ -58,6 +68,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
     RouterLinkActive,
     IonSelect,
     IonSelectOption,
+    DatePipe,
   ],
 })
 export class StandingsComponent implements OnInit {
@@ -65,29 +76,63 @@ export class StandingsComponent implements OnInit {
   public season!: StandingsResponse['season'];
   public standings!: StandingsResponse['standings'];
   public competitionCode: string;
+  public seasons: CompetitionResponse['seasons'];
+  public filters!: StandingsResponse['filters'];
   constructor(
     private footballdata: FootballdataService,
     private route: ActivatedRoute
   ) {
     this.competitionCode =
       this.route.snapshot.paramMap.get('competitionCode') || '';
+    this.seasons = [];
   }
 
   ngOnInit() {
     this.loadStandings();
+    this.loadSeasons();
   }
 
-  loadStandings() {
+  loadStandings(filters?: StandingsRequest['filters']) {
+    const request = new StandingsRequest({
+      id: this.competitionCode,
+      filters: {
+        ...filters,
+      },
+    });
     this.footballdata
-      .Standings(new StandingsRequest({ id: this.competitionCode }))
+      .Standings(request)
       .then((response: StandingsResponse) => {
         this.competition = response.competition;
         this.season = response.season;
         this.standings = response.standings;
+        this.filters = response.filters;
       })
       .catch((error) => {
         console.error('Error loading standings:', error);
       });
   }
 
+  loadSeasons() {
+    // console.log('seasons', this.selectedSeason, this.seasons);
+    const competitionRequest = new CompetitionRequest({
+      competitionCode: this.competitionCode,
+    });
+    this.footballdata
+      .Competition(competitionRequest)
+      .then((res: CompetitionResponse) => {
+        // console.log(res.seasons);
+        this.seasons = res.seasons.sort((a, b) => {
+          const dateA = new Date(a.startDate);
+          const dateB = new Date(b.startDate);
+          return dateB.getTime() > dateA.getTime() ? 1 : -1;
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
+  onSeasonChange(event: SelectCustomEvent) {
+    this.filters.season = event.detail.value;
+    this.loadStandings(this.filters);
+  }
 }

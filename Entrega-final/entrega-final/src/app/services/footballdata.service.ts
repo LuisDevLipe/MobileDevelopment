@@ -61,9 +61,7 @@ export class FootballdataService {
       url: `${this.url}/competitions/${competitionCode}/standings`,
       headers: this.headers,
       params: {
-        matchday: request.filters?.matchday?.toString() ?? '',
-        season: request.filters?.season ?? '',
-        date: request.filters?.date ?? '', // YYYY-MM-DD
+        ...request.filters as HttpParams, // Spread the filters directly
       },
     });
     return response.data as StandingsResponse;

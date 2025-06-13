@@ -35,15 +35,15 @@
       fill="solid"
       label="Choose a Season"
       label-placement="floating"
-      value="2025"
+      [value]="filters.season"
+      (ionChange)="onSeasonChange($event)"
     >
-    <ion-select-option value="2025">2025</ion-select-option>
-      <!-- @for(season of seasons; track season.id){
+      @for(season of seasons; track season.id){
         <ion-select-option value="{{ season.startDate | date : 'yyyy' }}">
           {{ season.startDate | date : "yyyy" }} -
           {{ season.endDate | date : "yyyy" }}
         </ion-select-option>
-      } -->
+      }
     </ion-select>
     @for(standing of standings ; track standing?.table){
       <ion-grid>

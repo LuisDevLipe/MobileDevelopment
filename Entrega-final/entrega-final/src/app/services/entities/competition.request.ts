@@ -39,9 +39,9 @@ class StandingsRequest {
   }: {
     id: number | string;
     filters?: {
-      matchday: number;
-      season: string;
-      date: string; // YYYY-MM-DD
+      matchday?: number;
+      season?: string;
+      date?: string; // YYYY-MM-DD
     };
   }) {
     this.id = id;
