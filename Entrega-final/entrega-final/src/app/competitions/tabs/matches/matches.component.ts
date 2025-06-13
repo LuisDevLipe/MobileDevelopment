@@ -25,6 +25,7 @@ import {
   IonListHeader,
   IonText,
   IonSpinner,
+  IonBadge,
 } from '@ionic/angular/standalone';
 import { InfiniteScrollCustomEvent } from '@ionic/core';
 import {
@@ -43,6 +44,7 @@ import { MatchStatuses } from 'src/app/services/enums/match.status';
   styleUrls: ['./matches.component.scss'],
   standalone: true,
   imports: [
+    IonBadge,
     IonSpinner,
     IonText,
     IonListHeader,
@@ -96,7 +98,10 @@ export class MatchesComponent implements OnInit {
       status: this.selectedStatus.join(','),
     });
   }
-  loadMatches(filters?: CompetitionMatchesRequest['filters']) {
+  loadMatches(
+    filters?: CompetitionMatchesRequest['filters'],
+    sortType = 'desc' as 'asc' | 'desc'
+  ) {
     // console.log(this.selectedStatus);
     const override_filters = {
       ...this.filters,
@@ -120,7 +125,11 @@ export class MatchesComponent implements OnInit {
         this.matches = res.matches.sort((a, b) => {
           const dateA = new Date(a.utcDate);
           const dateB = new Date(b.utcDate);
-          return dateA.getTime() < dateB.getTime() ? 1 : -1;
+          if (sortType === 'asc') {
+            return dateA.getTime() > dateB.getTime() ? 1 : -1;
+          } else {
+            return dateA.getTime() < dateB.getTime() ? 1 : -1;
+          }
         });
         this.page = this.page++;
       })
@@ -160,9 +169,12 @@ export class MatchesComponent implements OnInit {
     // console.log(event);
     if (event.type === 'ionChange') {
       this.selectedStatus = (event.target as HTMLIonSelectElement).value;
-      this.loadMatches({
-        status: this.selectedStatus.join(','),
-      });
+      this.loadMatches(
+        {
+          status: this.selectedStatus.join(','),
+        },
+        this.selectedStatus.includes('SCHEDULED') ? 'asc' : 'desc'
+      );
     }
     // console.log(this.selectedStatus);
   }

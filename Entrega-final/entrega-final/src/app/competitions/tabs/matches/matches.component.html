@@ -81,6 +81,15 @@
           alt="Picute of {{ match.homeTeam.name }} crest"
         />
       </ion-thumbnail>
+      @if(match.status === 'IN PLAY'){
+        <ion-badge
+          mode="md"
+          slot="start"
+          color="success">
+          live
+        </ion-badge>
+
+      }
 
       <ion-label class="ion-text-center">
         {{ match.score.fullTime.home }} - {{ match.score.fullTime.away }}
