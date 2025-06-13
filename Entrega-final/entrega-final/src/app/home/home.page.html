@@ -31,12 +31,30 @@
     </ion-card>
     <ion-toolbar mode="md">
       <ion-searchbar
-        placeholder="Pesquisar"
-        debounce="500"
+        placeholder="Search..."
+        debounce="1000"
         (ionInput)="onSearchInput($event)"
+        (ionCancel)="loadCompetitions()"
+        (ionClear)="loadCompetitions()"
+        mode="md"
+        inputmode="search"
       ></ion-searchbar>
     </ion-toolbar>
+    <ion-refresher
+      slot="fixed"
+      (ionRefresh)="loadCompetitions($event)"
 
+      mode="md"
+    >
+      <ion-refresher-content
+        pullingIcon="arrow-down"
+        pullingText="Pull to refresh"
+        refreshingSpinner="circles"
+        refreshingText="Loading competitions..."
+      ></ion-refresher-content>
+    </ion-refresher>
+
+    @if(competitions && competitions.length > 0) {
     <ion-list mode="md" inset="false" lines="full" class="ion-no-padding">
       <ion-item-group>
         <ion-item-divider>
@@ -45,8 +63,7 @@
           <ion-note slot="end">Tap a competition to view details</ion-note>
         </ion-item-divider>
 
-        @for(competition of (competitions | async)?.competitions; track
-        competition.id){
+        @for(competition of competitions; track competition.id){
 
         <ion-item
           id="{{competition.id}}"
@@ -66,5 +83,17 @@
         }
       </ion-item-group>
     </ion-list>
+    }@else {
+    <ion-list mode="md" lines="none">
+      <ion-item>
+        <ion-label>No competitions found.</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-note slot="start">Refresh the page to reload contents</ion-note>
+        <ion-icon name="arrow-down-sharp" slot="end"></ion-icon>
+      </ion-item>
+    </ion-list>
+    <!-- arrow down icon -->
+    }
   </ion-content>
 </ion-content>

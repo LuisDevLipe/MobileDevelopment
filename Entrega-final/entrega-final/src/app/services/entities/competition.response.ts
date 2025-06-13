@@ -108,6 +108,7 @@ class CompetitionMatchesResponse {
 interface Competition {
   id: number;
   name: string;
+  area: Area;
   code: string;
   type: string;
   emblem: string;
