@@ -26,48 +26,48 @@
       </ion-list>
     </ion-card-content>
   </ion-card>
-      <ion-select
-        mode="md"
-        interface="alert"
-        placeholder="Selecione uma temporada"
-        [multiple]="false"
-        justify="space-between"
-        fill="solid"
-        label="Choose a Season"
-        label-placement="floating"
-        (ionCancel)="onSeasonChange($event)"
-        (ionChange)="onSeasonChange($event)"
-        (ionDismiss)="onSeasonChange($event)"
-        value="{{ selectedSeason }}"
-      >
-        @for(season of seasons; track season.id){
-        <ion-select-option value="{{ season.startDate | date : 'yyyy' }}">
-          {{ season.startDate | date : "yyyy" }} -
-          {{ season.endDate | date : "yyyy" }}
-        </ion-select-option>
-        }
-      </ion-select>
-      <ion-select
-        mode="md"
-        interface="alert"
-        placeholder="Match Status"
-        [multiple]="true"
-        justify="space-between"
-        fill="solid"
-        label="Choose a Match Status"
-        label-placement="stacked"
-        (ionCancel)="onMatchStatusChange($event)"
-        (ionChange)="onMatchStatusChange($event)"
-        (ionDismiss)="onMatchStatusChange($event)"
-        [value]="selectedStatus"
-      >
-        @for(status of matchStatuses; track status){
-        <ion-select-option value="{{ status }}"
-          >{{ status.replace("_", " ") }}
-        </ion-select-option>
-        }
-      </ion-select>
-  <ion-list>
+  <ion-select
+    mode="md"
+    interface="alert"
+    placeholder="Selecione uma temporada"
+    [multiple]="false"
+    justify="space-between"
+    fill="solid"
+    label="Choose a Season"
+    label-placement="floating"
+    (ionCancel)="onSeasonChange($event)"
+    (ionChange)="onSeasonChange($event)"
+    (ionDismiss)="onSeasonChange($event)"
+    value="{{ selectedSeason }}"
+  >
+    @for(season of seasons; track season.id){
+    <ion-select-option value="{{ season.startDate | date : 'yyyy' }}">
+      {{ season.startDate | date : "yyyy" }} -
+      {{ season.endDate | date : "yyyy" }}
+    </ion-select-option>
+    }
+  </ion-select>
+  <ion-select
+    mode="md"
+    interface="alert"
+    placeholder="Match Status"
+    [multiple]="true"
+    justify="space-between"
+    fill="solid"
+    label="Choose a Match Status"
+    label-placement="stacked"
+    (ionCancel)="onMatchStatusChange($event)"
+    (ionChange)="onMatchStatusChange($event)"
+    (ionDismiss)="onMatchStatusChange($event)"
+    [value]="selectedStatus"
+  >
+    @for(status of matchStatuses; track status){
+    <ion-select-option value="{{ status }}"
+      >{{ status.replace("_", " ") }}
+    </ion-select-option>
+    }
+  </ion-select>
+  <ion-list lines="full" mode="md">
     @for(match of matches; track match?.id){
     <ion-item>
       <ion-thumbnail
@@ -81,22 +81,40 @@
           alt="Picute of {{ match.homeTeam.name }} crest"
         />
       </ion-thumbnail>
-      @if(match.status === 'IN PLAY'){
-        <ion-badge
-          mode="md"
-          slot="start"
-          color="success">
-          live
-        </ion-badge>
-
-      }
-
-      <ion-label class="ion-text-center">
-        {{ match.score.fullTime.home }} - {{ match.score.fullTime.away }}
-      </ion-label>
-      <ion-note slot="end">
-        {{ match.utcDate | date : "dd/MM/yyyy HH:mm" }}
-      </ion-note>
+      <ion-grid>
+        <ion-row style="font-size: 0.75rem">
+          <ion-col class="ion-text-center" style="font-weight: bold;">
+            {{ match.homeTeam.tla }}
+          </ion-col>
+          <ion-col class="ion-text-center"> vs </ion-col>
+          <ion-col class="ion-text-center"  style="font-weight: bold;">
+            {{ match.awayTeam.tla }}
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col class="ion-text-center">
+            @if(match.status === 'IN_PLAY'){
+            <ion-badge mode="md" color="success"> live </ion-badge>
+            } @else if(match.status === 'FINISHED') {
+            <ion-badge mode="md" color="primary"> finished </ion-badge>
+            } @else if(match.status === 'SCHEDULED') {
+            <ion-badge mode="md" color="warning"> scheduled </ion-badge>
+            } @else {
+            <ion-badge mode="md" color="medium"> {{ match.status | lowercase }} </ion-badge>
+            }
+          </ion-col>
+          <ion-col>
+            <ion-label class="ion-text-center"  style="font-weight: bold;">
+              {{ match.score.fullTime.home }} - {{ match.score.fullTime.away }}
+            </ion-label>
+          </ion-col>
+          <ion-col class="ion-text-center" >
+            <ion-badge mode="md" color="transparent" style="font-weight: 400;">{{
+              match.utcDate | date : "dd MM"
+            }}</ion-badge>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
       <ion-thumbnail
         mode="md"
         slot="end"

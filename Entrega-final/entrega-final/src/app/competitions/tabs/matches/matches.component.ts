@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { DatePipe } from '@angular/common';
+import { DatePipe, LowerCasePipe } from '@angular/common';
 import {
   IonContent,
   IonTitle,
@@ -26,6 +26,9 @@ import {
   IonText,
   IonSpinner,
   IonBadge,
+  IonGrid,
+  IonRow,
+  IonCol,
 } from '@ionic/angular/standalone';
 import { InfiniteScrollCustomEvent } from '@ionic/core';
 import {
@@ -44,6 +47,9 @@ import { MatchStatuses } from 'src/app/services/enums/match.status';
   styleUrls: ['./matches.component.scss'],
   standalone: true,
   imports: [
+    IonCol,
+    IonRow,
+    IonGrid,
     IonBadge,
     IonSpinner,
     IonText,
@@ -69,6 +75,7 @@ import { MatchStatuses } from 'src/app/services/enums/match.status';
     IonSelectOption,
     IonThumbnail,
     DatePipe,
+    LowerCasePipe,
   ],
 })
 export class MatchesComponent implements OnInit {
@@ -122,6 +129,7 @@ export class MatchesComponent implements OnInit {
         this.competition = res.competition;
         this.filters = res.filters;
         this.resultSet = res.resultSet;
+
         this.matches = res.matches.sort((a, b) => {
           const dateA = new Date(a.utcDate);
           const dateB = new Date(b.utcDate);
@@ -135,6 +143,10 @@ export class MatchesComponent implements OnInit {
       })
       .catch((err) => {
         console.error(err);
+      })
+      .finally(() => {
+        this.matches[0].status = 'IN_PLAY';
+        console.log(this.matches[0].status);
       });
     // console.log(this.seasons, this.selectedSeason);
   }
