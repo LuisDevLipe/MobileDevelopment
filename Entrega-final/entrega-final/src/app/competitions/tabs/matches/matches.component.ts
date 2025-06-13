@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { DatePipe, LowerCasePipe } from '@angular/common';
+import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
+import { DatePipe, LowerCasePipe } from "@angular/common";
 import {
   IonContent,
   IonTitle,
@@ -12,7 +12,6 @@ import {
   IonCard,
   IonCardHeader,
   IonCardTitle,
-
   IonImg,
   IonCardContent,
   IonSelect,
@@ -20,28 +19,27 @@ import {
   IonLabel,
   IonNote,
   IonThumbnail,
-
   IonSpinner,
   IonBadge,
   IonGrid,
   IonRow,
   IonCol,
-} from '@ionic/angular/standalone';
-import { InfiniteScrollCustomEvent } from '@ionic/core';
+} from "@ionic/angular/standalone";
+import { InfiniteScrollCustomEvent } from "@ionic/core";
 import {
   CompetitionMatchesRequest,
   CompetitionRequest,
-} from 'src/app/services/entities/competition.request';
+} from "src/app/services/entities/competition.request";
 import {
   CompetitionMatchesResponse,
   CompetitionResponse,
-} from 'src/app/services/entities/competition.response';
-import { FootballdataService } from 'src/app/services/footballdata.service';
-import { MatchStatuses } from 'src/app/services/enums/match.status';
+} from "src/app/services/entities/competition.response";
+import { FootballdataService } from "src/app/services/footballdata.service";
+import { MatchStatuses } from "src/app/services/enums/match.status";
 @Component({
-  selector: 'tab-matches',
-  templateUrl: './matches.component.html',
-  styleUrls: ['./matches.component.scss'],
+  selector: "tab-matches",
+  templateUrl: "./matches.component.html",
+  styleUrls: ["./matches.component.scss"],
   standalone: true,
   imports: [
     IonCol,
@@ -74,12 +72,12 @@ import { MatchStatuses } from 'src/app/services/enums/match.status';
 })
 export class MatchesComponent implements OnInit {
   public competitionCode: string;
-  public filters!: CompetitionMatchesResponse['filters'];
-  public resultSet!: CompetitionMatchesResponse['resultSet'];
-  public competition!: CompetitionMatchesResponse['competition'];
-  public matches!: CompetitionMatchesResponse['matches'];
-  public selectedSeason?: CompetitionResponse['seasons'][number]['id'];
-  public seasons!: CompetitionResponse['seasons'];
+  public filters!: CompetitionMatchesResponse["filters"];
+  public resultSet!: CompetitionMatchesResponse["resultSet"];
+  public competition!: CompetitionMatchesResponse["competition"];
+  public matches!: CompetitionMatchesResponse["matches"];
+  public selectedSeason?: CompetitionResponse["seasons"][number]["id"];
+  public seasons!: CompetitionResponse["seasons"];
   public selectedStatus: string[];
   public page: number = 1;
   public pageSize: number = 20;
@@ -87,38 +85,36 @@ export class MatchesComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private footballdata: FootballdataService
+    private footballdata: FootballdataService,
   ) {
     this.competitionCode =
-      this.route.snapshot.paramMap.get('competitionCode') || '';
-      this.selectedStatus = ['IN_PLAY', 'FINISHED', "LIVE"]
+      this.route.snapshot.paramMap.get("competitionCode") || "";
+    this.selectedStatus = ["IN_PLAY", "FINISHED", "LIVE"];
   }
 
   ngOnInit() {
     this.loadSeasons();
     this.loadMatches({
-      status: this.selectedStatus.join(','),
+      status: this.selectedStatus.join(","),
     });
   }
   loadMatches(
-    filters?: CompetitionMatchesRequest['filters'],
-    sortType = 'desc' as 'asc' | 'desc'
+    filters?: CompetitionMatchesRequest["filters"],
+    sortType = "desc" as "asc" | "desc",
   ) {
-
     const override_filters = {
       ...this.filters,
       ...filters,
-      status: this.selectedStatus.join(','),
+      status: this.selectedStatus.join(","),
     };
     this.footballdata
       .CompetitionMatches(
         new CompetitionMatchesRequest({
           id: this.competitionCode,
           filters: override_filters,
-        })
+        }),
       )
       .then((res: CompetitionMatchesResponse) => {
-        
         this.competition = res.competition;
         this.filters = res.filters;
         this.resultSet = res.resultSet;
@@ -126,7 +122,7 @@ export class MatchesComponent implements OnInit {
         this.matches = res.matches.sort((a, b) => {
           const dateA = new Date(a.utcDate);
           const dateB = new Date(b.utcDate);
-          if (sortType === 'asc') {
+          if (sortType === "asc") {
             return dateA.getTime() > dateB.getTime() ? 1 : -1;
           } else {
             return dateA.getTime() < dateB.getTime() ? 1 : -1;
@@ -137,9 +133,7 @@ export class MatchesComponent implements OnInit {
       .catch((err) => {
         console.error(err);
       })
-      .finally(() => {
-      });
-
+      .finally(() => {});
   }
 
   drillDownByDate(date?: string) {
@@ -148,8 +142,8 @@ export class MatchesComponent implements OnInit {
     const dateFrom = new Date();
     dateFrom.setDate(dateFrom.getDate() - 365);
     return {
-      dateFrom: dateFrom.toISOString().split('T')[0],
-      dateTo: dateTo.toISOString().split('T')[0],
+      dateFrom: dateFrom.toISOString().split("T")[0],
+      dateTo: dateTo.toISOString().split("T")[0],
     };
   }
   paginate(event: InfiniteScrollCustomEvent) {
@@ -158,8 +152,7 @@ export class MatchesComponent implements OnInit {
   }
 
   onSeasonChange(event: CustomEvent) {
-
-    if (event.type === 'ionChange') {
+    if (event.type === "ionChange") {
       this.selectedSeason = (event.target as HTMLIonSelectElement).value;
 
       this.loadMatches({
@@ -169,34 +162,29 @@ export class MatchesComponent implements OnInit {
   }
 
   onMatchStatusChange(event: CustomEvent) {
-
-    if (event.type === 'ionChange') {
+    if (event.type === "ionChange") {
       this.selectedStatus = (event.target as HTMLIonSelectElement).value;
       this.loadMatches(
         {
-          status: this.selectedStatus.join(','),
+          status: this.selectedStatus.join(","),
         },
-        this.selectedStatus.includes('SCHEDULED') ? 'asc' : 'desc'
+        this.selectedStatus.includes("SCHEDULED") ? "asc" : "desc",
       );
     }
-
   }
 
   loadSeasons() {
-
     const competitionRequest = new CompetitionRequest({
       competitionCode: this.competitionCode,
     });
     this.footballdata
       .Competition(competitionRequest)
       .then((res) => {
-
         this.seasons = res.seasons.sort((a, b) => {
           const dateA = new Date(a.startDate);
           const dateB = new Date(b.startDate);
           return dateB.getTime() > dateA.getTime() ? 1 : -1;
         });
-        this.selectedSeason = new Date().getFullYear();
       })
       .catch((err) => {
         console.error(err);

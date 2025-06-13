@@ -1,9 +1,6 @@
 <ion-header [translucent]="true" mode="md">
   <ion-toolbar>
-    <ion-back-button
-      defaultHref="/home"
-      slot="start"
-    ></ion-back-button>
+    <ion-back-button defaultHref="/home" slot="start"></ion-back-button>
     <ion-title> Scorers</ion-title>
     <ion-buttons slot="end">
       <ion-menu-button menu="main"></ion-menu-button>
@@ -11,99 +8,104 @@
   </ion-toolbar>
 </ion-header>
 @if (competition && scorers && season) {
+  <ion-content [fullscreen]="true" id="main">
+    <ion-header collapse="condense" mode="md">
+      <ion-toolbar>
+        <ion-title size="small">Scorers</ion-title>
+        <ion-buttons slot="end">
+          <ion-menu-button menu="main"></ion-menu-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title> Top Scorers </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-list inset="false" mode="md" lines="none" class="ion-no-padding">
+          <ion-item>
+            <ion-label position="stacked">{{ competition.name }}</ion-label>
+            <ion-note slot="">{{ competition.type }}</ion-note>
+            <ion-thumbnail slot="end">
+              <ion-img
+                src="{{ competition.emblem }}"
+                alt="Emblem of {{ competition.name }}"
+              ></ion-img>
+            </ion-thumbnail>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
 
-<ion-content [fullscreen]="true" id="main">
-  <ion-header collapse="condense" mode="md">
-    <ion-toolbar>
-      <ion-title size="small">Scorers</ion-title>
-      <ion-buttons slot="end">
-        <ion-menu-button menu="main"></ion-menu-button>
-      </ion-buttons>
-    </ion-toolbar>
-  </ion-header>
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title> Top Scorers </ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-list inset="false" mode="md" lines="none" class="ion-no-padding">
-        <ion-item>
-          <ion-label position="stacked">{{ competition.name }}</ion-label>
-          <ion-note slot="">{{ competition.type }}</ion-note>
-          <ion-thumbnail slot="end">
-            <ion-img
-              src="{{ competition.emblem }}"
-              alt="Emblem of {{ competition.name }}"
-            ></ion-img>
-          </ion-thumbnail>
-        </ion-item>
-      </ion-list>
-    </ion-card-content>
-  </ion-card>
+    <ion-select
+      label="Choose a Season"
+      labelPlacement="floating"
+      fill="solid"
+      mode="md"
+      value="{{ filters.season }}"
+      (ionChange)="onSeasonChange($event)"
+    >
+      @for (season of seasons; track season.id) {
+        <ion-select-option value="{{ season.startDate | date: 'yyyy' }}"
+          >{{ season.startDate | date: "yyyy" }} -
+          {{ season.endDate | date: "yyyy" }}</ion-select-option
+        >
+      }
+    </ion-select>
+    @for (scorer of scorers; track scorer.player.id) {
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>
+            {{ scorer.player.name }}
+          </ion-card-title>
+          <ion-card-subtitle>
+            {{ scorer.team.name }}
+          </ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-grid>
+            <ion-row class="ion-text-center" style="color: black">
+              <ion-col> Matches </ion-col>
+              <ion-col> Goals </ion-col>
+              <ion-col> Assists </ion-col>
+              <ion-col> Penalties </ion-col>
+            </ion-row>
+            <ion-row class="ion-text-center">
+              <ion-col>{{ scorer.playedMatches }}</ion-col>
+              <ion-col>{{ scorer.goals }}</ion-col>
+              <ion-col>{{ scorer.assists }}</ion-col>
+              <ion-col>{{ scorer.penalties || "0" }}</ion-col>
+            </ion-row>
+          </ion-grid>
+          <ion-list mode="md" inset="false" lines="full" class="ion-no-padding">
+            <ion-item-group>
+              <ion-item-divider>
+                <ion-label>Player Information</ion-label>
+              </ion-item-divider>
+            </ion-item-group>
+            <ion-item>
+              <ion-label slot="start">Position</ion-label>
+              <ion-label slot="end">{{ scorer.player.section }}</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label slot="start">Nationality</ion-label>
+              <ion-label slot="end">{{ scorer.player.nationality }}</ion-label>
+            </ion-item>
 
-  <ion-select
-    label="Choose a Season"
-    labelPlacement="floating"
-    fill="solid"
-    mode="md"
-    value="{{ season.startDate | date : 'yyyy' }}"
-  >
-    <ion-select-option>2025</ion-select-option>
-  </ion-select>
-  @for(scorer of (scorers); track scorer.player.id) {
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>
-        {{ scorer.player.name }}
-      </ion-card-title>
-      <ion-card-subtitle> {{ scorer.team.name }} </ion-card-subtitle>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-grid>
-        <ion-row class="ion-text-center">
-          <ion-col> Matches </ion-col>
-          <ion-col> Goals </ion-col>
-          <ion-col> Assists </ion-col>
-          <ion-col> Penalties </ion-col>
-        </ion-row>
-        <ion-row class="ion-text-center">
-          <ion-col>{{ scorer.playedMatches }}</ion-col>
-          <ion-col>{{ scorer.goals }}</ion-col>
-          <ion-col>{{ scorer.assists }}</ion-col>
-          <ion-col>{{ scorer.penalties || "0" }}</ion-col>
-        </ion-row>
-      </ion-grid>
-      <ion-list mode="md" inset="false" lines="full" class="ion-no-padding">
-        <ion-item-group>
-          <ion-item-divider>
-            <ion-label>Player Information</ion-label>
-          </ion-item-divider>
-        </ion-item-group>
-        <ion-item>
-          <ion-label>Position</ion-label>
-          <ion-note slot="end">{{ scorer.player.section }}</ion-note>
-        </ion-item>
-        <ion-item>
-          <ion-label>Nationality</ion-label>
-          <ion-note slot="end">{{ scorer.player.nationality }}</ion-note>
-        </ion-item>
-
-        <ion-item>
-          <ion-label>Age</ion-label>
-          <ion-note slot="end"
-            >{{ getAge(scorer.player.dateOfBirth) }} Anos</ion-note
-          >
-        </ion-item>
-        <ion-item-group />
-      </ion-list>
-    </ion-card-content>
-  </ion-card>
-
-  }
-</ion-content>
-
+            <ion-item>
+              <ion-label slot="start">Age</ion-label>
+              <ion-label slot="end"
+                >{{ getAge(scorer.player.dateOfBirth) }} Anos</ion-label
+              >
+            </ion-item>
+            <ion-item-group />
+          </ion-list>
+        </ion-card-content>
+      </ion-card>
+    }
+  </ion-content>
 } @else {
-<ion-content [fullscreen]="true">
-  <ion-spinner name="dots" class="ion-padding main-loader"></ion-spinner>
-</ion-content>
+  <ion-content [fullscreen]="true">
+    <ion-spinner name="dots" class="ion-padding main-loader"></ion-spinner>
+  </ion-content>
 }
