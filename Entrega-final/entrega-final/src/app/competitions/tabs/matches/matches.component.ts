@@ -12,7 +12,7 @@ import {
   IonCard,
   IonCardHeader,
   IonCardTitle,
-  IonCardSubtitle,
+
   IonImg,
   IonCardContent,
   IonSelect,
@@ -20,10 +20,7 @@ import {
   IonLabel,
   IonNote,
   IonThumbnail,
-  IonInfiniteScroll,
-  IonInfiniteScrollContent,
-  IonListHeader,
-  IonText,
+
   IonSpinner,
   IonBadge,
   IonGrid,
@@ -52,15 +49,12 @@ import { MatchStatuses } from 'src/app/services/enums/match.status';
     IonGrid,
     IonBadge,
     IonSpinner,
-    IonText,
-    IonListHeader,
-    IonInfiniteScrollContent,
-    IonInfiniteScroll,
+
     IonNote,
     IonLabel,
     IonCardContent,
     IonImg,
-    IonCardSubtitle,
+
     IonCardTitle,
     IonCardHeader,
     IonCard,
@@ -86,7 +80,7 @@ export class MatchesComponent implements OnInit {
   public matches!: CompetitionMatchesResponse['matches'];
   public selectedSeason?: CompetitionResponse['seasons'][number]['id'];
   public seasons!: CompetitionResponse['seasons'];
-  public selectedStatus: string[] = ['IN_PLAY', 'FINISHED'];
+  public selectedStatus: string[];
   public page: number = 1;
   public pageSize: number = 20;
   public readonly matchStatuses: string[] = Object.keys(MatchStatuses);
@@ -97,6 +91,7 @@ export class MatchesComponent implements OnInit {
   ) {
     this.competitionCode =
       this.route.snapshot.paramMap.get('competitionCode') || '';
+      this.selectedStatus = ['IN_PLAY', 'FINISHED', "LIVE"]
   }
 
   ngOnInit() {
@@ -109,14 +104,12 @@ export class MatchesComponent implements OnInit {
     filters?: CompetitionMatchesRequest['filters'],
     sortType = 'desc' as 'asc' | 'desc'
   ) {
-    // console.log(this.selectedStatus);
+
     const override_filters = {
       ...this.filters,
       ...filters,
       status: this.selectedStatus.join(','),
     };
-    console.log(this.selectedStatus);
-    console.log(override_filters.status);
     this.footballdata
       .CompetitionMatches(
         new CompetitionMatchesRequest({
@@ -125,7 +118,7 @@ export class MatchesComponent implements OnInit {
         })
       )
       .then((res: CompetitionMatchesResponse) => {
-        // console.log(res);
+        
         this.competition = res.competition;
         this.filters = res.filters;
         this.resultSet = res.resultSet;
@@ -145,10 +138,8 @@ export class MatchesComponent implements OnInit {
         console.error(err);
       })
       .finally(() => {
-        this.matches[0].status = 'IN_PLAY';
-        console.log(this.matches[0].status);
       });
-    // console.log(this.seasons, this.selectedSeason);
+
   }
 
   drillDownByDate(date?: string) {
@@ -167,10 +158,10 @@ export class MatchesComponent implements OnInit {
   }
 
   onSeasonChange(event: CustomEvent) {
-    // console.log(event);
+
     if (event.type === 'ionChange') {
       this.selectedSeason = (event.target as HTMLIonSelectElement).value;
-      // console.log(this.selectedSeason);
+
       this.loadMatches({
         season: this.selectedSeason?.toString(),
       });
@@ -178,7 +169,7 @@ export class MatchesComponent implements OnInit {
   }
 
   onMatchStatusChange(event: CustomEvent) {
-    // console.log(event);
+
     if (event.type === 'ionChange') {
       this.selectedStatus = (event.target as HTMLIonSelectElement).value;
       this.loadMatches(
@@ -188,18 +179,18 @@ export class MatchesComponent implements OnInit {
         this.selectedStatus.includes('SCHEDULED') ? 'asc' : 'desc'
       );
     }
-    // console.log(this.selectedStatus);
+
   }
 
   loadSeasons() {
-    // console.log('seasons', this.selectedSeason, this.seasons);
+
     const competitionRequest = new CompetitionRequest({
       competitionCode: this.competitionCode,
     });
     this.footballdata
       .Competition(competitionRequest)
       .then((res) => {
-        // console.log(res.seasons);
+
         this.seasons = res.seasons.sort((a, b) => {
           const dateA = new Date(a.startDate);
           const dateB = new Date(b.startDate);

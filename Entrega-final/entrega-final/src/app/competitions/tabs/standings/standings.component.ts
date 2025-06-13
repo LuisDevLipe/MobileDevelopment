@@ -15,7 +15,7 @@ import {
   IonCardTitle,
   IonLabel,
   IonNote,
-  IonCardSubtitle,
+
   IonCardContent,
   IonList,
   IonImg,
@@ -27,12 +27,12 @@ import { FootballdataService } from 'src/app/services/footballdata.service';
 import { ActivatedRoute } from '@angular/router';
 import {
   CompetitionRequest,
-  CompetitionsRequest,
+
   StandingsRequest,
 } from 'src/app/services/entities/competition.request';
 import {
   CompetitionResponse,
-  CompetitionsResponse,
+
   StandingsResponse,
 } from 'src/app/services/entities/competition.response';
 import { RouterLink, RouterLinkActive } from '@angular/router';
@@ -48,7 +48,6 @@ import { SelectCustomEvent } from '@ionic/core';
     IonImg,
     IonList,
     IonCardContent,
-    IonCardSubtitle,
     IonNote,
     IonLabel,
     IonCardTitle,
