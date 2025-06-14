@@ -1,3 +1,29 @@
-<p>
-  notfound works!
-</p>
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Page not found</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/"></ion-back-button>
+      </ion-buttons>
+      <ion-title size="large">Page not found</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-item style="margin-top: auto;">
+    <ion-label>
+      Seems like you got lost. The page you are lookin for does not exist.
+
+    </ion-label>
+  </ion-item>
+    <ion-button fill="outline" expand="block" routerLink="/">
+      <ion-icon name="home"></ion-icon>
+      <ion-label>Go Home</ion-label>
+      <ion-ripple-effect></ion-ripple-effect>
+    </ion-button>
+</ion-content>
