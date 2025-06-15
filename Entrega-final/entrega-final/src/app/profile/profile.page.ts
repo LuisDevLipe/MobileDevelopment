@@ -92,7 +92,8 @@ export class ProfilePage implements OnInit {
       .then(() => {
         this.inputsAreReadonly = true; // Disable edit mode after update
       })
-      .catch(console.error);
+      .catch(console.error)
+      .finally(() => {});
   }
   switchEditMode(event: ToggleCustomEvent) {
     const isChecked = event.detail.checked;

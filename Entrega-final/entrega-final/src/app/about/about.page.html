@@ -2,8 +2,8 @@
   <ion-toolbar>
     <ion-title>About</ion-title>
     <ion-buttons slot="end">
-        <ion-menu-button menu="main"></ion-menu-button>
-      </ion-buttons>
+      <ion-menu-button menu="main"></ion-menu-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true">
@@ -16,23 +16,39 @@
     </ion-toolbar>
   </ion-header>
   <ion-content>
-    <ion-list>
-      <ion-item-group>
-        <ion-item-divider color="light">
-          <ion-label>Luis Felipe Macedo dos Santos</ion-label>
-        </ion-item-divider>
-        <ion-item>
-          <ion-thumbnail>
-            <ion-img src="assets/pikachu.gif"></ion-img>
-          </ion-thumbnail>
-          <ion-label position="" class="ion-padding">
-            3 anos aprendendo programação e nada ainda.
-          </ion-label>
-          <!-- <ion-note>
-              Não sei nem centralizar uma div.
-          </ion-note> -->
-        </ion-item>
-      </ion-item-group>
-    </ion-list>
+<ion-item lines="none">
+  
+  <ion-title>
+    Who made this project?
+  </ion-title>
+</ion-item>
+    <ion-card>
+      <ion-img src="assets/pikachu.gif"></ion-img>
+        <ion-card-header>
+          <ion-card-title>
+            Luis Felipe Macedo dos Santos
+          </ion-card-title>
+          <ion-card-subtitle>
+            Gosto de escrever código feio que funciona.
+          </ion-card-subtitle>
+        </ion-card-header>
+      <ion-card-content>
+        <ion-list lines="none" inset="false" class="ion-no-padding">
+          <ion-item>
+            <ion-label slot="start">Tecnologia favorita</ion-label>
+            <ion-label slot="end">Javascript</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>Hobby</ion-label>
+            <ion-label slot="end">Filmes</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>Pretensão de carreira</ion-label>
+            <ion-label slot="end">DevOps
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
   </ion-content>
 </ion-content>

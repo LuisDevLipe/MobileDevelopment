@@ -17,8 +17,7 @@ import {
   IonItemDivider,
   IonThumbnail,
   IonImg,
-  IonNote,
-} from '@ionic/angular/standalone';
+  IonNote, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonRow, IonGrid, IonCol } from '@ionic/angular/standalone';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { IonRouterLink } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
@@ -28,7 +27,7 @@ import { peopleCircleSharp, helpCircleSharp, homeSharp } from 'ionicons/icons';
   templateUrl: './about.page.html',
   styleUrls: ['./about.page.scss'],
   standalone: true,
-  imports: [
+  imports: [IonCol, IonGrid, IonRow, IonCardContent, IonCardSubtitle, IonCardTitle, IonCardHeader, IonCard, 
     IonNote,
     IonImg,
     IonItemDivider,
