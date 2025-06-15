@@ -1,6 +1,16 @@
 import { bootstrapApplication } from '@angular/platform-browser';
-import { RouteReuseStrategy, provideRouter, withPreloading, PreloadAllModules, withComponentInputBinding, withRouterConfig } from '@angular/router';
-import { IonicRouteStrategy, provideIonicAngular } from '@ionic/angular/standalone';
+import {
+  RouteReuseStrategy,
+  provideRouter,
+  withPreloading,
+  PreloadAllModules,
+  withComponentInputBinding,
+  withRouterConfig,
+} from '@angular/router';
+import {
+  IonicRouteStrategy,
+  provideIonicAngular,
+} from '@ionic/angular/standalone';
 
 import { routes } from './app/app.routes';
 import { AppComponent } from './app/app.component';
@@ -14,14 +24,21 @@ bootstrapApplication(AppComponent, {
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     provideIonicAngular(),
-    provideRouter(routes, withPreloading(PreloadAllModules), withComponentInputBinding(), withRouterConfig({paramsInheritanceStrategy: "always"})),
+    provideRouter(
+      routes,
+      withPreloading(PreloadAllModules),
+      withComponentInputBinding(),
+      withRouterConfig({ paramsInheritanceStrategy: 'always' })
+    ),
     provideHttpClient(),
     provideFirebaseApp(() => initializeApp(environment.FIREBASE_CONFIG)),
     provideAuth(() => {
       const auth = getAuth();
-      connectAuthEmulator(auth, 'http://localhost:9099', {
-        disableWarnings: true,
-      });
+      if (!environment.production) {
+        connectAuthEmulator(auth, 'http://localhost:9099', {
+          disableWarnings: true,
+        });
+      }
       return auth;
     }),
   ],
