@@ -26,20 +26,21 @@
       }
     </ion-avatar>
 
-    <ion-button fill="outline" expand="block" (click)="updateProfile()">
-      <ion-icon name="cloudy-sharp"></ion-icon>
-      <ion-label>Save changes to profile</ion-label>
-      <ion-ripple-effect></ion-ripple-effect>
-    </ion-button>
-
+   @if(false === inputsAreReadonly){
+     <ion-button fill="outline" expand="block" (click)="updateProfile()">
+       <ion-icon name="cloudy-sharp"></ion-icon>
+       <ion-label>Save changes to profile</ion-label>
+       <ion-ripple-effect></ion-ripple-effect>
+      </ion-button>
+    } 
     <ion-list>
       <ion-item>
         <ion-toggle
-          [checked]="false"
-          [enableOnOffLabels]="true"
-          mode="md"
-          (ionChange)="switchEditMode($event)"
-          >Edit mode</ion-toggle
+        [checked]="false"
+        [enableOnOffLabels]="true"
+        mode="md"
+        (ionChange)="switchEditMode($event)"
+        >Edit mode</ion-toggle
         >
       </ion-item>
       <ion-item-group>
@@ -49,10 +50,10 @@
         </ion-item-divider>
         <ion-item>
           <ion-input
-            label="Name"
-            (ionChange)="newUser.displayName = $event.detail.value"
-            labelPlacement="stacked"
-            value="{{user.displayName ?? 'Not assigned'}}"
+          label="Name"
+          (ionChange)="newUser.displayName = $event.detail.value"
+          labelPlacement="stacked"
+          value="{{user.displayName ?? 'Not assigned'}}"
             [readonly]="inputsAreReadonly"
           >
           </ion-input>

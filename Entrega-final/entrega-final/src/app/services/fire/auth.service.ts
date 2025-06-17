@@ -7,6 +7,7 @@ import {
   updateProfile,
   updatePhoneNumber,
   getAuth,
+  verifyBeforeUpdateEmail,
 } from '@angular/fire/auth';
 import { GuardResult, Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -56,5 +57,13 @@ export class AuthService {
       displayName: displayName,
       photoURL: photoURL,
     });
+  }
+  updatePhone(phone: string) {}
+  updateEmail(email: string): Promise<void> {
+    const auth = getAuth();
+    if (auth.currentUser === null) {
+      return Promise.reject('No user is currently signed in.');
+    }
+    return verifyBeforeUpdateEmail(auth.currentUser, email);
   }
 }

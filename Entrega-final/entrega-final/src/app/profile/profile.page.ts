@@ -95,6 +95,7 @@ export class ProfilePage implements OnInit {
       .catch(console.error)
       .finally(() => {});
   }
+
   switchEditMode(event: ToggleCustomEvent) {
     const isChecked = event.detail.checked;
     if (isChecked) {
