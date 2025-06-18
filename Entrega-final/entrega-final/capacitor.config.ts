@@ -1,18 +1,21 @@
-import type { CapacitorConfig } from "@capacitor/cli";
+import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: "io.ionic.starter",
-  appName: "entrega-final.2",
-  webDir: "www",
+  appId: 'io.ionic.starter',
+  appName: 'entrega-final.2',
+  webDir: 'www',
   plugins: {
     CapacitorHttp: {
       enabled: true,
     },
     Keyboard: {
-      resizeOnFullscreen: true,
+      resizeOnFullscreen: false,
     },
     EdgeToEdge: {
-      enabled: false,
+      // From capacitor docsThe plugin only needs to be installed. 
+      // It applies insets to the web view to support edge-to-edge display on Android. 
+      // The plugin also provides a method to set the background color of the status bar and navigation bar. 
+      // It's recommended to use this method in combination with the Status Bar plugin.
     },
   },
 };

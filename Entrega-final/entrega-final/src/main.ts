@@ -19,7 +19,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { provideAuth, getAuth, connectAuthEmulator } from '@angular/fire/auth';
 
-import { environment } from './environments/environment.development';
+import { environment } from './environments/environment';
 bootstrapApplication(AppComponent, {
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
