@@ -35,7 +35,7 @@ Entretanto, devemos levantar as limitações e as desvantagens de cada tecnologi
 
 -   [x] Implementação de um feed que consuma dados periodicamente da api escolhida na Etapa 1.
 
--   [ ] Design e Layout
+-   [x] Design e Layout
 
 -   [x] Implementação de uma tela de apresentação dos integrantes do grupo.
 
@@ -43,9 +43,11 @@ Entretanto, devemos levantar as limitações e as desvantagens de cada tecnologi
 
 -   [x] Implementação de cadastro de usuário para autenticação com o Firebase Auth.
 
--   [ ] Implementação de funcionalidade livre.
+-   [x] Implementação de funcionalidade livre.
 
-# Wireframe
+# Preliminar
+
+## Wireframe
 
 A escolha do design é um passo importante, pois ele define como o usuário será recebido e como o mesmo poderá interagir com a aplicação. Uma boa escolha de design cativa o cliente e atrai o seu interesse para explorar as funcionalidades. O design precisa ser coerente com os serviços oferecidos pela aplicação.
 
@@ -78,9 +80,50 @@ Requisitos funcionais da API.
 3. Conteúdo dinâmico (Imagens, textos.) - tipo feed de notícias.
 4. Uso gratuito.
 
-#### Entrega Final.
+# Entrega Final.
+
+## Feed, Design e Funcionalidade Livre.
+
+Para a entrega final, implementamos o consumo da api escolhida na etapa 1, seguindo o layout definido no design escolhido. 
+
+Escolhemos uma API que fornece dados de futebol, incluindo informações sobre campeonatos, partidas e jogadores.
+- A API escolhida é a [Football Data](https://www.football-data.org/).
+
+Seguimos o design escolhido, que é voltado para a apresentação de informações de forma clara e organizada. Mantivemos a estrutura do wireframe, com cards informativos.
+
+[<img src="./Entrega-final/evidencias/wireframe.png" alt="Wireframe escolhido" height="400" />](wireframe.png)
+[<img src="./Entrega-final/evidencias/standings.png" alt="Imagem da tabela de pontos do campenato Brasileiro Série A" height="400"/>](standings.png)
+[<img src="./Entrega-final/evidencias/home.png" alt="Design da aplicação" height="400"/>](home.png)
+
+[<img src="./Entrega-final/evidencias/matches.png" alt="Imagem das partidas do Campeonato Brasileiro Série A" height="400"/>](matches.png)
+[<img src="./Entrega-final/evidencias/scorers.png" alt="Imagem dos melhores jogadores do Campeonato Brasileiro Série A" height="400"/>](scorers.png)
+[<img src="./Entrega-final/evidencias/profile.png" alt="Imagem do perfil do usuário" height="400"/>](profile.png)
+
+`A primeira imagem é o wireframe escolhido, seguido pelas telas implementadas no aplicativo.`
+
+A implementação da entrega final inclui:
+
+Um feed que consome dados periodicamente da API. Onde exibimos informações atualizadas periodicamente em 3 seções diferentes do aplicativo, através das seguintes telas: 
+
+- Tabela de pontos do campeonato.
+    Esta tela representa a tabela de pontos do Campeonato Brasileiro Série A, exibindo as posições dos times, pontos e outros detalhes relevantes.
+
+- Partidas do Campeonato.
+    Esta tela exibe as partidas do Campeonato Brasileiro Série A, mostrando os jogos agendados, resultados e outras informações pertinentes. Com filtros para exibir partidas encerradas, em andamento e agendadas.
+
+- Melhores Jogadores do Campeonato.
+    Esta tela apresenta os melhores jogadores do Campeonato Brasileiro Série A, destacando suas estatísticas e desempenhos.
+
+E uma tela de funcionalidade livre, onde implementamos um perfil de usuário, onde o mesmo pode visualizar e editar suas informações pessoais que ficarão salves no Firebase Authentication.
+
+- Tela de perfil do usuário.
+    Esta tela permite que o usuário visualize e edite seu perfil, incluindo informações pessoais.
+
+Com isso concluímos 3 requisitos funcionais, feed que consome dados, design e layout, e funcionalidade livre com a tela de perfil do usuário.
 
 ## Documentação de implementação da Autenticação.
+
+Para a implementação dos requisitos de autenticação e cadastro de usuários no firebase, utilizamos o Firebase Authentication através do AngularFire, que é a biblioteca oficial do Angular para integração com o Firebase.
 
 Usuário são autenticados na tela de login, caso o usuário se registre, ele será automaticamente autenticado e redirecionado a tela principal.
 O usuário é proibido de acessar qualquer tela que não seja a de login, cadastro, boas-vindas e sobre.
@@ -103,7 +146,8 @@ Referências:
 
 - [AngularFire Authentication Guide](https://github.com/angular/angularfire/blob/main/docs/auth.md)
 
-## Documentação suplementar firebase auth
+Assim cumprimos os requisitos de autenticação e cadastro de usuários, garantindo que apenas usuários autenticados possam acessar as funcionalidades do aplicativo.
+<!-- ## Documentação suplementar firebase auth
 
 -   [Introdução ao Firebase Authentication (Documentação Oficial)](https://firebase.google.com/docs/auth/web/start?hl=pt-br)
 
@@ -111,8 +155,13 @@ Referências:
 
 -   [Configuração do Firebase Authentication para Web](https://firebase.google.com/docs/auth/web/start?hl=pt-br#web_2)
 
--   [Referência da API de Autenticação do Firebase](https://firebase.google.com/docs/reference/js/auth?hl=pt-br)
+-   [Referência da API de Autenticação do Firebase](https://firebase.google.com/docs/reference/js/auth?hl=pt-br) -->
 
+## Apresentação dos integrantes do grupo.
+
+A tela de apresentação do grupo foi implementada para atender ao requisito de apresentar os integrantes do grupo. Nela foram criados cards informativos, contendo gifs, informações e curiosidades sobre cada integrante de uma maneira leve e divertida e cumprindo o último requisito funcional da entrega final.
+
+[<img src="./Entrega-final/evidencias/about.png" alt="Tela de apresentação dos integrantes do grupo" height="400"/>](about.png)
 ## Integrantes
 
 Luis Felipe Macedo, Lucas Augusto, Gabriel Mufalani, Gabriel Vargas.
