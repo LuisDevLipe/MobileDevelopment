@@ -53,14 +53,17 @@ Entretanto, devemos levantar as limitações e as desvantagens de cada tecnologi
 
 # Entrega Final.
 
-## Feed, Design e Funcionalidade Livre.
+## Feed, Design
 
-Para a entrega final, implementamos o consumo da api escolhida na etapa 1, seguindo o layout definido no design escolhido. 
+Para a entrega final, implementamos o consumo da api escolhida na etapa 1, seguindo o design definido no wireframe escolhido. 
 
-Escolhemos uma API que fornece dados de futebol, incluindo informações sobre campeonatos, partidas e jogadores.
+Escolhemos uma API que fornece dados de futebol incluindo informações sobre campeonatos, partidas e jogadores.
+
 - A API escolhida é a [Football Data](https://www.football-data.org/).
 
-Seguimos o design escolhido, que é voltado para a apresentação de informações de forma clara e organizada. Mantivemos a estrutura do wireframe, com cards informativos.
+Seguimos um layout que é voltado para a apresentação das informações de forma clara e organizada. Mantivemos a estrutura do wireframe, que constitui-se de cards informativos e listas de itens.
+
+Como pode ser visto abaixo, a primeira imagem representa o wireframe escolhido, seguido pelas telas implementadas no aplicativo.
 
 [<img src="./Entrega-final/evidencias/wireframe.png" alt="Wireframe escolhido" height="400" />](wireframe.png)
 [<img src="./Entrega-final/evidencias/standings.png" alt="Imagem da tabela de pontos do campenato Brasileiro Série A" height="400"/>](standings.png)
@@ -68,46 +71,49 @@ Seguimos o design escolhido, que é voltado para a apresentação de informaçõ
 
 [<img src="./Entrega-final/evidencias/matches.png" alt="Imagem das partidas do Campeonato Brasileiro Série A" height="400"/>](matches.png)
 [<img src="./Entrega-final/evidencias/scorers.png" alt="Imagem dos melhores jogadores do Campeonato Brasileiro Série A" height="400"/>](scorers.png)
-[<img src="./Entrega-final/evidencias/profile.png" alt="Imagem do perfil do usuário" height="400"/>](profile.png)
-
-`A primeira imagem é o wireframe escolhido, seguido pelas telas implementadas no aplicativo.`
 
 A implementação da entrega final inclui:
 
-Um feed que consome dados periodicamente da API. Onde exibimos informações atualizadas periodicamente em 3 seções diferentes do aplicativo, através das seguintes telas: 
+Um feed que consome dados periodicamente da API onde exibimos informações atualizadas periodicamente em 3 seções diferentes do aplicativo, através das seguintes telas: 
 
 - Tabela de pontos do campeonato.
-    Esta tela representa a tabela de pontos do Campeonato Brasileiro Série A, exibindo as posições dos times, pontos e outros detalhes relevantes.
+    Esta tela representa a tabela de pontos do Campeonato escolhido pelo usuário na tela inicial, exibindo as posições dos times, pontos e outros detalhes relevantes.
 
 - Partidas do Campeonato.
-    Esta tela exibe as partidas do Campeonato Brasileiro Série A, mostrando os jogos agendados, resultados e outras informações pertinentes. Com filtros para exibir partidas encerradas, em andamento e agendadas.
+    Esta tela exibe as partidas do Campeonato escolhido pelo usuário na tela inicial, mostrando os jogos agendados, resultados e outras informações pertinentes. Contém filtro para exibir partidas encerradas, em andamento e agendadas.
 
 - Melhores Jogadores do Campeonato.
-    Esta tela apresenta os melhores jogadores do Campeonato Brasileiro Série A, destacando suas estatísticas e desempenhos.
+    Esta tela apresenta os melhores jogadores do Campeonato escolhido pelo usuário na tela inicial, destacando suas estatísticas e desempenho como gols e jogos.
 
-E uma tela de funcionalidade livre, onde implementamos um perfil de usuário, onde o mesmo pode visualizar e editar suas informações pessoais que ficarão salves no Firebase Authentication.
+## Funcionalidade Livre.
+
+Implementamos o requisito de tela de funcionalidade livre através de um perfil de usuário, onde o mesmo pode visualizar e editar suas informações pessoais que ficarão salvas no Firebase Authentication.
 
 - Tela de perfil do usuário.
     Esta tela permite que o usuário visualize e edite seu perfil, incluindo informações pessoais.
 
 Com isso concluímos 3 requisitos funcionais, feed que consome dados, design e layout, e funcionalidade livre com a tela de perfil do usuário.
 
+[<img src="./Entrega-final/evidencias/profile.png" alt="Imagem do perfil do usuário" height="400"/>](profile.png)
+
 ## Documentação de implementação da Autenticação.
 
 Para a implementação dos requisitos de autenticação e cadastro de usuários no firebase, utilizamos o Firebase Authentication através do AngularFire, que é a biblioteca oficial do Angular para integração com o Firebase.
 
-Usuário são autenticados na tela de login, caso o usuário se registre, ele será automaticamente autenticado e redirecionado a tela principal.
-O usuário é proibido de acessar qualquer tela que não seja a de login, cadastro, boas-vindas e sobre.
+Usuários são autenticados na tela de login, caso o usuário se registre será automaticamente autenticado e redirecionado a tela principal.
+
+O usuário é proibido de acessar qualquer tela que não seja a de login, cadastro, boas-vindas e sobre, caso não esteja devidamente autenticado com o firebase.
 
 O protocolo de proteção das páginas é feito através do Angular Router, onde as rotas estão protegidas com Angular Guards.
 
-Internamente os guards chamam o servilo authService, que verifica através do sdk do firebase se o usuário está autenticado.
-Há um observable que se inscreve no método de estado de autenticação do firebase e resolve o estado do usuário,
-retornando um booleano ou urlTree para redirecionamento.
+Internamente os guards chamam o serviço authService, que verifica através do sdk do firebase se o usuário está autenticado.
+Há um observable que se inscreve no método de estado de autenticação do usuário no firebase e resolve o estado do usuário retornando um booleano ou urlTree para redirecionamento.
 
 Angular Guards são declaradas no módulo de rotas, onde cada rota que deve ser protegida possui o guard associado.
 
-![Módulo Guard e método do serviço de autenticação](./Entrega-final/evidencias/guards.png)
+Veja abaixo a implementação do guard e do serviço de autenticação.
+
+[![Módulo Guard e método do serviço de autenticação](./Entrega-final/evidencias/guards.png)](./Entrega-final/evidencias/guards.png)
 
 ![Rotas da aplicação protegidas pelo Angular Guards com autentição do firebase](./Entrega-final/evidencias/routes-guards.png)
 
@@ -118,6 +124,7 @@ Referências:
 - [AngularFire Authentication Guide](https://github.com/angular/angularfire/blob/main/docs/auth.md)
 
 Assim cumprimos os requisitos de autenticação e cadastro de usuários, garantindo que apenas usuários autenticados possam acessar as funcionalidades do aplicativo.
+
 <!-- ## Documentação suplementar firebase auth
 
 -   [Introdução ao Firebase Authentication (Documentação Oficial)](https://firebase.google.com/docs/auth/web/start?hl=pt-br)
