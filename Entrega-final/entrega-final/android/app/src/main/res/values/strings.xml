@@ -2,6 +2,6 @@
 <resources>
     <string name="app_name">entrega-final.2</string>
     <string name="title_activity_main">entrega-final.2</string>
-    <string name="package_name">io.ionic.starter</string>
-    <string name="custom_url_scheme">io.ionic.starter</string>
+    <string name="package_name">com.g2l2.entregafinal</string>
+    <string name="custom_url_scheme">com.g2l2.entregafinal</string>
 </resources>
